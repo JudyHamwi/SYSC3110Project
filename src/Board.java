@@ -27,7 +27,7 @@ public class Board {
      * Print the Board
      */
     public String toString() {
-        String Board= "RISK BOARD: \n" + "Continets: \n";
+        String Board= "RISK BOARD: \n" + "Continents: \n";
         for(Continent c:continents){
             Board+=c;
         }

@@ -22,12 +22,15 @@ public class Dice {
         return values;
     }
 
+    /**
+     * @return a list of rolled dices in descending order
+     */
     public List<Integer> sortedValues(){
         List<Integer> sortedList = new ArrayList<>();
-        for (int i = 0; i< values.size(); i++)
-        {
+        while(!values.isEmpty()){
             sortedList.add(values.poll());
         }
+        Collections.reverse(sortedList);
         return sortedList;
     }
     public static void main(String[] args) {
@@ -37,6 +40,7 @@ public class Dice {
         System.out.println("Player2 rolled : " + player2Dice.roll());
         Dice player3Dice = new Dice(1);
         System.out.println("you rolled : " + player3Dice.roll());
+        System.out.println(player1Dice.sortedValues());
     }
 
 }

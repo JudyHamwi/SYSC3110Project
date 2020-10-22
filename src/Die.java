@@ -16,7 +16,7 @@ public class Die {
 
     /**
      * retrieve the value of the last roll
-     * @return the face value
+     * @return the current face value of the Die object
      */
     public int getFaceValue(){
         return this.faceValue;

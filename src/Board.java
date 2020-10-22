@@ -234,6 +234,9 @@ public class Board {
         NorthAfrica.setAdjacentCountry(Brazil);
         NorthAfrica.setAdjacentCountry(WesternEurope);
         NorthAfrica.setAdjacentCountry(SouthernEurope);
+        SouthAfrica.setAdjacentCountry(Congo);
+        SouthAfrica.setAdjacentCountry(EastAfrica);
+        SouthAfrica.setAdjacentCountry(Madagascar);
 
         //add adjacent countries in Europe
         GreatBritain.setAdjacentCountry(Iceland);

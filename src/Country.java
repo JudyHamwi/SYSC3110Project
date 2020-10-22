@@ -65,6 +65,7 @@ public class Country {
      */
     public void addCurrentOwner(Player player){
         currentOwner=player;
+        player.addCountry(this);
     }
     public String toString(){
         return countryName;

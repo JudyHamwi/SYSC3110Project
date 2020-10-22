@@ -30,6 +30,7 @@ public class Parser {
             return new Command(command, word2);
 
         }
+
         return new Command(null, word2);
     }
 }

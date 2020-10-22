@@ -194,6 +194,9 @@ public class Board {
         Quebec.setAdjacentCountry(Greenland);
         Quebec.setAdjacentCountry(Ontario);
         Quebec.setAdjacentCountry(EasternUnitedStates);
+        WesternUnitedStates.setAdjacentCountry(Alberta);
+        WesternUnitedStates.setAdjacentCountry(CentralAmerica);
+        WesternUnitedStates.setAdjacentCountry(EasternUnitedStates);
 
         //add adjacent countries in South America
         Argentina.setAdjacentCountry(Peru);

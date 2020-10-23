@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,6 +33,16 @@ public class Board {
             Board=Board.concat(c.toString());
         }
         return Board;
+    }
+
+    public ArrayList<Country> getCountries(){
+        ArrayList<Country> countries=new ArrayList<>();
+        for(Continent c:continents){
+            for(Country cy:c.getContinentCountries()){
+                countries.add(cy);
+            }
+        }
+        return countries;
     }
 
     /**
@@ -336,9 +347,4 @@ public class Board {
         WesternAustralia.setAdjacentCountry(NewGuinea);
     }
 
-    public static void main(String[] args) {
-        Board b=new Board();
-        System.out.println(b);
-
-    }
 }

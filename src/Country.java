@@ -65,9 +65,12 @@ public class Country {
      */
     public void addCurrentOwner(Player player){
         currentOwner=player;
-        player.addCountry(this);
     }
     public String toString(){
         return countryName;
+    }
+
+    public void addArmy(int numberArmies){
+        this.numberOfArmies+=numberArmies;
     }
 }

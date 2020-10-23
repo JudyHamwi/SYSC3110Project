@@ -5,9 +5,9 @@ import java.util.*;
 public class Game {
 
     private Board board;
-    private state gameState;
+    private GameState gameState;
     private boolean finished;
-    private List<Player> players;
+    private static List<Player> players;
     private int playerArmy;
 
     public Game(int numberOfPlayers){
@@ -17,16 +17,22 @@ public class Game {
     }
 
     private void initialize(int numberOfPlayers){
+        this.gameState = GameState.IN_PROGRESS;
         addPlayers(numberOfPlayers);
+        initialArmyForPlayer();
         distributeCountries();
-        distributeArmyToCountry();
+        distributeRandomArmyToCountry();
+    }
 
+    public GameState getState(){
+        return this.gameState;
     }
 
     private void addPlayers(int numberOfPlayers){
         for (int i=0; i<numberOfPlayers; i++){
             players.add(new Player());
         }
+
     }
 
     private void distributeCountries(){
@@ -34,12 +40,12 @@ public class Game {
         for (int i=0; i<board.getCountries().size(); i+=players.size()){
 
             for (int j=0; j<players.size(); j++ ) {
-                players.get(i).addCountry(board.getCountries().get(i+j));
+                players.get(j).addCountry(board.getCountries().get(i+j));
             }
         }
     }
 
-    private int initialArmyForPlayer(){
+    private void initialArmyForPlayer(){
         if (players.size()==2){
             playerArmy = 50;
         }
@@ -55,27 +61,44 @@ public class Game {
         if (players.size()==6){
             playerArmy = 20;
         }
-    }
-
-    private void distributeRandomArmies(Player p, int army) {
-        for (Country c : p.getCountries()) {
-            Random r = new Random();
-            int randomArmy=r.nextInt(army)+1;
-            if(army>0){
-                c.addArmy(randomArmy);
-            }
-            army-=randomArmy;
+        for (Player p:players){
+            p.addPlayerArmy(playerArmy);
         }
     }
 
-    private void distributeArmyToCountry(){
-        for(Player p:players){
-            int counter=playerArmy;
-            for(Country c:p.getCountries()){
-                c.addArmy(1);
-                counter--;
+   /* private void distributeRandomArmies(Player p, int army) {
+        Random r = new Random();
+        for (Country c : p.getPlayerCountries()) {
+            if(army>0){
+                int randomArmy=(r.nextInt(army+1));
+                c.addArmy(randomArmy);
+                army-=randomArmy;
             }
-            distributeRandomArmies(p,counter);
+        }
+    }
+
+    */
+
+    private void distributeOneArmyToCountry(){
+        for(Player p:players){
+            for(Country c:p.getCountriesOwned()){
+                c.addArmy(1);
+                p.addPlayerArmy(-1);
+            }
+        }
+    }
+
+    private void distributeRandomArmyToCountry(){
+        distributeOneArmyToCountry();
+        Random r = new Random();
+        for (Player p: players) {
+            for (Country c : p.getCountriesOwned()) {
+                if (p.getPlayerArmy() > 0) {
+                    int randomArmy = (r.nextInt(p.getPlayerArmy()))+ 1;
+                    c.addArmy(randomArmy);
+                    p.addPlayerArmy(-randomArmy);
+                }
+            }
         }
     }
 
@@ -89,6 +112,24 @@ public class Game {
         int[] attackerDice= new int[3];
         int[] defenderDice= new int[2];
 
+    }
+
+    public void printBoard(){
+        System.out.println(board);
+    }
+
+    public static void main(String[] args) {
+        Game game=new Game(3);
+        for(Player p:players) {
+            System.out.println(p);
+            System.out.println("owns: " + p.getCountriesOwned());
+            System.out.println("Leftover:" + p.getCountriesOwned());
+            for(Country c:p.getCountriesOwned()){
+                System.out.println(" "+ c + " Number of Armies: "+ c.getNumberOfArmies());
+            }
+
+        }
+        game.printBoard();
     }
 
 }

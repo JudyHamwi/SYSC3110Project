@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Continent in the Board of RISK Game
@@ -29,6 +26,10 @@ public class Continent {
     public void addCountry(Country country){
         countries.add(country);
         adjacentCountries.put(country, country.getAdjacentCountries());
+    }
+
+    public List<Country> getContinentCountries(){
+        return countries;
     }
 
     /**

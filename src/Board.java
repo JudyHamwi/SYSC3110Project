@@ -5,7 +5,7 @@ import java.util.List;
  * The Board of the RISK Game
  */
 public class Board {
-    private List<Continent> continents;
+    private final List<Continent> continents;
 
     /**
      * Constructor of Board that creates a new Board
@@ -29,7 +29,7 @@ public class Board {
     public String toString() {
         String Board= "RISK BOARD: \n" + "Continents: \n";
         for(Continent c:continents){
-            Board+=c;
+            Board=Board.concat(c.toString());
         }
         return Board;
     }

@@ -32,13 +32,13 @@ public class Player {
         this.countriesOwned.add(country);
     }
 
-    /*public boolean canAttack(Country attackFrom, Country attackTo){
+    public boolean canAttack(Country attackFrom, Country attackTo){
         if ( attackFrom.getAdjacentCountries().contains(attackTo)
                 && attackFrom.getNumberOfArmies() > 1 && attackTo.getNumberOfArmies() > 0){
             return true;
         }
         return false;
-    }*/
+    }
 
     public String printPlayerId(){
         return "Player" + getplayerID();

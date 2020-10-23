@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.util.Random;
+import java.util.*;
 
 public class Game {
 
@@ -12,10 +13,10 @@ public class Game {
     public Game(int numberOfPlayers){
         players = new ArrayList<Player>();
         board = new Board();
-        initialize();
+        initialize(numberOfPlayers);
     }
 
-    private void initialize(){
+    private void initialize(int numberOfPlayers){
         addPlayers(numberOfPlayers);
         distributeCountries();
         distributeArmyToCountry();
@@ -29,29 +30,29 @@ public class Game {
     }
 
     private void distributeCountries(){
-        Collections.shuffle(board.getListOfCountries());
-        for (int i=0; i<board.getLengthOfCountries(); i+=players.getLength()){
+        Collections.shuffle(board.getCountries());
+        for (int i=0; i<board.getCountries().size(); i+=players.size()){
 
-            for (j=0; j<players.getLength(); j++ ) {
-                players.add(country[i+j];
+            for (int j=0; j<players.size(); j++ ) {
+                players.get(i).addCountry(board.getCountries().get(i+j));
             }
         }
     }
 
     private int initialArmyForPlayer(){
-        if (players.length()==2){
+        if (players.size()==2){
             playerArmy = 50;
         }
-        if (players.length()==3){
+        if (players.size()==3){
             playerArmy = 35;
         }
-        if (players.length()==4){
+        if (players.size()==4){
             playerArmy = 30;
         }
-        if (players.length()==5){
+        if (players.size()==5){
             playerArmy = 25;
         }
-        if (players.length()==6){
+        if (players.size()==6){
             playerArmy = 20;
         }
     }

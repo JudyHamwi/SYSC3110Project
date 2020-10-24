@@ -3,10 +3,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class Player {
+
     private static int playerCounter =1;
     private final int PLAYER_ID;
     private List<Country> countriesOwned;
-    private List<Continent> continents;
     private int placeArmy;
 
     public Player(){
@@ -54,18 +54,26 @@ public class Player {
     }
 
     public boolean canAttack(Country attackFrom, Country attackTo){
-        if ( attackFrom.getAdjacentCountries().contains(attackTo)
-                && attackFrom.getNumberOfArmies() > 1 && attackTo.getNumberOfArmies() > 0){
+        if(attackFrom.getCurrentOwner().equals(attackTo.getCurrentOwner())) {
+            System.out.println("You can not attack your own country");
+            return false;
+        }
+        else if(!attackFrom.isAdjacent(attackTo)) {
+            System.out.println("The countries are not adjacent");
+            return false;
+        }
+        else if (attackFrom.getNumberOfArmies()==1){
+            System.out.println("There are not enough armies to attack");
+            return false;
+        }
+        else{
             return true;
         }
-        return false;
     }
 
     public String toString(){
         return "Player" + getplayerID();
     }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -77,7 +85,7 @@ public class Player {
 
     @Override
     public int hashCode() {
-        return Objects.hash(PLAYER_ID, countriesOwned, continents, placeArmy);
+        return Objects.hash(PLAYER_ID, countriesOwned, placeArmy);
     }
     /*
 

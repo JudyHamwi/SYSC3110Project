@@ -25,15 +25,15 @@ public class Parser {
         Scanner tokenizer = new Scanner(inputLine);
         if (tokenizer.hasNext()) {
             word1 = tokenizer.next();
-            if(tokenizer.hasNext()) {
+            if (tokenizer.hasNext()) {
                 word2 = tokenizer.next();
-                if(tokenizer.hasNext()) {
+                if (tokenizer.hasNext()) {
                     word3 = tokenizer.next();
-                    if(tokenizer.hasNext()) {
+                    if (tokenizer.hasNext()) {
                         word4 = tokenizer.next();
-                        if(tokenizer.hasNext()) {
+                        if (tokenizer.hasNext()) {
                             word5 = tokenizer.next();
-                            if(tokenizer.hasNext()) {
+                            if (tokenizer.hasNext()) {
                                 word6 = tokenizer.next();
                             }
                         }
@@ -42,7 +42,7 @@ public class Parser {
             }
         }
 
-        if(validInput.isCommand(word1) || validInput.isValidNumOfPlayers(word1)) { // I don't know if this is correct.
+        if (validInput.isCommand(word1) || validInput.isValidNumOfPlayers(word1)) { // I don't know if this is correct.
             return new Command(word1, word2, word3, word4, word5, word6);
 
         } else {

@@ -13,6 +13,7 @@ public class Player {
         this.PLAYER_ID = this.getNextPlayerId();
         this.countriesOwned = new ArrayList<>();
         this.placeArmy=0;
+
     }
 
     public List<Country> getCountriesOwned() {
@@ -63,6 +64,8 @@ public class Player {
     public String toString(){
         return "Player" + getplayerID();
     }
+
+
 
     @Override
     public boolean equals(Object o) {

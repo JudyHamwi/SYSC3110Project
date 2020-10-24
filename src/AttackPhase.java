@@ -23,13 +23,12 @@ public class AttackPhase {
     public int numberOfDiceForAttacker(){
         if(attackerArmies<1){
             System.out.println("Not Enough Armies to Attack");
-        }
-        else if(attackerArmies==1){
+        } else if (attackerArmies==1){
             return 1;
-        }else if (attackerArmies==2){
+        } else if (attackerArmies==2){
             return 2;
         }
-            return 3;
+        return 3;
     }
 
     int numberOfDiceForDefender(){
@@ -72,7 +71,7 @@ public class AttackPhase {
 
     }
 
-    public void attack(){
+    public void attack() {
         attackerArmies=(attackerCountry.getNumberOfArmies())-1;
         while (attackerArmies > 0 && defenderCountry.getNumberOfArmies()>0 ){
             numberOfDiceForAttacker();

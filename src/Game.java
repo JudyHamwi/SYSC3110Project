@@ -44,25 +44,6 @@ public class Game {
         }
     }
 
-    /*
-    private void distributeCountries(){
-        int numberOfCountries=(int) (Math.floor(board.getCountries().size()/players.size()));
-        int index=0;
-        for (Player p : players) {
-            for( int i=0; i<numberOfCountries;i++) {
-                p.addCountry(board.getCountries().get(index));
-                index++;
-                }
-            index+=numberOfCountries;
-                }
-
-            int leftoverCountries=board.getCountries().size()-numberOfCountries*players.size() ;
-                   for(int j=0;j<leftoverCountries;j++){
-                       players.get(j).addCountry(board.getCountries().get(numberOfCountries*players.size()+j));
-
-                   }
-                
-           }*/
 
     private void distributeCountries(){
         Collections.shuffle(board.getCountries());

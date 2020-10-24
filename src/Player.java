@@ -47,6 +47,10 @@ public class Player {
         country.addCurrentOwner(this);
     }
 
+    public void removeCountry(Country country){
+        countriesOwned.remove(country);
+    }
+
     public boolean canAttack(Country attackFrom, Country attackTo){
         if ( attackFrom.getAdjacentCountries().contains(attackTo)
                 && attackFrom.getNumberOfArmies() > 1 && attackTo.getNumberOfArmies() > 0){

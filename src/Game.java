@@ -107,21 +107,12 @@ public class Game {
     }
 
     private void attackPhase(Player player, Country attackerCountry, Country defenderCountry) {
-         if(attackerCountry.getCurrentOwner().equals(defenderCountry.getCurrentOwner())) {
-            System.out.println("You can not attack your own country");
+        if (player.canAttack(attackerCountry, defenderCountry)) {
+            AttackPhase playerAttack = new AttackPhase(player, attackerCountry, defenderCountry);
+            playerAttack.attack();
+            removePlayer();
+            checkWinner();
         }
-        else if(!attackerCountry.isAdjacent(defenderCountry)) {
-            System.out.println("The countries are not adjacent");
-        }
-        else if (attackerCountry.getNumberOfArmies()==1){
-             System.out.println("There are not enough armies to attack");
-        } else {
-             AttackPhase playerAttack = new AttackPhase(player, attackerCountry, defenderCountry);
-             playerAttack.attack();
-             removePlayer();
-             checkWinner();
-         }
-
     }
 
     private void removePlayer() {

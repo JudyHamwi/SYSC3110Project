@@ -33,6 +33,7 @@ public class Dice {
         Collections.reverse(sortedList);
         return sortedList;
     }
+    /*
     public static void main(String[] args) {
         Dice player1Dice = new Dice(3);
         System.out.println("Player1 rolled : " + player1Dice.roll());
@@ -41,6 +42,6 @@ public class Dice {
         Dice player3Dice = new Dice(1);
         System.out.println("you rolled : " + player3Dice.roll());
         System.out.println(player1Dice.sortedValues());
-    }
+    } */
 
 }

@@ -107,6 +107,13 @@ public class Game {
     private void attack(Player player, Country attackerCountry, Country defenderCountry){
         if (attackerCountry.isAdjacent(defenderCountry) && !(attackerCountry.getCurrentOwner().equals(defenderCountry.getCurrentOwner()))) {
             AttackPhase attack=new AttackPhase(player, attackerCountry, defenderCountry);
+            // new method call
+            for (Player p:players){
+                if(p.getCountriesOwned().size()==0){
+                    players.remove(p);
+                    System.out.println(p + "Died");
+                }
+            }
         }else {
             return;
         }

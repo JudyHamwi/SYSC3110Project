@@ -10,6 +10,7 @@ public class Game {
     private static List<Player> players;
     private int playerArmy;
 
+
     public Game(int numberOfPlayers){
         players = new ArrayList<Player>();
         board = new Board();
@@ -22,6 +23,7 @@ public class Game {
         initialArmyForPlayer();
         distributeCountries();
         distributeRandomArmyToCountry();
+        AttackPhase attack=new AttackPhase(players.get(0), board.getCountries().get(0), board.getCountries().get(1) );
     }
 
     public GameState getState(){
@@ -102,17 +104,25 @@ public class Game {
         }
     }
 
+    private void attack(Player player, Country attackerCountry, Country defenderCountry){
+        if (attackerCountry.isAdjacent(defenderCountry) && !(attackerCountry.getCurrentOwner().equals(defenderCountry.getCurrentOwner()))) {
+            AttackPhase attack=new AttackPhase(player, attackerCountry, defenderCountry);
+        }else {
+            return;
+        }
+    }
+
     //Example every player has 30 army, and 10 countries
     //distribute one at time so each country has at least (because this is must)
     //Each country has 1, and army to place 20/per player
     //After thats complete, do same loop, except you ad
+    // attack Alaska Alberta
+    //  Check the first word, and second word
+    // if they are adjacent and not belonging to same player
+    // not true, not adjacent countries,
+    // attack Alberta Quebec
 
 
-    private void attack(Country from, Country to){
-        int[] attackerDice= new int[3];
-        int[] defenderDice= new int[2];
-
-    }
 
     public void printBoard(){
         System.out.println(board);
@@ -128,8 +138,8 @@ public class Game {
                 System.out.println(" "+ c + " Number of Armies: "+ c.getNumberOfArmies());
             }
 
+
         }
-        game.printBoard();
     }
 
 }

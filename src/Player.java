@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Player {
     private static int playerCounter =1;
@@ -61,6 +62,19 @@ public class Player {
 
     public String toString(){
         return "Player" + getplayerID();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return PLAYER_ID == player.PLAYER_ID ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(PLAYER_ID, countriesOwned, continents, placeArmy);
     }
     /*
 

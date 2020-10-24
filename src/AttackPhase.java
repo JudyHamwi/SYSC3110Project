@@ -13,14 +13,14 @@ public class AttackPhase {
     private int attackerArmies;
 
     public AttackPhase(Player player,  Country attackerCountry, Country defenderCountry){
+        this.player=player;
         this.attackerDiceValues = new ArrayList<>();
         this.defenderDiceValues = new ArrayList<>();
         this.attackerCountry = attackerCountry;
         this.defenderCountry = defenderCountry;
-        attack();
     }
+
     public int numberOfDiceForAttacker(){
-        attackerArmies=(attackerCountry.getNumberOfArmies())-1;
         if(attackerArmies<1){
             System.out.println("Not Enough Armies to Attack");
         }
@@ -73,6 +73,7 @@ public class AttackPhase {
     }
 
     public void attack(){
+        attackerArmies=(attackerCountry.getNumberOfArmies())-1;
         while (attackerArmies > 0 && defenderCountry.getNumberOfArmies()>0 ){
             numberOfDiceForAttacker();
             numberOfDiceForDefender();
@@ -87,9 +88,6 @@ public class AttackPhase {
         }
     }
 
-    public static void main(String[] args) {
-
-    }
 
 }
 

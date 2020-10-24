@@ -73,4 +73,8 @@ public class Country {
     public void addArmy(int numberArmies){
         this.numberOfArmies+=numberArmies;
     }
+
+    public boolean isAdjacent(Country country){
+        return adjacentCountries.contains(country);
+    }
 }

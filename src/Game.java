@@ -211,11 +211,17 @@ public class Game {
     public void play() {
         theInitialState();
         while (gameState == GameState.IN_PROGRESS) {
-            System.out.println(currentPlayer + ", it is your turn.");
-            Command command = parser.getCommand();
-            processCommand(command, currentPlayer);
+            try {
+                System.out.println(currentPlayer + ", it is your turn.");
+                Command command = parser.getCommand();
+                processCommand(command, currentPlayer);
+            } catch (Exception e) {
+                System.out.println("Exception Occured: " + e);
+                System.out.println("Please enter command again...");
+            }
         }
     }
+
 
     private void endTurn(Player p) {
         gameState = GameState.COMPLETED;

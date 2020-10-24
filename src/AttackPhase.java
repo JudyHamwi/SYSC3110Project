@@ -54,17 +54,20 @@ public class AttackPhase {
     public void compareDice(){
         if (attackerDiceValues.get(0) > defenderDiceValues.get(0)){
             defenderCountry.addArmy(-1);
-        } else{
+        } else if(attackerDiceValues.get(0) < defenderDiceValues.get(0)){
             attackerCountry.addArmy(-1);
             attackerArmies --;
         }
-        if (attackerDiceValues.get(1) > defenderDiceValues.get(1)){
-            defenderCountry.addArmy(-1);
-        }else{
-            attackerCountry.addArmy(-1);
-            attackerArmies --;
+        if(attackerDiceValues.size()>1 && defenderDiceValues.size()>1 ) {
+            if (attackerDiceValues.get(1) > defenderDiceValues.get(1)) {
+                defenderCountry.addArmy(-1);
+            } else {
+                attackerCountry.addArmy(-1);
+                attackerArmies--;
+            }
         }
     }
+
     public  void numberOfArmiesToMove(){
         defenderCountry.addArmy(attackerArmies);
         attackerCountry.addArmy(-attackerArmies);
@@ -73,6 +76,8 @@ public class AttackPhase {
 
     public void attack() {
         attackerArmies=(attackerCountry.getNumberOfArmies())-1;
+        System.out.println(player + " has attacked " + defenderCountry + " with " + attackerArmies + " armies.");
+        System.out.println(defenderCountry + " is defending with " + defenderCountry.getNumberOfArmies() + " armies.");
         while (attackerArmies > 0 && defenderCountry.getNumberOfArmies()>0 ){
             numberOfDiceForAttacker();
             numberOfDiceForDefender();
@@ -80,14 +85,17 @@ public class AttackPhase {
             rollForDefender();
             compareDice();
         }
-        if (defenderCountry.getNumberOfArmies() == 0){
+        if (defenderCountry.getNumberOfArmies() == 0) {
             defenderCountry.getCurrentOwner().removeCountry(defenderCountry);
             player.addCountry(defenderCountry);
             numberOfArmiesToMove();
+            System.out.println(player + " has conquered " + defenderCountry + " and is occupied by " + attackerArmies
+                                        + " armies.");
+        } else {
+            System.out.println(defenderCountry + " was not conquered and has " + defenderCountry.getNumberOfArmies()
+                                        + " armies.");
         }
     }
-
-
 }
 
 /*

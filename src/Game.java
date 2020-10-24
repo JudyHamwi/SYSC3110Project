@@ -15,100 +15,90 @@ public class Game {
     private int numPlayers;
     private Parser parser;
     private Player currentPlayer;
-    //private boolean turn;
 
 
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
         parser = new Parser();
-        //turn = true;
     }
 
-    private void initialize(int numberOfPlayers){
+    private void initialize(int numberOfPlayers) {
         this.gameState = GameState.INITIALIZING;
         addPlayers(numberOfPlayers);
         initialArmyForPlayer();
         distributeCountries();
         distributeRandomArmyToCountry();
-        currentPlayer=players.getFirst();
+        currentPlayer = players.getFirst();
     }
 
-    public GameState getState(){
+    public GameState getState() {
         return this.gameState;
     }
 
-    private void addPlayers(int numberOfPlayers){
-        for (int i=0; i<numberOfPlayers; i++){
+    private void addPlayers(int numberOfPlayers) {
+        for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player());
         }
     }
 
 
-    private void distributeCountries(){
+    private void distributeCountries() {
         Collections.shuffle(board.getCountries());
         int totalCountries = board.getCountries().size();
         int leftovers = totalCountries % players.size();
         int countryLoop = totalCountries - leftovers;
-        for (int i=0; i<countryLoop; i+=players.size()){
-            for (int j=0; j<players.size(); j++ ) {
-                players.get(j).addCountry(board.getCountries().get(i+j));
+        for (int i = 0; i < countryLoop; i += players.size()) {
+            for (int j = 0; j < players.size(); j++) {
+                players.get(j).addCountry(board.getCountries().get(i + j));
             }
         }
 
-        if (leftovers>0){
-            int i  = totalCountries - leftovers;
-                for(int j=0; j<leftovers;j++){
-                  players.get(j).addCountry(board.getCountries().get(i+j));
-                }
+        if (leftovers > 0) {
+            int i = totalCountries - leftovers;
+            for (int j = 0; j < leftovers; j++) {
+                players.get(j).addCountry(board.getCountries().get(i + j));
+            }
         }
     }
 
-
-
-
-
-
-
-
-
-    private void initialArmyForPlayer(){
-        if (players.size()==2){
+    private void initialArmyForPlayer() {
+        if (players.size() == 2) {
             playerArmy = 50;
         }
-        if (players.size()==3){
+        if (players.size() == 3) {
             playerArmy = 35;
         }
-        if (players.size()==4){
+        if (players.size() == 4) {
             playerArmy = 30;
         }
-        if (players.size()==5){
+        if (players.size() == 5) {
             playerArmy = 25;
         }
-        if (players.size()==6){
+        if (players.size() == 6) {
             playerArmy = 20;
         }
-        for (Player p:players){
+        for (Player p : players) {
             p.addPlayerArmy(playerArmy);
         }
     }
 
-    private void distributeOneArmyToCountry(){
-        for(Player p:players){
-            for(Country c:p.getCountriesOwned()){
+    private void distributeOneArmyToCountry() {
+        for (Player p : players) {
+            for (Country c : p.getCountriesOwned()) {
                 c.addArmy(1);
                 p.addPlayerArmy(-1);
             }
         }
     }
 
-    private void distributeRandomArmyToCountry(){
+    private void distributeRandomArmyToCountry() {
         distributeOneArmyToCountry();
         Random r = new Random();
-        for (Player p: players) {
+        for (Player p : players) {
             for (Country c : p.getCountriesOwned()) {
                 if (p.getPlayerArmy() > 0) {
-                    int randomArmy = (r.nextInt(p.getPlayerArmy()))+ 1;
+                    int randomArmy = (r.nextInt(p.getPlayerArmy())) + 1;
                     c.addArmy(randomArmy);
                     p.addPlayerArmy(-randomArmy);
                 }
@@ -116,18 +106,39 @@ public class Game {
         }
     }
 
-    private void attackPhase(Player player, Country attackerCountry, Country defenderCountry){
-        if (attackerCountry.isAdjacent(defenderCountry) && !(attackerCountry.getCurrentOwner().equals(defenderCountry.getCurrentOwner()))) {
-            AttackPhase attack = new AttackPhase(player, attackerCountry, defenderCountry);
-            // new method call
-            for (Player p:players){
-                if(p.getCountriesOwned().size()==0){
-                    players.remove(p);
-                    System.out.println(p + "Died");
-                }
-            }
+    private void attackPhase(Player player, Country attackerCountry, Country defenderCountry) {
+         if(attackerCountry.getCurrentOwner().equals(defenderCountry.getCurrentOwner())) {
+            System.out.println("You can not attack your own country");
+        }
+        else if(!attackerCountry.isAdjacent(defenderCountry)) {
+            System.out.println("The countries are not adjacent");
+        }
+        else if (attackerCountry.getNumberOfArmies()==1){
+             System.out.println("There are not enough armies to attack");
         } else {
-            return;
+             AttackPhase playerAttack = new AttackPhase(player, attackerCountry, defenderCountry);
+             playerAttack.attack();
+             removePlayer();
+             checkWinner();
+         }
+
+    }
+
+    private void removePlayer() {
+        for (Player p : players) {
+            if (p.getCountriesOwned().size() == 0) {
+                players.remove(p);
+                System.out.println(p + " has lost.");
+            }
+        }
+    }
+
+    private void checkWinner() {
+        if(players.size() == 1){
+            System.out.println(players.get(0) + ", you have conquered all your enemies' territories!");
+            System.out.println("");
+            System.out.println("The game has now ended.");
+            System.exit(0);
         }
     }
 
@@ -140,10 +151,10 @@ public class Game {
         System.out.println("Please type in the number of players.");
     }
 
-    private boolean processCommand(Command command, Player p) {
+    private void processCommand(Command command, Player p) {
         boolean wantToExit = false;
 
-        if(command.isUnknown()) {
+        if (command.isUnknown()) {
             System.out.println("Sorry, I did not understand that.");
         }
 
@@ -151,47 +162,43 @@ public class Game {
         if (commandWord.equals("help")) {
             printHelp();
         }
-        if(commandWord.equals("exit")) {
-            wantToExit = exit(command);
-        }
-
-        if(commandWord.equals("attack")) {
+        if (commandWord.equals("attack")) {
             attack(command, p);
         }
-
-        if(commandWord.equals("print")) {
+        if (commandWord.equals("print")) {
             printBoard(command);
         }
-
         if(commandWord.equals("end")) {
-            // do something that ends the player's turn
+            endTurn(p);
         }
-
-        return wantToExit;
+        if(commandWord.equals("exit")) {
+            System.out.println(p + " has quit the game!");
+            System.exit(0);
+        }
     }
-    
+
 
     private int processNumOfPlayers(Command command) {
 
-        if(command.isUnknown()) {
+        if (command.isUnknown()) {
             System.out.println("Invalid number");
         }
 
         String numPlayers = command.getCommandWord();
 
-        if(numPlayers.equals("two") || numPlayers.equals("2")) {
+        if (numPlayers.equals("two") || numPlayers.equals("2")) {
             return 2;
         }
-        if(numPlayers.equals("three") || numPlayers.equals("3")) {
+        if (numPlayers.equals("three") || numPlayers.equals("3")) {
             return 3;
         }
-        if(numPlayers.equals("four") || numPlayers.equals("4")) {
+        if (numPlayers.equals("four") || numPlayers.equals("4")) {
             return 4;
         }
-        if(numPlayers.equals("five") || numPlayers.equals("5")) {
+        if (numPlayers.equals("five") || numPlayers.equals("5")) {
             return 5;
         }
-        if(numPlayers.equals("six") || numPlayers.equals("6")) {
+        if (numPlayers.equals("six") || numPlayers.equals("6")) {
             return 6;
         }
         return 0;
@@ -210,44 +217,30 @@ public class Game {
         this.gameState = GameState.IN_PROGRESS;
     }
 
-    public void play(){
-              theInitialState();
-           while(gameState==GameState.IN_PROGRESS){
-              System.out.println(currentPlayer + ", it is your turn.");
-               Command command = parser.getCommand();
-               if (command.getCommandWord().equals("exit")) {
-                   System.out.println(currentPlayer + " has quit the game!");
-                   System.exit(0);
-               }
-               processCommand(command, currentPlayer);
-               if (command.getCommandWord().equals("end")) {
-                   endTurn(currentPlayer);
-
-               }
-
+    public void play() {
+        theInitialState();
+        while (gameState == GameState.IN_PROGRESS) {
+            System.out.println(currentPlayer + ", it is your turn.");
+            Command command = parser.getCommand();
+            processCommand(command, currentPlayer);
         }
     }
 
     private void endTurn(Player p) {
-
-        gameState= GameState.COMPLETED;
-          if(players.getLast().equals(p)){
-              currentPlayer=players.getFirst();
-
-          }
-          else {
-              int i = players.indexOf(p);
-              currentPlayer = players.get(i + 1);
-
-
-          }
-               gameState = GameState.IN_PROGRESS; 
+        gameState = GameState.COMPLETED;
+        if (players.getLast().equals(p)) {
+            currentPlayer = players.getFirst();
+        } else {
+            int i = players.indexOf(p);
+            currentPlayer = players.get(i + 1);
+        }
+        gameState = GameState.IN_PROGRESS;
     }
 
 
     private void printInitialState() {
         System.out.println("HERE IS THE INITIAL STATE OF THE MAP: ");
-        for (Player p:players) {
+        for (Player p : players) {
             System.out.println(p);
             System.out.println("owns: " + p.getCountriesOwned());
             System.out.println("Leftover:" + p.getCountriesOwned());
@@ -272,11 +265,10 @@ public class Game {
     }
 
     private boolean exit(Command command) {
-        if(command.hasSecondWord()) {
+        if (command.hasSecondWord()) {
             System.out.println("Exit what?");
             return false;
-        }
-        else {
+        } else {
             return true;  // signal that we want to quit
         }
     }
@@ -289,17 +281,17 @@ public class Game {
         Country defendingC = null;
         this.gameState = GameState.IN_PROGRESS;
 
-        if(!command.hasSecondWord()) {
+        if (!command.hasSecondWord()) {
             System.out.println("What country would you like to attack?");
             return;
         }
 
-        if(!command.hasThirdWord()) {
+        if (!command.hasThirdWord()) {
             System.out.println("What country would you like to attack from?");
         }
 
-        if(command.hasSixthWord()) {
-            if(command.getFourthWord().equals("from")) {
+        if (command.hasSixthWord()) {
+            if (command.getFourthWord().equals("from")) {
                 attackingCountry = command.getFifthWord() + " " + command.getSixthWord();
                 attackingC = turnAttackerCIntoCountry(p, attackingCountry);
 
@@ -317,7 +309,7 @@ public class Game {
                 attackingC = turnAttackerCIntoCountry(p, attackingCountry);
             }
 
-            if(command.getFourthWord().equals("from")) {
+            if (command.getFourthWord().equals("from")) {
                 defendingCountry = command.getSecondWord() + " " + command.getThirdWord();
                 defendingC = turnDefendingCIntoCountry(p, defendingCountry);
                 attackingCountry = command.getFifthWord();
@@ -325,53 +317,49 @@ public class Game {
             }
         }
 
-        if(command.getThirdWord().equals("from")) {
+        if (command.getThirdWord().equals("from")) {
             attackingCountry = command.getFourthWord();
             attackingC = turnAttackerCIntoCountry(p, attackingCountry);
             defendingCountry = command.getSecondWord();
             defendingC = turnDefendingCIntoCountry(p, defendingCountry);
         }
-        
+
         attackPhase(p, attackingC, defendingC);
     }
 
     public Country turnAttackerCIntoCountry(Player p, String country) {
-       Country attackingC = null;
-        for (Country c : p.getCountriesOwned() )  {
+        Country attackingC = null;
+        for (Country c : p.getCountriesOwned()) {
             if (c.getCountryName().equals(country)) {
                 attackingC = c;
             }
         }
-      return attackingC;
+        return attackingC;
     }
 
     public Country turnDefendingCIntoCountry(Player p, String country) {
         Country defendingC = null;
         for (Country c : p.getCountriesOwned()) {
-            for(Country adjC : c.getAdjacentCountries())  {
-                if(adjC.getCountryName().equals(country)) {
+            for (Country adjC : c.getAdjacentCountries()) {
+                if (adjC.getCountryName().equals(country)) {
                     defendingC = adjC;
                 }
             }
         }
-      return defendingC;
+        return defendingC;
     }
 
-
-    public void printBoard(Command command){
-        if(!command.hasSecondWord()) {
+    public void printBoard(Command command) {
+        if (!command.hasSecondWord()) {
             System.out.println("Print what?");
             return;
         }
-
         System.out.println(board);
     }
-       
 
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
-        System.out.println(game.getNumPlayers());  // Confirm the number of players
 
     }
 

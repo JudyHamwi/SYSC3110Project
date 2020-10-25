@@ -12,13 +12,16 @@ import java.util.List;
  */
 public class Board {
     private final List<Continent> continents;
+    private ArrayList<Country> countries;
 
     /**
      * Constructor of Board that creates a new Board
      */
     public Board(){
         continents= new LinkedList<>();
+        countries = new ArrayList<>();
         createBoard();
+        setTotalCountries();
     }
 
     /**
@@ -43,16 +46,21 @@ public class Board {
     }
 
     /**
-     * Retrieves all the countries in the Board
-     * @return List of countries in the Board
+     * Set all the countries in the Board
      */
-    public ArrayList<Country> getCountries(){
-        ArrayList<Country> countries=new ArrayList<>();
+    public void setTotalCountries(){
         for(Continent c:continents){
             for(Country cy:c.getContinentCountries()){
                 countries.add(cy);
             }
         }
+    }
+
+    /**
+     * Retrieves all the countries in the Board
+     * @return List of countries in the Board
+     */
+    public ArrayList<Country> getCountries(){
         return countries;
     }
 

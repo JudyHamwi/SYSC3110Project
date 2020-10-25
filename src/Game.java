@@ -1,4 +1,3 @@
-import org.ietf.jgss.GSSManager;
 
 import java.util.Collections;
 import java.util.Random;
@@ -24,7 +23,6 @@ public class Game {
     private int numPlayers;
     private Parser parser;
     private Player currentPlayer;
-
 
     /**
      * Starts a new Game

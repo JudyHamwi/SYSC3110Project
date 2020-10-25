@@ -3,7 +3,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The Board of the RISK Game
+ *The Board of the RISK Game.
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
  */
 public class Board {
     private final List<Continent> continents;
@@ -25,7 +30,9 @@ public class Board {
     }
 
     /**
-     * Print the Board
+     * The textual represention of the Board. Contains information about every continent, country
+     * and the player that owns the country
+     * @return the textal representation of the board.
      */
     public String toString() {
         String Board= "RISK BOARD: \n" + "Continents: \n";
@@ -35,6 +42,10 @@ public class Board {
         return Board;
     }
 
+    /**
+     * Retrieves all the countries in the Board
+     * @return List of countries in the Board
+     */
     public ArrayList<Country> getCountries(){
         ArrayList<Country> countries=new ArrayList<>();
         for(Continent c:continents){

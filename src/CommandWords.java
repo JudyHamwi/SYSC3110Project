@@ -1,3 +1,11 @@
+/**
+ * Command Words contains a repository of valid command words to be enetered by the players to play the Game.
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
+ */
 public class CommandWords {
 
     private static final String[] validCommands = {"help", "exit", "attack", "print", "end"};
@@ -6,6 +14,11 @@ public class CommandWords {
     public CommandWords() {
     }
 
+    /**
+     * checks if the command entered by the player is a valid command
+     * @param aString command entered by the user
+     * @return true of the command is a valid command and false otherwise
+     */
     public boolean isCommand(String aString) {
         for (int i = 0; i < validCommands.length; i++) {
             if(validCommands[i].equals(aString)) return true;
@@ -13,6 +26,12 @@ public class CommandWords {
         return false;
     }
 
+    /**
+     * Checks if the number of players eneterd by the player is a valid
+     * number of players for the Game
+     * @param aString number of players entered by the player
+     * @return true of its a valid number of players and false otherwise
+     */
     public boolean isValidNumOfPlayers(String aString) {
         for (int i = 0; i < validNumOfPlayers.length; i++) {
             if(validNumOfPlayers[i].equals(aString)) return true;

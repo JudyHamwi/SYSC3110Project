@@ -3,6 +3,11 @@ import java.util.List;
 
 /**
  * Country in the Board of RISK Game
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
  */
 public class Country {
 
@@ -12,7 +17,7 @@ public class Country {
     private Player currentOwner;
 
     /**
-     * Contrusctor to create a new Country with a specific name
+     * Constructor to create a new Country with a specific name
      * @param name of the country
      */
     public Country(String name){
@@ -56,26 +61,43 @@ public class Country {
         return currentOwner;
     }
 
-
-    public boolean hasOwner(){
-        return currentOwner!=null;
-    }
     /**
-     * adds a new owner to the country
+     * sets the owner of the country
      */
     public void addCurrentOwner(Player player){
         currentOwner=player;
     }
 
+    /**
+     * text representation of the country
+     * @return text representation of the country
+     */
     public String toString(){
         return countryName;
     }
 
+    /**
+     * adds a number of armies that conquer the country
+     * @param numberArmies that are added to conquer the country
+     */
     public void addArmy(int numberArmies){
         this.numberOfArmies+=numberArmies;
     }
 
+    /**
+     * checks if the two countries are adjacent
+     * @param country that is compared if it is adjacent to the current country
+     * @return true if the two countries are adjacent and false otherwise
+     */
     public boolean isAdjacent(Country country){
         return adjacentCountries.contains(country);
+    }
+
+    /**
+     * checks if the country is owned by a player
+     * @return true if the country is owned by a player and false otherwise
+     */
+    public boolean hasOwner(){
+        return currentOwner!=null;
     }
 }

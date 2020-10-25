@@ -1,7 +1,12 @@
 import java.util.*;
 
 /**
- * Continent in the Board of RISK Game
+ * Continent in the Board of RISK Game.
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
  */
 public class Continent {
     private String continentName;
@@ -20,7 +25,6 @@ public class Continent {
 
     /**
      * Add country to the continent
-     *
      * @param country added to the continent
      */
     public void addCountry(Country country) {
@@ -33,13 +37,16 @@ public class Continent {
 
     /**
      * get the name of the continent
-     *
      * @return name of the continent
      */
     public String getContinentName() {
         return continentName;
     }
 
+    /**
+     * Text representation of the continent.
+     * @return text representation of the continent
+     */
     public String toString() {
         String continent = continentName + ": \n";
         for (Country c : countries) {

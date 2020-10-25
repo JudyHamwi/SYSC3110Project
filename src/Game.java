@@ -4,6 +4,15 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.*;
 
+/**
+ * The RISK Game that initiazes the game, manages the Attack Phase, and keeps track
+ * of the turn of each player and winning player
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
+ */
 
 public class Game {
 
@@ -17,12 +26,19 @@ public class Game {
     private Player currentPlayer;
 
 
+    /**
+     * Starts a new Game
+     */
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
         parser = new Parser();
     }
 
+    /**
+     * Initalizes the start of the Game
+     * @param numberOfPlayers that will play the game
+     */
     private void initialize(int numberOfPlayers) {
         this.gameState = GameState.INITIALIZING;
         addPlayers(numberOfPlayers);
@@ -32,10 +48,18 @@ public class Game {
         currentPlayer = players.getFirst();
     }
 
+    /**
+     * gets the current state of the game
+     * @return GameState of the game
+     */
     public GameState getState() {
         return this.gameState;
     }
 
+    /**
+     * Adds a number of players to the game
+     * @param numberOfPlayers that will play the game
+     */
     private void addPlayers(int numberOfPlayers) {
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player());
@@ -43,6 +67,9 @@ public class Game {
     }
 
 
+    /**
+     * Distribute equal amount of random countries to each player
+     */
     private void distributeCountries() {
         Collections.shuffle(board.getCountries());
         int totalCountries = board.getCountries().size();
@@ -62,6 +89,9 @@ public class Game {
         }
     }
 
+    /**
+     * Calculates the number of armies that will be assigned to every player
+     */
     private void initialArmyForPlayer() {
         if (players.size() == 2) {
             playerArmy = 50;
@@ -83,6 +113,9 @@ public class Game {
         }
     }
 
+    /**
+     *  Distributes one army to every country owned by the players
+     */
     private void distributeOneArmyToCountry() {
         for (Player p : players) {
             for (Country c : p.getCountriesOwned()) {
@@ -92,6 +125,9 @@ public class Game {
         }
     }
 
+    /**
+     * distributes a random number of armies to every country of the players
+     */
     private void distributeRandomArmyToCountry() {
         distributeOneArmyToCountry();
         Random r = new Random();
@@ -106,6 +142,12 @@ public class Game {
         }
     }
 
+    /**
+     * Initiates the atack phase of the game, which is entered when a player decided to attack
+     * @param player who wants to attack
+     * @param attackerCountry the country that the player wants to attack from
+     * @param defenderCountry the country that will be defending from the attack
+     */
     private void attackPhase(Player player, Country attackerCountry, Country defenderCountry) {
         if (player.canAttack(attackerCountry, defenderCountry)) {
             AttackPhase playerAttack = new AttackPhase(player, attackerCountry, defenderCountry);
@@ -115,6 +157,9 @@ public class Game {
         }
     }
 
+    /**
+     * removes a player from the game if lost all their armies
+     */
     private void removePlayer() {
         for (Player p : players) {
             if (p.getCountriesOwned().size() == 0) {
@@ -124,6 +169,9 @@ public class Game {
         }
     }
 
+    /**
+     * checks if a player won the game if it conquered all the countries in the board
+     */
     private void checkWinner() {
         if(players.size() == 1){
             System.out.println(players.get(0) + ", you have conquered all your enemies' territories!");
@@ -133,6 +181,9 @@ public class Game {
         }
     }
 
+    /**
+     * prints the welcome message shown when the game starts
+     */
     private void printWelcome() {
         System.out.println();
         System.out.println("Welcome to RISK!: Global Domination!");
@@ -142,6 +193,11 @@ public class Game {
         System.out.println("Please type in the number of players.");
     }
 
+    /**
+     * Processes the commands entered by the user to produce the required result
+     * @param command enetered by the user
+     * @param p
+     */
     private void processCommand(Command command, Player p) {
         boolean wantToExit = false;
 
@@ -169,6 +225,11 @@ public class Game {
     }
 
 
+    /**
+     * Processes the number of players enetered by the user
+     * @param command of number of players enetered by the user
+     * @return number of players to play the game
+     */
     private int processNumOfPlayers(Command command) {
 
         if (command.isUnknown()) {
@@ -195,11 +256,17 @@ public class Game {
         return 0;
     }
 
+    /**
+     * intializes the number of players in the game
+     */
     public void initializePlayers() {
         Command numOfPlayers = parser.getCommand();
         this.numPlayers = processNumOfPlayers(numOfPlayers);
     }
 
+    /**
+     * Initialzes the state of the game at the start of the game
+     */
     public void theInitialState() {
         printWelcome();
         initializePlayers();
@@ -208,6 +275,9 @@ public class Game {
         this.gameState = GameState.IN_PROGRESS;
     }
 
+    /**
+     * Play loop of the game that responds to the player's turns commands
+     */
     public void play() {
         theInitialState();
         while (gameState == GameState.IN_PROGRESS) {
@@ -223,6 +293,10 @@ public class Game {
     }
 
 
+    /**
+     * ends the turn of the current player and passes the turn to the next player
+     * @param p is the current player that will end their turn
+     */
     private void endTurn(Player p) {
         gameState = GameState.COMPLETED;
         if (players.getLast().equals(p)) {
@@ -235,6 +309,9 @@ public class Game {
     }
 
 
+    /**
+     * Prints the initial state of the game after the initialization happens
+     */
     private void printInitialState() {
         System.out.println("HERE IS THE INITIAL STATE OF THE MAP: ");
         for (Player p : players) {
@@ -248,6 +325,10 @@ public class Game {
         }
     }
 
+    /**
+     * returns the number of players in the game
+     * @return number of players in the game
+     */
     public int getNumPlayers() {
         return numPlayers;
     }
@@ -261,6 +342,11 @@ public class Game {
         System.out.println("attack (country) from (owned country)       end turn");
     }
 
+    /**
+     * exits the gmae
+     * @param command that exits the famae
+     * @return true if it is the right command to exit the game
+     */
     private boolean exit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Exit what?");
@@ -270,6 +356,11 @@ public class Game {
         }
     }
 
+    /**
+     * Responds to the command of the player to attack
+     * @param command entered by the player to attack
+     * @param p player that wants to attack
+     */
     private void attack(Command command, Player p) {
 
         String attackingCountry = null;
@@ -324,6 +415,12 @@ public class Game {
         attackPhase(p, attackingC, defendingC);
     }
 
+    /**
+     * Responds to the command of the country to be attacked from
+     * @param p player that wants to attack
+     * @param country of the attacker to attack from
+     * @return country to attack from
+     */
     public Country turnAttackerCIntoCountry(Player p, String country) {
         Country attackingC = null;
         for (Country c : p.getCountriesOwned()) {
@@ -334,6 +431,12 @@ public class Game {
         return attackingC;
     }
 
+    /**
+     * Responds to the command of the country that will be attacked.
+     * @param p player that wants to attack
+     * @param country that will be attacked
+     * @return country that will be attacked
+     */
     public Country turnDefendingCIntoCountry(Player p, String country) {
         Country defendingC = null;
         for (Country c : p.getCountriesOwned()) {
@@ -346,6 +449,10 @@ public class Game {
         return defendingC;
     }
 
+    /**
+     * Prints the Board of the Game
+     * @param command entered by the player to print the board
+     */
     public void printBoard(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Print what?");

@@ -1,5 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Translates the commands entered by the players to be recognized and executed by the Game
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ *  @author Diana Miraflor
+ */
 public class Parser {
     private CommandWords validInput;
     private Scanner reader;
@@ -9,6 +17,10 @@ public class Parser {
         reader = new Scanner(System.in);
     }
 
+    /**
+     * Translates the inputs entered by the user and checks if they are valid commands
+     * @return valid command entered by the user
+     */
     public Command getCommand() {
         String inputLine;
         String word1 = null;

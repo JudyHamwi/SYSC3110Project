@@ -2,6 +2,11 @@ import java.util.Random;
 
 /**
  * this class represents one die with 6 sides and faces value ranges between 1 and 6
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
  */
 public class Die {
     private final int MAX_FACES = 6; // maximum face value
@@ -9,6 +14,9 @@ public class Die {
     private Random random; // random generator
 
 
+    /**
+     * creates a new Die
+     */
     public Die(){
         this.random = new Random();
         this.faceValue = 1;
@@ -32,6 +40,7 @@ public class Die {
     }
 
     /**
+     * Text representation of the die
      * @return a string representation of the rolled die.
      */
     public String toString(){

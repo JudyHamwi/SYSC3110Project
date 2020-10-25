@@ -1,6 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *One of the Phases of the Game, the Attack Phase. This Phase is entered when a player attacks a Country.
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul
+ * @author Judy Hamwi
+ * @author Diana Miraflor
+ */
+
 public class AttackPhase {
 
 
@@ -12,6 +21,12 @@ public class AttackPhase {
     private List<Integer> defenderDiceValues;
     private int attackerArmies;
 
+    /**
+     *  Constructor of Attack Phase initalizes the fields.
+     * @param player initiating the attack
+     * @param attackerCountry contains the armies that want to attack
+     * @param defenderCountry country that contains armies to defend the attack
+     */
     public AttackPhase(Player player,  Country attackerCountry, Country defenderCountry){
         this.player=player;
         this.attackerDiceValues = new ArrayList<>();
@@ -20,6 +35,12 @@ public class AttackPhase {
         this.defenderCountry = defenderCountry;
     }
 
+    /**
+     *  Calculate the number of Dice that need to be rolled for the Attack. The number of dice
+     *  used to attack is equal to the number of armies attacking. The number is calculated
+     *  with the maximum number of armies atacking.
+     * @return number of dice rolled for the attack
+     */
     public int numberOfDiceForAttacker(){
         if(attackerArmies<1){
             System.out.println("Not Enough Armies to Attack");
@@ -31,6 +52,12 @@ public class AttackPhase {
         return 3;
     }
 
+    /**
+     * Calculate teh number of dice to be rolled for the defender country. The number of dice represent the number
+     * if armies defending the country. If the number of armies is only one, the defender can only roll one deice,
+     * else the defender can roll two dice
+     * @return number of dice rolled by the defender
+     */
     int numberOfDiceForDefender(){
         if(defenderCountry.getNumberOfArmies()==1) {
             return 1;
@@ -39,18 +66,27 @@ public class AttackPhase {
 
     }
 
+    /**
+     * Roll of Dice of th Attacker
+     */
     public void rollForAttacker(){
         dice=new Dice(numberOfDiceForAttacker());
         dice.roll();
         attackerDiceValues = dice.sortedValues();
     }
 
+    /**
+     * Roll of Dice of the Defender
+     */
     public void rollForDefender(){
         dice=new Dice(numberOfDiceForDefender());
         dice.roll();
         defenderDiceValues = dice.sortedValues();
     }
 
+    /**
+     * Compare the Roll of Dice of the Attacker and Defender. Remove armies of the losing country.
+     */
     public void compareDice(){
         if (attackerDiceValues.get(0) > defenderDiceValues.get(0)){
             defenderCountry.addArmy(-1);
@@ -68,12 +104,19 @@ public class AttackPhase {
         }
     }
 
+    /**
+     * If the Attacker wins, the armies are moved from the attacker country to the defender country
+     */
     public  void numberOfArmiesToMove(){
         defenderCountry.addArmy(attackerArmies);
         attackerCountry.addArmy(-attackerArmies);
 
     }
 
+    /**
+     * Applies the attack phase of the Game. It implements the player attacking the defender, and
+     * makes the decision of the attacker army conquering the defender armu.
+     */
     public void attack() {
         attackerArmies=(attackerCountry.getNumberOfArmies())-1;
         System.out.println(player + " has attacked " + defenderCountry + " with " + attackerArmies + " armies.");
@@ -97,16 +140,3 @@ public class AttackPhase {
         }
     }
 }
-
-/*
-Step1: Pick a country to attack, and to attack from
-Step2: Attack with countryfrom.army-1
-Step3: Example: If you attack 8 vs 6
-    3.1: 3 vs 2 - and then attacker wins
-    3.2: do it again until either attackingtroops or defenderCountry.army reaches 0
-step4: if attacker wins, move attacking troops to defenderCountry
-    4.1: Change ownership of countries, and update list of countries of playrs
-
-Loop back: ask player if they want to attack again or end turn
-
- */

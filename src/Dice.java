@@ -1,18 +1,34 @@
 import java.util.*;
 
+/**
+ * Dice that is rolled when the game is in the Attack Phase. The Defender and Attackr both roll the dice
+ * when the attacker attacks a country to try and conquer it.
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
+ */
 public class Dice {
     private Random random;
     private Die die;
     private int numberOfDice;
     private PriorityQueue<Integer> values;
 
-
+    /**
+     * Creates a dice with a specified number of Die
+     * @param numberOfDice to be rolled by the attacker
+     */
     public Dice (int numberOfDice){
         this.random = new Random();
         this.numberOfDice = numberOfDice;
         this.values = new PriorityQueue<>();
     }
 
+    /**
+     * Rolls the specified number of dice
+     * @return Collection of the values of the rolled Die
+     */
     public Collection<Integer> roll(){
         for (int i = 0; i <numberOfDice; i++){
             this.die = new Die();
@@ -23,6 +39,7 @@ public class Dice {
     }
 
     /**
+     * Sorts the values of the collection of rolled dice in descending order
      * @return a list of rolled dices in descending order
      */
     public List<Integer> sortedValues(){
@@ -33,15 +50,5 @@ public class Dice {
         Collections.reverse(sortedList);
         return sortedList;
     }
-    /*
-    public static void main(String[] args) {
-        Dice player1Dice = new Dice(3);
-        System.out.println("Player1 rolled : " + player1Dice.roll());
-        Dice player2Dice = new Dice(2);
-        System.out.println("Player2 rolled : " + player2Dice.roll());
-        Dice player3Dice = new Dice(1);
-        System.out.println("you rolled : " + player3Dice.roll());
-        System.out.println(player1Dice.sortedValues());
-    } */
 
 }

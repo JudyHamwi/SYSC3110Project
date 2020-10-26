@@ -46,7 +46,7 @@ public class Parser {
             }
         }
 
-        if (validInput.isCommand(word1) || validInput.isValidNumOfPlayers(word1)) { // I don't know if this is correct.
+        if (validInput.isCommand(word1) || validInput.isValidNumOfPlayers(word1)) {
             return new Command(word1, word2, word3, word4);
 
         } else {

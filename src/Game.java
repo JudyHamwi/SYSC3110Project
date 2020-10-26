@@ -258,8 +258,17 @@ public class Game {
      * Intializes the number of players in the game
      */
     public void initializePlayers() {
-        Command numOfPlayers = parser.getCommand();
-        this.numPlayers = processNumOfPlayers(numOfPlayers);
+        do{
+            try{
+                Command numOfPlayers =parser.getCommand();
+                this.numPlayers =processNumOfPlayers(numOfPlayers);
+
+            }
+            catch(Exception e){
+                System.out.println("Please enter a valid number between 2 and 6..");
+            }
+        }
+        while(this.numPlayers >6 || this.numPlayers < 2);
     }
 
     /**

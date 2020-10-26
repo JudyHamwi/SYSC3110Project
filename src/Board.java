@@ -70,8 +70,8 @@ public class Board {
     private void createBoard(){
 
         //  create the Continents in the Game
-        Continent NorthAmerica=new Continent("North America");
-        Continent SouthAmerica=new Continent("South America");
+        Continent NorthAmerica=new Continent("NorthAmerica");
+        Continent SouthAmerica=new Continent("SouthAmerica");
         Continent Europe=new Continent("Europe");
         Continent Africa=new Continent("Africa");
         Continent Asia=new Continent("Asia");
@@ -88,13 +88,13 @@ public class Board {
         //create the countries in North America
         Country Alaska=new Country("Alaska");
         Country Alberta=new Country("Alberta");
-        Country CentralAmerica=new Country("Central America");
-        Country EasternUnitedStates=new Country("Eastern United States");
+        Country CentralAmerica=new Country("CentralAmerica");
+        Country EasternUnitedStates=new Country("EasternUnitedStates");
         Country Greenland=new Country("Greenland");
-        Country NorthwestTerritory=new Country("Northwest Territory");
+        Country NorthwestTerritory=new Country("NorthwestTerritory");
         Country Ontario=new Country("Ontario");
         Country Quebec=new Country("Quebec");
-        Country WesternUnitedStates=new Country("Western United States");
+        Country WesternUnitedStates=new Country("WesternUnitedStates");
 
         //create the countries in South America
         Country Argentina=new Country("Argentina");
@@ -103,21 +103,21 @@ public class Board {
         Country Venezuela=new Country("Venezuela");
 
         //create the countries in Europe
-        Country GreatBritain=new Country("Great Britain");
+        Country GreatBritain=new Country("GreatBritain");
         Country Iceland=new Country("Iceland");
-        Country NorthernEurope=new Country("Northern Europe");
+        Country NorthernEurope=new Country("NorthernEurope");
         Country Scandinavia=new Country("Scandinavia");
-        Country SouthernEurope=new Country("Southern Europe");
+        Country SouthernEurope=new Country("SouthernEurope");
         Country Ukraine=new Country("Ukraine");
-        Country WesternEurope=new Country("Western Europe");
+        Country WesternEurope=new Country("WesternEurope");
 
         //create the countries in Africa
         Country Congo=new Country("Congo");
-        Country EastAfrica=new Country("East Africa");
+        Country EastAfrica=new Country("EastAfrica");
         Country Egypt=new Country("Egypt");
         Country Madagascar=new Country("Madagascar");
-        Country NorthAfrica=new Country("North Africa");
-        Country SouthAfrica=new Country("South Africa");
+        Country NorthAfrica=new Country("NorthAfrica");
+        Country SouthAfrica=new Country("SouthAfrica");
 
         //create the countries in Africa
         Country Afghanistan=new Country("Afghanistan");
@@ -126,7 +126,7 @@ public class Board {
         Country Irkutsk=new Country("Irkutsk");
         Country Japan=new Country("Japan");
         Country Kamchatka=new Country("Kamchatka");
-        Country MiddleEast=new Country("Middle East");
+        Country MiddleEast=new Country("MiddleEast");
         Country Mongolia=new Country("Mongolia");
         Country Siam=new Country("Siam");
         Country Siberia=new Country("Siberia");
@@ -134,10 +134,10 @@ public class Board {
         Country Yakutsk=new Country("Yakutsk");
 
         //create the countries in Australia
-        Country EasternAustralia=new Country("Eastern Australia");
+        Country EasternAustralia=new Country("EasternAustralia");
         Country Indonesia=new Country("Indonesia");
-        Country NewGuinea=new Country("New Guinea");
-        Country WesternAustralia=new Country("Western Australia");
+        Country NewGuinea=new Country("NewGuinea");
+        Country WesternAustralia=new Country("WesternAustralia");
 
         // add countries to North America
         NorthAmerica.addCountry(Alaska);

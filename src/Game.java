@@ -315,12 +315,11 @@ public class Game {
         for (Player p : players) {
             System.out.println(p);
             System.out.println("owns: " + p.getCountriesOwned());
-            System.out.println("Leftover:" + p.getCountriesOwned());
-            System.out.println(p.getTotalNumberOfCountries());
             for (Country c : p.getCountriesOwned()) {
                 System.out.println(" " + c + " Number of Armies: " + c.getNumberOfArmies());
             }
         }
+        printHelp();
     }
 
     /**
@@ -334,10 +333,11 @@ public class Game {
     private void printHelp() {
         System.out.println("Aim to conquer enemy territories!");
         System.out.println("Your command words are: ");
-        System.out.println("help   exit   attack   print board");
+        System.out.println("help   exit   attack   end print board");
         System.out.println("");
         System.out.println("While attacking, your command words are: ");
-        System.out.println("attack (country) from (owned country)       end turn");
+        System.out.println("attack (country) from (owned country)");
+        System.out.println("To end your turn, enter the command : end");
     }
 
     /**

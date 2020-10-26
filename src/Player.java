@@ -99,7 +99,7 @@ public class Player {
      * @param attackTo country that the player wants to attack
      * @return true of the player can do the attack and false otherwose
      */
-    public boolean canAttack(Country attackTo, Country attackFrom){
+    public boolean canAttack(Country attackFrom, Country attackTo){
         if(attackFrom.getCurrentOwner().equals(attackTo.getCurrentOwner())) {
             System.out.println("You can not attack your own country");
             return false;

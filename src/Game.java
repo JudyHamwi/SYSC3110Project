@@ -156,7 +156,7 @@ public class Game {
     }
 
     /**
-     * removes a player from the game if lost all their armies
+     * Removes a player from the game if lost all their armies
      */
     private void removePlayer() {
         for (Player p : players) {
@@ -204,6 +204,7 @@ public class Game {
         }
 
         String commandWord = command.getCommandWord();
+
         if (commandWord.equals("help")) {
             printHelp();
         }
@@ -385,8 +386,8 @@ public class Game {
             System.out.println("What country would you like to attack from?");
         }
 
-        attackingCountry = command.getSecondWord();
-        defendingCountry = command.getFourthWord();
+        attackingCountry = command.getFourthWord();
+        defendingCountry = command.getSecondWord();
 
         for(Country c: board.getCountries()) {
             if(c.getCountryName().equals(attackingCountry)) {

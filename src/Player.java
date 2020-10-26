@@ -97,7 +97,7 @@ public class Player {
      * and attacked, and number of armies follow the rules of the game
      * @param attackFrom country that the player wants to attack from
      * @param attackTo country that the player wants to attack
-     * @return true of the player can do the attack and false otherwose
+     * @return true of the player can do the attack and false otherwise
      */
     public boolean canAttack(Country attackFrom, Country attackTo){
         if(attackFrom.getCurrentOwner().equals(attackTo.getCurrentOwner())) {

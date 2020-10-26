@@ -281,7 +281,6 @@ public class Game {
         while (gameState == GameState.IN_PROGRESS) {
             System.out.println(currentPlayer + ", it is your turn.");
             try {
-                System.out.println(currentPlayer + ", it is your turn.");
                 Command command = parser.getCommand();
                 processCommand(command, currentPlayer);
             } catch (Exception e) {

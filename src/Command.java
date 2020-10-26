@@ -13,8 +13,6 @@ public class Command {
     private String secondWord;
     private String thirdWord;
     private String fourthWord;
-    private String fifthWord;
-    private String sixthWord;
 
     /**
      * Command contruction retrieves a maximum of six words from the user
@@ -22,17 +20,12 @@ public class Command {
      * @param word2 second word in the command entered by the user
      * @param word3 third word in the command entered by the user
      * @param word4 fourth word in the command entered by the user
-     * @param word5 fifth word in the command entered by the user
-     * @param word6 sixth word in the command entered by the user
      */
-    public Command(String word1, String word2, String word3, String word4, String word5, String word6) {
+    public Command(String word1, String word2, String word3, String word4) {
         this.commandWord = word1;
         this.secondWord = word2;
         this.thirdWord = word3;
         this.fourthWord = word4;
-        this.fifthWord = word5;
-        this.sixthWord = word6;
-
     }
 
     /**
@@ -66,18 +59,6 @@ public class Command {
     public String getFourthWord() { return fourthWord; }
 
     /**
-     * retrieved the fifth command word entered by the user
-     * @return fifth word entered by the user
-     */
-    public String getFifthWord() { return fifthWord; }
-
-    /**
-     * retrieved the sixth command word entered by the user
-     * @return sixth word entered by the user
-     */
-    public String getSixthWord() { return sixthWord; }
-
-    /**
      * Determines whether or not it is a valid command word
      * @return false if it is not a valid command word and true otherwise
      */
@@ -105,16 +86,5 @@ public class Command {
     public boolean hasFourthWord() {
         return (fourthWord != null);
     }
-    /**
-     * Determines whether the command has a fifth word
-     * @return false if it does not have a fifth command word and true otherwise
-     */
-    public boolean hasFifthWord() {return (fifthWord != null);}
-    /**
-     * Determines whether the command has a sixth word
-     * @return false if it does not have a sixth command word and true otherwise
-     */
-    public boolean hasSixthWord() {return (sixthWord != null);}
-
 
 }

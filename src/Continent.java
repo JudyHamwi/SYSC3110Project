@@ -62,6 +62,4 @@ public class Continent {
         }
         return continent;
     }
-
-
 }

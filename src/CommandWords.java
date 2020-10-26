@@ -27,7 +27,7 @@ public class CommandWords {
     }
 
     /**
-     * Checks if the number of players eneterd by the player is a valid
+     * Checks if the number of players entered by the player is a valid
      * number of players for the Game
      * @param aString number of players entered by the player
      * @return true of its a valid number of players and false otherwise

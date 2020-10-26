@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.*;
 
 /**
- * The RISK Game that initiazes the game, manages the Attack Phase, and keeps track
+ * The RISK Game that initializes the game, manages the Attack Phase, and keeps track
  * of the turn of each player and winning player
  * @version 1.0
  * @author Sarah Jaber
@@ -255,7 +255,7 @@ public class Game {
     }
 
     /**
-     * intializes the number of players in the game
+     * Intializes the number of players in the game
      */
     public void initializePlayers() {
         Command numOfPlayers = parser.getCommand();
@@ -279,6 +279,7 @@ public class Game {
     public void play() {
         theInitialState();
         while (gameState == GameState.IN_PROGRESS) {
+            System.out.println(currentPlayer + ", it is your turn.");
             try {
                 System.out.println(currentPlayer + ", it is your turn.");
                 Command command = parser.getCommand();
@@ -341,8 +342,8 @@ public class Game {
     }
 
     /**
-     * exits the gmae
-     * @param command that exits the famae
+     * Exits the game
+     * @param command that exits the game
      * @return true if it is the right command to exit the game
      */
     private boolean exit(Command command) {
@@ -376,75 +377,22 @@ public class Game {
             System.out.println("What country would you like to attack from?");
         }
 
-        if (command.hasSixthWord()) {
-            if (command.getFourthWord().equals("from")) {
-                attackingCountry = command.getFifthWord() + " " + command.getSixthWord();
-                attackingC = turnAttackerCIntoCountry(p, attackingCountry);
+        attackingCountry = command.getSecondWord();
+        defendingCountry = command.getFourthWord();
 
-                defendingCountry = command.getSecondWord() + " " + command.getThirdWord();
-                System.out.println(defendingCountry);  //testing
-                defendingC = turnDefendingCIntoCountry(p, defendingCountry);
-            }
-        }
-
-        if (!command.hasSixthWord()) {
-            if (command.getThirdWord().equals("from")) {
-                defendingCountry = command.getSecondWord();
-                defendingC = turnDefendingCIntoCountry(p, defendingCountry);
-                attackingCountry = command.getFourthWord() + " " + command.getFifthWord();
-                attackingC = turnAttackerCIntoCountry(p, attackingCountry);
-            }
-
-            if (command.getFourthWord().equals("from")) {
-                defendingCountry = command.getSecondWord() + " " + command.getThirdWord();
-                defendingC = turnDefendingCIntoCountry(p, defendingCountry);
-                attackingCountry = command.getFifthWord();
-                attackingC = turnAttackerCIntoCountry(p, attackingCountry);
-            }
-        }
-
-        if (command.getThirdWord().equals("from")) {
-            attackingCountry = command.getFourthWord();
-            attackingC = turnAttackerCIntoCountry(p, attackingCountry);
-            defendingCountry = command.getSecondWord();
-            defendingC = turnDefendingCIntoCountry(p, defendingCountry);
-        }
-
-        attackPhase(p, attackingC, defendingC);
-    }
-
-    /**
-     * Responds to the command of the country to be attacked from
-     * @param p player that wants to attack
-     * @param country of the attacker to attack from
-     * @return country to attack from
-     */
-    public Country turnAttackerCIntoCountry(Player p, String country) {
-        Country attackingC = null;
-        for (Country c : p.getCountriesOwned()) {
-            if (c.getCountryName().equals(country)) {
+        for(Country c: board.getCountries()) {
+            if(c.getCountryName().equals(attackingCountry)) {
                 attackingC = c;
             }
         }
-        return attackingC;
-    }
 
-    /**
-     * Responds to the command of the country that will be attacked.
-     * @param p player that wants to attack
-     * @param country that will be attacked
-     * @return country that will be attacked
-     */
-    public Country turnDefendingCIntoCountry(Player p, String country) {
-        Country defendingC = null;
-        for (Country c : p.getCountriesOwned()) {
-            for (Country adjC : c.getAdjacentCountries()) {
-                if (adjC.getCountryName().equals(country)) {
-                    defendingC = adjC;
-                }
+        for(Country c : board.getCountries()) {
+            if(c.getCountryName().equals(defendingCountry)) {
+                defendingC = c;
             }
         }
-        return defendingC;
+
+        attackPhase(p, attackingC, defendingC);
     }
 
     /**
@@ -462,7 +410,5 @@ public class Game {
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
-
     }
-
 }

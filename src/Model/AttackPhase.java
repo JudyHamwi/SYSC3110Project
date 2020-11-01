@@ -1,8 +1,10 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *One of the Phases of the Game, the Attack Phase. This Phase is entered when a player attacks a Country.
+ *One of the Phases of the Model.Game, the Attack Phase. This Phase is entered when a player attacks a Model.Country.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul
@@ -13,9 +15,9 @@ import java.util.List;
 public class AttackPhase {
 
 
-    private  Player player;
-    private  Country attackerCountry;
-    private  Country defenderCountry;
+    private Player player;
+    private Country attackerCountry;
+    private Country defenderCountry;
     private Dice dice ;
     private List<Integer> attackerDiceValues;
     private List<Integer> defenderDiceValues;
@@ -27,7 +29,7 @@ public class AttackPhase {
      * @param attackerCountry contains the armies that want to attack
      * @param defenderCountry country that contains armies to defend the attack
      */
-    public AttackPhase(Player player,  Country attackerCountry, Country defenderCountry){
+    public AttackPhase(Player player, Country attackerCountry, Country defenderCountry){
         this.player=player;
         this.attackerDiceValues = new ArrayList<>();
         this.defenderDiceValues = new ArrayList<>();
@@ -36,7 +38,7 @@ public class AttackPhase {
     }
 
     /**
-     *  Calculate the number of Dice that need to be rolled for the Attack. The number of dice
+     *  Calculate the number of Model.Dice that need to be rolled for the Attack. The number of dice
      *  used to attack is equal to the number of armies attacking. The number is calculated
      *  with the maximum number of armies atacking.
      * @return number of dice rolled for the attack
@@ -67,7 +69,7 @@ public class AttackPhase {
     }
 
     /**
-     * Roll of Dice of th Attacker
+     * Roll of Model.Dice of th Attacker
      */
     public void rollForAttacker(){
         dice=new Dice(numberOfDiceForAttacker());
@@ -76,7 +78,7 @@ public class AttackPhase {
     }
 
     /**
-     * Roll of Dice of the Defender
+     * Roll of Model.Dice of the Defender
      */
     public void rollForDefender(){
         dice=new Dice(numberOfDiceForDefender());
@@ -85,7 +87,7 @@ public class AttackPhase {
     }
 
     /**
-     * Compare the Roll of Dice of the Attacker and Defender. Remove armies of the losing country.
+     * Compare the Roll of Model.Dice of the Attacker and Defender. Remove armies of the losing country.
      */
     public void compareDice(){
         if (attackerDiceValues.get(0) > defenderDiceValues.get(0)){
@@ -114,7 +116,7 @@ public class AttackPhase {
     }
 
     /**
-     * Applies the attack phase of the Game. It implements the player attacking the defender, and
+     * Applies the attack phase of the Model.Game. It implements the player attacking the defender, and
      * makes the decision of the attacker army conquering the defender armu.
      */
     public void attack() {

@@ -1,7 +1,9 @@
+package Model;
+
 import java.util.*;
 
 /**
- * Dice that is rolled when the game is in the Attack Phase. The Defender and Attackr both roll the dice
+ * Model.Dice that is rolled when the game is in the Attack Phase. The Defender and Attackr both roll the dice
  * when the attacker attacks a country to try and conquer it.
  * @version 1.0
  * @author Sarah Jaber
@@ -16,7 +18,7 @@ public class Dice {
     private PriorityQueue<Integer> values;
 
     /**
-     * Creates a dice with a specified number of Die
+     * Creates a dice with a specified number of Model.Die
      * @param numberOfDice to be rolled by the attacker
      */
     public Dice (int numberOfDice){
@@ -27,7 +29,7 @@ public class Dice {
 
     /**
      * Rolls the specified number of dice
-     * @return Collection of the values of the rolled Die
+     * @return Collection of the values of the rolled Model.Die
      */
     public Collection<Integer> roll(){
         for (int i = 0; i <numberOfDice; i++){

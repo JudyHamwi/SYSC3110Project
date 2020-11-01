@@ -1,10 +1,13 @@
+package Model;
+
+import Command.Command;
+import Command.Parser;
 
 import java.util.Collections;
 import java.util.Random;
 import java.util.*;
-
 /**
- * The RISK Game that initializes the game, manages the Attack Phase, and keeps track
+ * The RISK Model.Game that initializes the game, manages the Attack Phase, and keeps track
  * of the turn of each player and winning player
  * @version 1.0
  * @author Sarah Jaber
@@ -25,7 +28,7 @@ public class Game {
     private Player currentPlayer;
 
     /**
-     * Starts a new Game
+     * Starts a new Model.Game
      */
     public Game() {
         players = new LinkedList<Player>();
@@ -34,7 +37,7 @@ public class Game {
     }
 
     /**
-     * Initalizes the start of the Game
+     * Initalizes the start of the Model.Game
      * @param numberOfPlayers that will play the game
      */
     private void initialize(int numberOfPlayers) {
@@ -48,7 +51,7 @@ public class Game {
 
     /**
      * gets the current state of the game
-     * @return GameState of the game
+     * @return Model.GameState of the game
      */
     public GameState getState() {
         return this.gameState;
@@ -405,7 +408,7 @@ public class Game {
     }
 
     /**
-     * Prints the Board of the Game
+     * Prints the Model.Board of the Model.Game
      * @param command entered by the player to print the board
      */
     public void printBoard(Command command) {

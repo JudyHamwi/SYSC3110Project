@@ -1,9 +1,11 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- *The Board of the RISK Game.
+ *The Model.Board of the RISK Model.Game.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
@@ -15,7 +17,7 @@ public class Board {
     private ArrayList<Country> countries;
 
     /**
-     * Constructor of Board that creates a new Board
+     * Constructor of Model.Board that creates a new Model.Board
      */
     public Board(){
         continents= new LinkedList<>();
@@ -25,7 +27,7 @@ public class Board {
     }
 
     /**
-     * add a new continent to the Board
+     * add a new continent to the Model.Board
      * @param continent added to the board
      */
     public void addContinent(Continent continent){
@@ -43,9 +45,16 @@ public class Board {
         return null;
     }
 
-
+    public Continent getContinent(String continent){
+        for (Continent c : continents){
+            if(c.getContinentName().equals(continent)){
+                return c;
+            }
+        }
+        return null;
+    }
     /**
-     * The textual represention of the Board. Contains information about every continent, country
+     * The textual represention of the Model.Board. Contains information about every continent, country
      * and the player that owns the country
      * @return the textal representation of the board.
      */
@@ -58,7 +67,7 @@ public class Board {
     }
 
     /**
-     * Set all the countries in the Board
+     * Set all the countries in the Model.Board
      */
     public void setTotalCountries(){
         for(Continent c:continents){
@@ -69,19 +78,19 @@ public class Board {
     }
 
     /**
-     * Retrieves all the countries in the Board
-     * @return List of countries in the Board
+     * Retrieves all the countries in the Model.Board
+     * @return List of countries in the Model.Board
      */
     public ArrayList<Country> getCountries(){
         return countries;
     }
 
     /**
-     * create the Board for the RISK Game
+     * create the Model.Board for the RISK Model.Game
      */
     private void createBoard(){
 
-        //  create the Continents in the Game
+        //  create the Continents in the Model.Game
         Continent NorthAmerica=new Continent("NorthAmerica");
         Continent SouthAmerica=new Continent("SouthAmerica");
         Continent Europe=new Continent("Europe");

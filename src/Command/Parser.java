@@ -1,7 +1,11 @@
+package Command;
+
+import Command.Command;
+
 import java.util.Scanner;
 
 /**
- * Translates the commands entered by the players to be recognized and executed by the Game
+ * Translates the commands entered by the players to be recognized and executed by the Model.Game
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam

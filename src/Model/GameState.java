@@ -1,7 +1,8 @@
+package Model;
 
 /**
- *  GameState
- *  The GameState class is an Enum class that is meant to show changes in the game’s
+ *  Model.GameState
+ *  The Model.GameState class is an Enum class that is meant to show changes in the game’s
  *  progression. For our game we have game states INITIALIZING, IN_PROGRESS and COMPLETED to show if
  *  the game is still being played or if the game has been finished.
  */

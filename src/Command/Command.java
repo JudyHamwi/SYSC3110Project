@@ -1,6 +1,8 @@
+package Command;
+
 /**
- * Command interprets the commands typed by the user and provides functionality for the
- * interaction between the user and the Game
+ * Command.Command interprets the commands typed by the user and provides functionality for the
+ * interaction between the user and the Model.Game
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
@@ -15,7 +17,7 @@ public class Command {
     private String fourthWord;
 
     /**
-     * Command contruction retrieves a maximum of six words from the user
+     * Command.Command contruction retrieves a maximum of six words from the user
      * @param word1 first word in the command entered by the user
      * @param word2 second word in the command entered by the user
      * @param word3 third word in the command entered by the user

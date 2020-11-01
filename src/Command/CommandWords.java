@@ -1,5 +1,7 @@
+package Command;
+
 /**
- * Command Words contains a repository of valid command words to be enetered by the players to play the Game.
+ * Command.Command Words contains a repository of valid command words to be enetered by the players to play the Model.Game.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
@@ -28,7 +30,7 @@ public class CommandWords {
 
     /**
      * Checks if the number of players entered by the player is a valid
-     * number of players for the Game
+     * number of players for the Model.Game
      * @param aString number of players entered by the player
      * @return true of its a valid number of players and false otherwise
      */

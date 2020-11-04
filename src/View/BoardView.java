@@ -4,23 +4,31 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BoardView extends JPanel {
-    private static final int BOARD_WIDTH = 1080 ;
-    private static final int BOARD_HEIGHT = 980;
+    private static final int BOARD_WIDTH = 1300 ;
+    private static final int BOARD_HEIGHT = 900;
+    private JPanel mapPanel;
     private JLabel mapLabel;
-    final ImageIcon mapIcon = new ImageIcon("images/mapIcon.png");
-
+    private ImageIcon mapImageIcon;
     private GridBagConstraints c;
 
     public BoardView(){
-        mapLabel = new JLabel(mapIcon);
         c = new GridBagConstraints();
-
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT ));
         this.setVisible(true);
-        this.add(mapLabel);
-        this.add(new CountryPanel());
+        this.add(mapPanel());
+        //this.add(new CountryPanel());
 
+    }
+
+    private JPanel mapPanel(){
+        mapPanel = new JPanel();
+        mapPanel.setLayout(new GridLayout(1,1,5,5));
+        mapImageIcon = new ImageIcon("images/riskMap.png");
+        this.mapLabel = new JLabel(mapImageIcon);
+        mapLabel.setPreferredSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT));
+        mapPanel.add(mapLabel);
+        return mapPanel;
     }
 
 

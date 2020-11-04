@@ -9,7 +9,7 @@ public class RiskView extends JFrame {
 
     public RiskView(){
         super("Risk");
-        this.setSize(1080,980);
+        this.setSize(1600,1108);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(new BoardView());
 

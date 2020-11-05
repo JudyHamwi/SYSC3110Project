@@ -1,9 +1,11 @@
+package RISKModel;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Player that plays in the Game.
+ * RISKModel.Player that plays in the RISKModel.Game.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
@@ -18,7 +20,7 @@ public class Player {
     private int placeArmy;
 
     /**
-     * Player that plays in the Game
+     * RISKModel.Player that plays in the RISKModel.Game
      */
     public Player(){
         this.PLAYER_ID = this.getNextPlayerId();
@@ -36,7 +38,7 @@ public class Player {
     }
 
     /**
-     * Instantiates the ID of the next player to be added to the Game
+     * Instantiates the ID of the next player to be added to the RISKModel.Game
      * @return ID of the next player to be added in the game
      */
     public static int getNextPlayerId() {
@@ -125,7 +127,7 @@ public class Player {
      * @return String representation of the player
      */
     public String toString(){
-        return "Player" + getplayerID();
+        return "RISKModel.Player" + getplayerID();
     }
 
     @Override

@@ -1,7 +1,9 @@
+package RISKModel;
+
 import java.util.*;
 
 /**
- * Continent in the Board of RISK Game.
+ * RISKModel.Continent in the RISKModel.Board of RISK RISKModel.Game.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
@@ -10,13 +12,13 @@ import java.util.*;
  */
 public class Continent {
     private String continentName;
-    private List<Country> countries;
+    private LinkedList<Country> countries;
     private Player currentOwner;
 
     /**
-     * Contrusctor of Continent that creates a new Continent
+     * Contrusctor of RISKModel.Continent that creates a new RISKModel.Continent
      *
-     * @param name of the Continent
+     * @param name of the RISKModel.Continent
      */
     public Continent(String name) {
         continentName = name;
@@ -31,7 +33,7 @@ public class Continent {
         countries.add(country);
     }
 
-    public List<Country> getContinentCountries() {
+    public LinkedList<Country> getContinentCountries() {
         return countries;
     }
 

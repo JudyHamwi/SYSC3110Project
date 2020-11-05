@@ -1,8 +1,10 @@
+package RISKModel;
+
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Country in the Board of RISK Game
+ * RISKModel.Country in the RISKModel.Board of RISK RISKModel.Game
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
@@ -17,7 +19,7 @@ public class Country {
     private Player currentOwner;
 
     /**
-     * Constructor to create a new Country with a specific name
+     * Constructor to create a new RISKModel.Country with a specific name
      * @param name of the country
      */
     public Country(String name){

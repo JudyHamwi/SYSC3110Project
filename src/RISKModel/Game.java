@@ -1,10 +1,12 @@
+package RISKModel;
 
 import java.util.Collections;
 import java.util.Random;
 import java.util.*;
 
+
 /**
- * The RISK Game that initializes the game, manages the Attack Phase, and keeps track
+ * The RISK RISKModel.Game that initializes the game, manages the Attack Phase, and keeps track
  * of the turn of each player and winning player
  * @version 1.0
  * @author Sarah Jaber
@@ -21,20 +23,20 @@ public class Game {
     private static LinkedList<Player> players;
     private int playerArmy;
     private int numPlayers;
-    private Parser parser;
+    //private Parser parser;
     private Player currentPlayer;
 
     /**
-     * Starts a new Game
+     * Starts a new RISKModel.Game
      */
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
-        parser = new Parser();
+        //parser = new Parser();
     }
 
     /**
-     * Initalizes the start of the Game
+     * Initalizes the start of the RISKModel.Game
      * @param numberOfPlayers that will play the game
      */
     private void initialize(int numberOfPlayers) {
@@ -48,7 +50,7 @@ public class Game {
 
     /**
      * gets the current state of the game
-     * @return GameState of the game
+     * @return RISKModel.GameState of the game
      */
     public GameState getState() {
         return this.gameState;
@@ -261,8 +263,8 @@ public class Game {
     public void initializePlayers() {
         do{
             try{
-                Command numOfPlayers =parser.getCommand();
-                this.numPlayers =processNumOfPlayers(numOfPlayers);
+                //Command numOfPlayers =parser.getCommand();
+               // this.numPlayers =processNumOfPlayers(numOfPlayers);
 
             }
             catch(Exception e){
@@ -291,8 +293,8 @@ public class Game {
         while (gameState == GameState.IN_PROGRESS) {
             System.out.println(currentPlayer + ", it is your turn.");
             try {
-                Command command = parser.getCommand();
-                processCommand(command, currentPlayer);
+              //  Command command = parser.getCommand();
+                //processCommand(command, currentPlayer);
             } catch (Exception e) {
                 System.out.println("Exception Occured: " + e);
                 System.out.println("Please enter command again...");
@@ -405,7 +407,7 @@ public class Game {
     }
 
     /**
-     * Prints the Board of the Game
+     * Prints the RISKModel.Board of the RISKModel.Game
      * @param command entered by the player to print the board
      */
     public void printBoard(Command command) {

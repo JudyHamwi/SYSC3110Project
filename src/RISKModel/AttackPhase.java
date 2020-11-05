@@ -1,8 +1,11 @@
+package RISKModel;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
- *One of the Phases of the Game, the Attack Phase. This Phase is entered when a player attacks a Country.
+ *One of the Phases of the RISKModel.Game, the Attack Phase. This Phase is entered when a player attacks a RISKModel.Country.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul
@@ -13,9 +16,9 @@ import java.util.List;
 public class AttackPhase {
 
 
-    private  Player player;
-    private  Country attackerCountry;
-    private  Country defenderCountry;
+    private Player player;
+    private Country attackerCountry;
+    private Country defenderCountry;
     private Dice dice ;
     private List<Integer> attackerDiceValues;
     private List<Integer> defenderDiceValues;
@@ -27,7 +30,7 @@ public class AttackPhase {
      * @param attackerCountry contains the armies that want to attack
      * @param defenderCountry country that contains armies to defend the attack
      */
-    public AttackPhase(Player player,  Country attackerCountry, Country defenderCountry){
+    public AttackPhase(Player player, Country attackerCountry, Country defenderCountry){
         this.player=player;
         this.attackerDiceValues = new ArrayList<>();
         this.defenderDiceValues = new ArrayList<>();
@@ -36,7 +39,7 @@ public class AttackPhase {
     }
 
     /**
-     *  Calculate the number of Dice that need to be rolled for the Attack. The number of dice
+     *  Calculate the number of RISKModel.Dice that need to be rolled for the Attack. The number of dice
      *  used to attack is equal to the number of armies attacking. The number is calculated
      *  with the maximum number of armies atacking.
      * @return number of dice rolled for the attack
@@ -67,7 +70,7 @@ public class AttackPhase {
     }
 
     /**
-     * Roll of Dice of th Attacker
+     * Roll of RISKModel.Dice of th Attacker
      */
     public void rollForAttacker(){
         dice=new Dice(numberOfDiceForAttacker());
@@ -76,7 +79,7 @@ public class AttackPhase {
     }
 
     /**
-     * Roll of Dice of the Defender
+     * Roll of RISKModel.Dice of the Defender
      */
     public void rollForDefender(){
         dice=new Dice(numberOfDiceForDefender());
@@ -85,7 +88,7 @@ public class AttackPhase {
     }
 
     /**
-     * Compare the Roll of Dice of the Attacker and Defender. Remove armies of the losing country.
+     * Compare the Roll of RISKModel.Dice of the Attacker and Defender. Remove armies of the losing country.
      */
     public void compareDice(){
         if (attackerDiceValues.get(0) > defenderDiceValues.get(0)){
@@ -114,7 +117,7 @@ public class AttackPhase {
     }
 
     /**
-     * Applies the attack phase of the Game. It implements the player attacking the defender, and
+     * Applies the attack phase of the RISKModel.Game. It implements the player attacking the defender, and
      * makes the decision of the attacker army conquering the defender armu.
      */
     public void attack() {
@@ -137,6 +140,61 @@ public class AttackPhase {
         } else {
             System.out.println(defenderCountry + " was not conquered and has " + defenderCountry.getNumberOfArmies()
                                         + " armies.");
+        }
+    }
+
+    /**
+     * Translates the commands entered by the players to be recognized and executed by the RISKModel.Game
+     * @version 1.0
+     * @author Sarah Jaber
+     * @author Walid Baitul Islam
+     * @author Judy Hamwi
+     *  @author Diana Miraflor
+     */
+    public static class Parser {
+        private CommandWords validInput;
+        private Scanner reader;
+
+        public Parser() {
+            validInput = new CommandWords();
+            reader = new Scanner(System.in);
+        }
+
+        /**
+         * Translates the inputs entered by the user and checks if they are valid commands
+         * @return valid command entered by the user
+         */
+        public Command getCommand() {
+            String inputLine;
+            String word1 = null;
+            String word2 = null;
+            String word3 = null;
+            String word4 = null;
+
+            System.out.print("> ");
+
+            inputLine = reader.nextLine();
+
+            Scanner tokenizer = new Scanner(inputLine);
+            if (tokenizer.hasNext()) {
+                word1 = tokenizer.next();
+                if (tokenizer.hasNext()) {
+                    word2 = tokenizer.next();
+                    if (tokenizer.hasNext()) {
+                        word3 = tokenizer.next();
+                        if (tokenizer.hasNext()) {
+                            word4 = tokenizer.next();
+                        }
+                    }
+                }
+            }
+
+            if (validInput.isCommand(word1) || validInput.isValidNumOfPlayers(word1)) {
+                return new Command(word1, word2, word3, word4);
+
+            } else {
+                return new Command(null, word2, word3, word4);
+            }
         }
     }
 }

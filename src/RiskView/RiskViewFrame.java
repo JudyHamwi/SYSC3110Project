@@ -2,13 +2,11 @@ package RiskView;
 
 import RiskController.InitializationController;
 import RiskController.NewGameController;
-import RiskModel.Board;
-import RiskModel.Game;
-import RiskModel.GameState;
-import RiskModel.Player;
+import RiskModel.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class RiskViewFrame extends JFrame implements RiskView {
 
@@ -27,6 +25,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
     private JMenu menu;
     private JMenuItem newGame;
     private Game gameModel;
+    private BoardView boardView;
 
     public RiskViewFrame(){
         super("RISK Game");
@@ -72,12 +71,14 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleNewGame(Game game, Board board) {
-        this.add(new BoardView(board), BorderLayout.CENTER);
+        boardView=new BoardView(board);
+        this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);
         menuBar.add(numberOfPlayers);
     }
     public void handleInitialization(Game game, GameState state, Player player){
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
+        boardView.InitializeBoard();
     }
 }

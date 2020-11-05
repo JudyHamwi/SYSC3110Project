@@ -16,6 +16,7 @@ public class InitializationController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        gameModel.initialize(players);
+        gameModel.setNumberOfPlayers(players);
+        gameModel.theInitialState();
     }
 }

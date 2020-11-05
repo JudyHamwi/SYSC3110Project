@@ -53,9 +53,6 @@ public class Game {
         distributeCountries();
         distributeRandomArmyToCountry();
         currentPlayer = players.getFirst();
-        for(RiskView rv:riskViews){
-            rv.handleInitialization(this, gameState, currentPlayer);
-        }
     }
 
     /**
@@ -288,11 +285,18 @@ public class Game {
      * Initialzes the state of the game at the start of the game
      */
     public void theInitialState() {
-        printWelcome();
+        //printWelcome();
         initializePlayers();
         initialize(numPlayers);
-        printInitialState();
+        //printInitialState();
         this.gameState = GameState.IN_PROGRESS;
+        for(RiskView rv:riskViews){
+            rv.handleInitialization(this, gameState, currentPlayer);
+        }
+    }
+
+    public void setNumberOfPlayers(int numberOfPlayers){
+        numPlayers=numberOfPlayers;
     }
 
     /**

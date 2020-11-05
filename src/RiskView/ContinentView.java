@@ -5,6 +5,7 @@ import RiskModel.Country;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ContinentView extends JPanel {
@@ -16,9 +17,11 @@ public class ContinentView extends JPanel {
     private JPanel AsiaPanel;
     private JPanel AustraliaPanel;
     private Board board;
+    private ArrayList<JButton> countryButtons;
 
     public ContinentView(Board board){
         this.board=board;
+        countryButtons=new ArrayList<>();
         this.setLayout(new GridLayout(3,3));
         setNorthAmericaPanel();
         setSouthAmericaPanel();
@@ -32,7 +35,6 @@ public class ContinentView extends JPanel {
         this.add(AfricaPanel);
         this.add(AsiaPanel);
         this.add(AustraliaPanel);
-
     }
 
     private void setNorthAmericaPanel() {
@@ -43,7 +45,10 @@ public class ContinentView extends JPanel {
         LinkedList<Country> northAmericaCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for (Country c : northAmericaCountries) {
             JButton b = new JButton(c.getCountryName());
+            b.setFont(new Font("Arial", Font.BOLD, 12));
+            b.setBounds(100,100,100,100);
             northAmericaPanel.add(b);
+            countryButtons.add(b);
         }
     }
 
@@ -55,7 +60,9 @@ public class ContinentView extends JPanel {
         LinkedList<Country> southAmericaCountries = board.getContinent("SouthAmerica").getContinentCountries();
         for (Country c : southAmericaCountries) {
             JButton b = new JButton(c.getCountryName());
+            b.setFont(new Font("Arial", Font.BOLD, 12));
             southAmericaPanel.add(b);
+            countryButtons.add(b);
         }
     }
 
@@ -67,7 +74,9 @@ public class ContinentView extends JPanel {
         LinkedList<Country> EuropeCountries = board.getContinent("Europe").getContinentCountries();
         for (Country c : EuropeCountries) {
             JButton b = new JButton(c.getCountryName());
+            b.setFont(new Font("Arial", Font.BOLD, 12));
             EuropePanel.add(b);
+            countryButtons.add(b);
         }
     }
 
@@ -79,7 +88,9 @@ public class ContinentView extends JPanel {
         LinkedList<Country> AfricaCountries = board.getContinent("Africa").getContinentCountries();
         for (Country c : AfricaCountries) {
             JButton b = new JButton(c.getCountryName());
+            b.setFont(new Font("Arial", Font.BOLD, 12));
             AfricaPanel.add(b);
+            countryButtons.add(b);
         }
 
     }
@@ -92,7 +103,9 @@ public class ContinentView extends JPanel {
         LinkedList<Country> AsiaCountries = board.getContinent("Asia").getContinentCountries();
         for (Country c : AsiaCountries) {
             JButton b = new JButton(c.getCountryName());
+            b.setFont(new Font("Arial", Font.BOLD, 12));
             AsiaPanel.add(b);
+            countryButtons.add(b);
         }
     }
 
@@ -105,8 +118,39 @@ public class ContinentView extends JPanel {
         LinkedList<Country> AustraliaCountries = board.getContinent("Australia").getContinentCountries();
         for (Country c : AustraliaCountries) {
             JButton b = new JButton(c.getCountryName());
+            b.setFont(new Font("Arial", Font.BOLD, 12));
+            b.setText(c.getCountryName());
             AustraliaPanel.add(b);
+            countryButtons.add(b);
         }
+    }
+
+    public void paint(Graphics g){
+        super.paint(g);
+        Graphics2D g2= (Graphics2D) g;
+        g2.drawLine(countryButtons.get(0).getX()+countryButtons.get(0).getWidth(),
+                countryButtons.get(0).getY(), countryButtons.get(1).getX(), countryButtons.get(1).getY());
+    }
+
+    public void InitializePlayerCountries(){
+            for (JButton b : countryButtons) {
+                Country country = board.getCountry(b.getText());
+                if (country.getCurrentOwner().getplayerID() == 1) {
+                    b.setForeground(Color.BLUE);
+                }
+                else if(country.getCurrentOwner().getplayerID() == 2){
+                    b.setForeground(Color.RED);
+                }
+                else if(country.getCurrentOwner().getplayerID() == 3){
+                    b.setForeground(Color.GREEN);
+                } else if(country.getCurrentOwner().getplayerID() == 4){
+                    b.setForeground(Color.ORANGE);
+
+                }else if(country.getCurrentOwner().getplayerID() == 5){
+                    b.setForeground(Color.YELLOW);
+                }else
+                    b.setForeground(Color.PINK);
+            }
     }
 
 }

@@ -1,5 +1,7 @@
 package RISKModel;
 
+import RISKView.RISKView;
+
 import java.util.Collections;
 import java.util.Random;
 import java.util.*;
@@ -25,6 +27,7 @@ public class Game {
     private int numPlayers;
     //private Parser parser;
     private Player currentPlayer;
+    private ArrayList<RISKView> riskViews;
 
     /**
      * Starts a new RISKModel.Game
@@ -33,6 +36,7 @@ public class Game {
         players = new LinkedList<Player>();
         board = new Board();
         //parser = new Parser();
+        riskViews=new ArrayList<>();
     }
 
     /**
@@ -416,6 +420,14 @@ public class Game {
             return;
         }
         System.out.println(board);
+    }
+
+    public void addRiskView(RISKView rv){
+        riskViews.add(rv);
+    }
+
+    public void removeRiskView(RISKView rv){
+        riskViews.remove(rv);
     }
 
     public static void main(String[] args) {

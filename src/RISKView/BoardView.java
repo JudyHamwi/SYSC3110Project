@@ -23,4 +23,5 @@ public class BoardView extends JPanel {
         this.add(continentsInformation, BorderLayout.SOUTH);
         this.add(new ContinentView(), BorderLayout.CENTER);
     }
+
 }

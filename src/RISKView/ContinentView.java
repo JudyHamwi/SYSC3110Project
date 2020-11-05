@@ -110,5 +110,4 @@ public class ContinentView extends JPanel {
         }
     }
 
-
 }

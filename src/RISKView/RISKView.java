@@ -10,6 +10,7 @@ public class RISKView extends JFrame {
     private JPanel gameStatusPanel;
     private JLabel gameStatus;
     private JLabel currentPlayer;
+    private JOptionPane numberOfPlayers;
 
     public RISKView(){
         super("RISK Game");
@@ -20,6 +21,7 @@ public class RISKView extends JFrame {
         currentPlayer=new JLabel("Current Player: ");
         gameStatusPanel.add(gameStatus, BorderLayout.EAST);
         gameStatusPanel.add(currentPlayer,BorderLayout.WEST);
+        numberOfPlayers=new JOptionPane();
         this.add(new BoardView(), BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.NORTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

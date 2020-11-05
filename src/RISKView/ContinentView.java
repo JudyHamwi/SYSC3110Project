@@ -20,7 +20,7 @@ public class ContinentView extends JPanel {
 
     public ContinentView(){
         board=new Board();
-        this.setLayout(new GridLayout(6,6));
+        this.setLayout(new GridLayout(3,3));
         setNorthAmericaPanel();
         setSouthAmericaPanel();
         setEuropePanel();

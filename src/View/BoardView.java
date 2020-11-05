@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 public class BoardView extends JPanel {
     private static final int BOARD_WIDTH = 1300 ;
@@ -11,14 +12,16 @@ public class BoardView extends JPanel {
     private ImageIcon mapImageIcon;
     private GridBagConstraints c;
 
-    public BoardView(){
+    private final Set<ContinentView> continents;
+
+    public BoardView(final Set<ContinentView> continents){
+        this.continents = continents;
         c = new GridBagConstraints();
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT ));
         this.setVisible(true);
         this.add(mapPanel());
         //this.add(new CountryPanel());
-
     }
 
     private JPanel mapPanel(){

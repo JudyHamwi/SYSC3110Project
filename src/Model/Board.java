@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Board {
     private final List<Continent> continents;
-    private ArrayList<Country> countries;
 
+    private ArrayList<Country> countries;
     /**
      * Constructor of Model.Board that creates a new Model.Board
      */
@@ -24,6 +24,10 @@ public class Board {
         countries = new ArrayList<>();
         createBoard();
         setTotalCountries();
+    }
+
+    public List<Continent> getContinents() {
+        return continents;
     }
 
     /**
@@ -45,14 +49,14 @@ public class Board {
         return null;
     }
 
-    public Continent getContinent(String continent){
-        for (Continent c : continents){
-            if(c.getContinentName().equals(continent)){
-                return c;
+        public Continent getContinent(String continent){
+            for (Continent c : continents){
+                if(c.getContinentName().equals(continent)){
+                    return c;
+                }
             }
+            return null;
         }
-        return null;
-    }
     /**
      * The textual represention of the Model.Board. Contains information about every continent, country
      * and the player that owns the country

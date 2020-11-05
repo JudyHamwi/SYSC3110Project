@@ -12,7 +12,6 @@ import java.util.List;
  * @author Diana Miraflor
  */
 public class Country {
-
     private String countryName;
     private List<Country> adjacentCountries;
     private int numberOfArmies;

@@ -53,7 +53,7 @@ public class ContinentView extends JPanel {
         southAmericaPanel.setBackground(Color.RED);
         southAmericaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         southAmericaPanel.setLayout(new GridLayout(5, 5, 5, 5));
-        LinkedList<Country> southAmericaCountries = board.getContinent("NorthAmerica").getContinentCountries();
+        LinkedList<Country> southAmericaCountries = board.getContinent("SouthAmerica").getContinentCountries();
         for (Country c : southAmericaCountries) {
             JButton b = new JButton(c.getCountryName());
             southAmericaPanel.add(b);
@@ -65,7 +65,7 @@ public class ContinentView extends JPanel {
         EuropePanel.setBackground(Color.BLUE);
         EuropePanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         EuropePanel.setLayout(new GridLayout(5,5,5,5));
-        LinkedList<Country> EuropeCountries = board.getContinent("NorthAmerica").getContinentCountries();
+        LinkedList<Country> EuropeCountries = board.getContinent("Europe").getContinentCountries();
         for (Country c : EuropeCountries) {
             JButton b = new JButton(c.getCountryName());
             EuropePanel.add(b);
@@ -77,7 +77,7 @@ public class ContinentView extends JPanel {
         AfricaPanel.setBackground(Color.ORANGE);
         AfricaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         AfricaPanel.setLayout(new GridLayout(5,5,5,5));
-        LinkedList<Country> AfricaCountries = board.getContinent("NorthAmerica").getContinentCountries();
+        LinkedList<Country> AfricaCountries = board.getContinent("Africa").getContinentCountries();
         for (Country c : AfricaCountries) {
             JButton b = new JButton(c.getCountryName());
             AfricaPanel.add(b);
@@ -90,7 +90,7 @@ public class ContinentView extends JPanel {
         AsiaPanel.setBackground(Color.GREEN);
         AsiaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         AsiaPanel.setLayout(new GridLayout(5,5,5,5));
-        LinkedList<Country> AsiaCountries = board.getContinent("NorthAmerica").getContinentCountries();
+        LinkedList<Country> AsiaCountries = board.getContinent("Asia").getContinentCountries();
         for (Country c : AsiaCountries) {
             JButton b = new JButton(c.getCountryName());
             AsiaPanel.add(b);
@@ -103,7 +103,7 @@ public class ContinentView extends JPanel {
         AustraliaPanel.setBackground(Color.PINK);
         AustraliaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         AustraliaPanel.setLayout(new GridLayout(5,5,5,5));
-        LinkedList<Country> AustraliaCountries = board.getContinent("NorthAmerica").getContinentCountries();
+        LinkedList<Country> AustraliaCountries = board.getContinent("Australia").getContinentCountries();
         for (Country c : AustraliaCountries) {
             JButton b = new JButton(c.getCountryName());
             AustraliaPanel.add(b);

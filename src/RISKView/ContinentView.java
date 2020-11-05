@@ -38,6 +38,8 @@ public class ContinentView extends JPanel {
 
     private void setNorthAmericaPanel() {
         northAmericaPanel = new JPanel();
+        northAmericaPanel.setBackground(Color.YELLOW);
+        northAmericaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         northAmericaPanel.setLayout(new GridLayout(5, 5, 5, 5));
         LinkedList<Country> northAmericaCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for (Country c : northAmericaCountries) {
@@ -46,10 +48,10 @@ public class ContinentView extends JPanel {
         }
     }
 
-
-
     private void setSouthAmericaPanel() {
         southAmericaPanel = new JPanel();
+        southAmericaPanel.setBackground(Color.RED);
+        southAmericaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         southAmericaPanel.setLayout(new GridLayout(5, 5, 5, 5));
         LinkedList<Country> southAmericaCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for (Country c : southAmericaCountries) {
@@ -58,9 +60,10 @@ public class ContinentView extends JPanel {
         }
     }
 
-
     private void setEuropePanel(){
         EuropePanel=new JPanel();
+        EuropePanel.setBackground(Color.BLUE);
+        EuropePanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         EuropePanel.setLayout(new GridLayout(5,5,5,5));
         LinkedList<Country> EuropeCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for (Country c : EuropeCountries) {
@@ -69,9 +72,10 @@ public class ContinentView extends JPanel {
         }
     }
 
-
     private void setAfricaPanel(){
         AfricaPanel=new JPanel();
+        AfricaPanel.setBackground(Color.ORANGE);
+        AfricaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         AfricaPanel.setLayout(new GridLayout(5,5,5,5));
         LinkedList<Country> AfricaCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for (Country c : AfricaCountries) {
@@ -81,9 +85,10 @@ public class ContinentView extends JPanel {
 
     }
 
-
     private void setAsiaPanel(){
         AsiaPanel=new JPanel();
+        AsiaPanel.setBackground(Color.GREEN);
+        AsiaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         AsiaPanel.setLayout(new GridLayout(5,5,5,5));
         LinkedList<Country> AsiaCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for (Country c : AsiaCountries) {
@@ -95,6 +100,8 @@ public class ContinentView extends JPanel {
 
     private void setAustraliaPanel(){
         AustraliaPanel=new JPanel();
+        AustraliaPanel.setBackground(Color.PINK);
+        AustraliaPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         AustraliaPanel.setLayout(new GridLayout(5,5,5,5));
         LinkedList<Country> AustraliaCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for (Country c : AustraliaCountries) {

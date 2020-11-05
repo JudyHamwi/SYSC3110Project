@@ -1,6 +1,7 @@
 package RiskModel;
 
 import RiskView.BoardView;
+import RiskView.RiskView;
 import RiskView.RiskViewFrame;
 
 import java.awt.*;
@@ -45,13 +46,16 @@ public class Game {
      * Initalizes the start of the RISKModel.Game
      * @param numberOfPlayers that will play the game
      */
-    private void initialize(int numberOfPlayers) {
+    public void initialize(int numberOfPlayers) {
         this.gameState = GameState.INITIALIZING;
         addPlayers(numberOfPlayers);
         initialArmyForPlayer();
         distributeCountries();
         distributeRandomArmyToCountry();
         currentPlayer = players.getFirst();
+        for(RiskView rv:riskViews){
+            rv.handleInitialization(this, gameState, currentPlayer);
+        }
     }
 
     /**

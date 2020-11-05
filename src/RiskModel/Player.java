@@ -127,7 +127,7 @@ public class Player {
      * @return String representation of the player
      */
     public String toString(){
-        return "RISKModel.Player" + getplayerID();
+        return "Player" + getplayerID();
     }
 
     @Override

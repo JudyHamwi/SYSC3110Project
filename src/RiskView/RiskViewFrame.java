@@ -4,6 +4,8 @@ import RiskController.InitializationController;
 import RiskController.NewGameController;
 import RiskModel.Board;
 import RiskModel.Game;
+import RiskModel.GameState;
+import RiskModel.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,5 +75,9 @@ public class RiskViewFrame extends JFrame implements RiskView {
         this.add(new BoardView(board), BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);
         menuBar.add(numberOfPlayers);
+    }
+    public void handleInitialization(Game game, GameState state, Player player){
+        gameStatus.setText(state.toString());
+        currentPlayer.setText(player.toString());
     }
 }

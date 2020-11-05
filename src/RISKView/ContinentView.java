@@ -17,22 +17,20 @@ public class ContinentView extends JPanel {
     private JPanel AsiaPanel;
     private JPanel AustraliaPanel;
     private Board board;
-    private ArrayList<JButton> northAmericabuttons;
 
     public ContinentView(){
         board=new Board();
-        northAmericabuttons=new ArrayList<>();
         setNorthAmericaPanel();
+        this.add(northAmericaPanel);
     }
 
     private void setNorthAmericaPanel(){
         northAmericaPanel=new JPanel();
         northAmericaPanel.setLayout(new GridLayout(5,5,5,5));
-
         LinkedList<Country> northAmericaCountries = board.getContinent("NorthAmerica").getContinentCountries();
         for(Country c : northAmericaCountries){
             JButton b=new JButton(c.getCountryName());
-            northAmericabuttons.add(b);
+            northAmericaPanel.add(b);
         }
 
     }

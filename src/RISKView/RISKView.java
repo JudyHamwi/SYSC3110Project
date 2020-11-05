@@ -10,6 +10,7 @@ public class RISKView extends JFrame {
     public RISKView(){
         super("RISK Game");
         this.add(new ContinentView());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(300,400);
         this.setVisible(true);
     }

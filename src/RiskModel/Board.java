@@ -1,6 +1,4 @@
-package RISKModel;
-
-import RISKModel.Continent;
+package RiskModel;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,11 +1,10 @@
-package RISKView;
+package RiskView;
 
-import RISKModel.Board;
-import RISKModel.Country;
+import RiskModel.Board;
+import RiskModel.Country;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ContinentView extends JPanel {
@@ -18,8 +17,8 @@ public class ContinentView extends JPanel {
     private JPanel AustraliaPanel;
     private Board board;
 
-    public ContinentView(){
-        board=new Board();
+    public ContinentView(Board board){
+        this.board=board;
         this.setLayout(new GridLayout(3,3));
         setNorthAmericaPanel();
         setSouthAmericaPanel();

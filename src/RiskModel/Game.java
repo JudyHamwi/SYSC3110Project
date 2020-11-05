@@ -1,7 +1,9 @@
-package RISKModel;
+package RiskModel;
 
-import RISKView.RISKView;
+import RiskView.BoardView;
+import RiskView.RiskViewFrame;
 
+import java.awt.*;
 import java.util.Collections;
 import java.util.Random;
 import java.util.*;
@@ -27,7 +29,7 @@ public class Game {
     private int numPlayers;
     //private Parser parser;
     private Player currentPlayer;
-    private ArrayList<RISKView> riskViews;
+    private ArrayList<RiskViewFrame> riskViews;
 
     /**
      * Starts a new RISKModel.Game
@@ -422,11 +424,12 @@ public class Game {
         System.out.println(board);
     }
 
-    public void addRiskView(RISKView rv){
+    public void addRiskView(RiskViewFrame rv){
         riskViews.add(rv);
+        rv.handleNewGame(this,board);
     }
 
-    public void removeRiskView(RISKView rv){
+    public void removeRiskView(RiskViewFrame rv){
         riskViews.remove(rv);
     }
 

@@ -1,4 +1,4 @@
-package RISKModel;
+package RiskModel;
 
 /**
  * RISKModel.Command interprets the commands typed by the user and provides functionality for the

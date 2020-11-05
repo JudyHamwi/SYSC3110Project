@@ -1,6 +1,6 @@
-package RISKView;
+package RiskView;
 
-import RISKModel.Board;
+import RiskModel.Board;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ public class BoardView extends JPanel {
     public static final int CONTINENT_WIDTH=6;
     private JPanel continentsInformation;
 
-    public BoardView(){
+    public BoardView(Board board){
         this.setLayout(new BorderLayout());
         continentsInformation=new JPanel();
         continentsInformation.setLayout(new BoxLayout(continentsInformation, BoxLayout.Y_AXIS));
@@ -20,8 +20,8 @@ public class BoardView extends JPanel {
         continentsInformation.add(new JLabel("Africa: Orange"));
         continentsInformation.add(new JLabel("Asia: Green"));
         continentsInformation.add(new JLabel("Australia : Pink"));
-        this.add(continentsInformation, BorderLayout.SOUTH);
-        this.add(new ContinentView(), BorderLayout.CENTER);
+        this.add(continentsInformation, BorderLayout.CENTER);
+        this.add(new ContinentView(board), BorderLayout.NORTH);
     }
 
 }

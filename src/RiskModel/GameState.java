@@ -1,4 +1,4 @@
-package RISKModel;
+package RiskModel;
 
 /**
  *  RISKModel.GameState

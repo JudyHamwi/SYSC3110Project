@@ -5,6 +5,7 @@ import RiskModel.Continent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +19,10 @@ public class BoardView extends JPanel {
     private Board board;
     private ArrayList<ContinentView> continentViews;
     private JPanel playerColors;
+    private JButton endTurnButton;
+    private JButton attackButton;
+    private JButton rollDiceButton;
+    private JPanel inGamePanel;
 
     public BoardView(Board board){
         this.board=board;
@@ -31,6 +36,7 @@ public class BoardView extends JPanel {
         initializeContinents();
         this.add(boardInformation);
         this.add(playerColors);
+        this.add(inGamePanel());
     }
 
     public void initializeContinents(){
@@ -66,5 +72,28 @@ public class BoardView extends JPanel {
     }
 
     public Color[] getColors(){ return colorArray;}
+
+    public JPanel inGamePanel() {
+        inGamePanel = new JPanel();
+        //inGamePanel.setPreferredSize();
+
+        inGamePanel.setLayout(new GridLayout(3,3));
+
+        attackButton = new JButton("Attack!");
+        endTurnButton = new JButton("End turn");
+        rollDiceButton = new JButton("Roll Dice");
+
+        inGamePanel.add(attackButton);
+        inGamePanel.add(endTurnButton);
+        inGamePanel.add(rollDiceButton);
+
+        return inGamePanel;
+    }
+
+    public void addActionListeners(ActionListener e) {
+        attackButton.addActionListener(e);
+        endTurnButton.addActionListener(e);
+        rollDiceButton.addActionListener(e);
+    }
 
 }

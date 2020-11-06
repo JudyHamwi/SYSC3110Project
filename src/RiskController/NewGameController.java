@@ -11,17 +11,14 @@ public class NewGameController implements ActionListener {
 
     private Game game;
     private RiskViewFrame rv;
-    JMenuItem newGame;
-    JMenuItem quitGame;
 
     public NewGameController(RiskViewFrame rv, Game game){
         this.rv = rv;
         this.game=game;
-        // add action listeners to view.
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            game.addRiskView(rv);
+        game.addRiskView(rv);
     }
 }

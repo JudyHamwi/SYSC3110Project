@@ -218,7 +218,7 @@ public class Game {
             printHelp();
         }
         if (commandWord.equals("attack")) {
-            attack(command, p);
+            attack(p);
         }
         if (commandWord.equals("print")) {
             printBoard(command);
@@ -321,7 +321,7 @@ public class Game {
      * ends the turn of the current player and passes the turn to the next player
      * @param p is the current player that will end their turn
      */
-    private void endTurn(Player p) {
+    public void endTurn(Player p) {
         gameState = GameState.COMPLETED;
         if (players.getLast().equals(p)) {
             currentPlayer = players.getFirst();
@@ -330,6 +330,12 @@ public class Game {
             currentPlayer = players.get(i + 1);
         }
         gameState = GameState.IN_PROGRESS;
+        /*
+        for(RiskView rv : riskViews) {
+            rv.handlePlayersTurn(this, currentPlayer);
+        }
+
+         */
     }
 
 
@@ -382,10 +388,9 @@ public class Game {
 
     /**
      * Responds to the command of the player to attack
-     * @param command entered by the player to attack
      * @param p player that wants to attack
      */
-    private void attack(Command command, Player p) {
+    public void attack(Player p) {
 
         String attackingCountry = null;
         String defendingCountry = null;
@@ -393,6 +398,7 @@ public class Game {
         Country defendingC = null;
         this.gameState = GameState.IN_PROGRESS;
 
+        /*
         if (!command.hasSecondWord()) {
             System.out.println("What country would you like to attack?");
             return;
@@ -401,9 +407,13 @@ public class Game {
         if (!command.hasThirdWord()) {
             System.out.println("What country would you like to attack from?");
         }
+        
+         
 
         attackingCountry = command.getFourthWord();
         defendingCountry = command.getSecondWord();
+        
+         */
 
         for(Country c: board.getCountries()) {
             if(c.getCountryName().equals(attackingCountry)) {
@@ -446,5 +456,9 @@ public class Game {
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
+    }
+
+
+    public void rollDice(Player player) {
     }
 }

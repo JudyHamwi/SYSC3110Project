@@ -27,6 +27,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
     private JMenu menu;
     private JMenuItem newGame;
     private JMenuItem quitGame;
+    private JMenuItem helpMenuItem;
     private Game gameModel;
     private BoardView boardView;
 
@@ -46,6 +47,8 @@ public class RiskViewFrame extends JFrame implements RiskView {
         newGame.addActionListener(new NewGameController(this, gameModel));
         quitGame = new JMenuItem("Quit Game");
         quitGame.addActionListener(new QuitGameController());
+        helpMenuItem = new JMenuItem("Help");
+        // helpMenuItem.addActionListener();
         numberOfPlayers=new JMenu("Players");
         twoPlayers=new JMenuItem("2 Players");
         twoPlayers.addActionListener(new InitializationController(gameModel, 2));
@@ -77,12 +80,13 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleNewGame(Game game, Board board) {
-        boardView=new BoardView(board);
+        boardView = new BoardView(board);
         this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);
         menuBar.add(numberOfPlayers);
         menu.setText("Menu");
         menu.remove(newGame);
+        menu.add(helpMenuItem);
     }
 
     public void handleInitialization(Game game, GameState state, Player player){
@@ -91,8 +95,9 @@ public class RiskViewFrame extends JFrame implements RiskView {
         boardView.InitializeBoard();
     }
 
-
-    protected void addRiskActionListeners(ActionListener ev) {
-        // add buttons for number of players.
+    @Override
+    public void handPlayersTurn(Game game, Player player) {
+        currentPlayer.setText(player.toString());
     }
+
 }

@@ -1,56 +1,70 @@
 package RiskView;
 
 import RiskModel.Board;
+import RiskModel.Continent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BoardView extends JPanel {
 
     public static final int CONTINENT_WIDTH=6;
-    private JPanel continentsInformation;
-    private ContinentView continentView;
-    private JPanel playersInformation;
+    private static int colorCounter =0;
+    private Color[] colorArray;
+    private HashMap<Color, String> colors;
     private JPanel boardInformation;
+    private Board board;
+    private ArrayList<ContinentView> continentViews;
+    private JPanel playerColors;
 
     public BoardView(Board board){
-        this.setLayout(new BorderLayout());
-        continentsInformation=new JPanel();
-        playersInformation=new JPanel();
+        this.board=board;
+        continentViews=new ArrayList<>();
+        playerColors=new JPanel();
+        this.setLayout(new GridLayout(3,3,3,3));
+        colors=new HashMap<>();
+        colorArray=new Color[]{Color.magenta, Color.green, Color.blue, Color.orange, Color.pink, Color.red};
+        createColors();
         boardInformation=new JPanel();
-        playersInformation.setLayout(new BoxLayout(playersInformation, BoxLayout.Y_AXIS));
-        continentsInformation.setLayout(new BoxLayout(continentsInformation, BoxLayout.Y_AXIS));
-        continentsInformation.add(new JLabel("North America : Yellow"));
-        continentsInformation.add(new JLabel("South America : Red"));
-        continentsInformation.add(new JLabel("Europe : Blue"));
-        continentsInformation.add(new JLabel("Africa: Orange"));
-        continentsInformation.add(new JLabel("Asia: Green"));
-        continentsInformation.add(new JLabel("Australia : Pink"));
-        continentView=new ContinentView(board);
-        boardInformation.add(continentsInformation);
-        boardInformation.add(playersInformation);
-        this.add(boardInformation, BorderLayout.CENTER);
-        this.add(continentView, BorderLayout.NORTH);
+        initializeContinents();
+        this.add(boardInformation);
+        this.add(playerColors);
     }
 
-    public void InitializeBoard(){
-        continentView.InitializePlayerCountries();
+    public void initializeContinents(){
+        for(Continent c:board.getContinents()){
+            ContinentView continentview=new ContinentView(this, c, colorArray[colorCounter]);
+            this.add(continentview);
+            continentViews.add(continentview);
+            colorCounter++;
+        }
+    }
+
+    private void createColors(){
+        colors.put(Color.magenta, "Purple");
+        colors.put(Color.red, "Red");
+        colors.put(Color.blue,"Blue");
+        colors.put(Color.orange, "Orange");
+        colors.put( Color.green, "Green");
+        colors.put(Color.pink, "Pink");
+        colors.put( Color.white, "White");
+    }
+
+    public void InitializeBoard() {
+        for (ContinentView cv : continentViews) {
+            cv.InitializePlayerCountries();
+        }
         initializePlayerInformationPanel();
     }
 
-    public void initializePlayerInformationPanel() {
-        JLabel player1 = new JLabel("Player 1: BLUE");
-        JLabel player2 = new JLabel("Player 2: RED");
-        JLabel player3 = new JLabel("Player 3: GREEN");
-        JLabel player4 = new JLabel("Player 4: ORANGE");
-        JLabel player5 = new JLabel("Player 5: YELLOW");
-        JLabel player6 = new JLabel("Player 6: PINK");
-        playersInformation.add(player1);
-        playersInformation.add(player2);
-        playersInformation.add(player3);
-        playersInformation.add(player4);
-        playersInformation.add(player5);
-        playersInformation.add(player6);
-
+    public void initializePlayerInformationPanel(){
+        for(int i=0; i<6; i++){
+            playerColors.add(new JLabel("Player"+(i+1)+" : "+ colors.get(colorArray[i])));
+        }
     }
+
+    public Color[] getColors(){ return colorArray;}
+
 }

@@ -1,5 +1,6 @@
 package RiskModel;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Diana Miraflor
  */
 public class Board {
-    private final List<Continent> continents;
+    private final LinkedList<Continent> continents;
     private ArrayList<Country> countries;
 
     /**
@@ -54,6 +55,9 @@ public class Board {
         return null;
     }
 
+    public LinkedList<Continent> getContinents(){
+        return continents;
+    }
 
 
     /**

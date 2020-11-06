@@ -49,6 +49,14 @@ public class Continent {
      * Text representation of the continent.
      * @return text representation of the continent
      */
+    public Country getCountryFromContinent(String name){
+        for (Country c:countries){
+            if(c.getCountryName()==name){
+                return c;
+            }
+        }
+        return null;
+    }
     public String toString() {
         String continent = continentName + ": \n";
         for (Country c : countries) {

@@ -84,11 +84,13 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.setText("Menu");
         menu.remove(newGame);
     }
+
     public void handleInitialization(Game game, GameState state, Player player){
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
         boardView.InitializeBoard();
     }
+
 
     protected void addRiskActionListeners(ActionListener ev) {
         // add buttons for number of players.

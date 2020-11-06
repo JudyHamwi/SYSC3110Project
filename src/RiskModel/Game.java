@@ -434,7 +434,9 @@ public class Game {
 
     public void addRiskView(RiskViewFrame rv){
         riskViews.add(rv);
-        rv.handleNewGame(this,board);
+        for(RiskView rv2:riskViews) {
+            rv2.handleNewGame(this, board);
+        }
     }
 
     public void removeRiskView(RiskViewFrame rv){

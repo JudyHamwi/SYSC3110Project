@@ -128,7 +128,7 @@ public class ContinentView extends JPanel {
     public void paint(Graphics g){
         super.paint(g);
         Graphics2D g2= (Graphics2D) g;
-        g2.drawLine(countryButtons.get(0).getX()+countryButtons.get(0).getWidth(),
+        g2.drawLine(countryButtons.get(0).getX(),
                 countryButtons.get(0).getY(), countryButtons.get(1).getX(), countryButtons.get(1).getY());
     }
 
@@ -137,19 +137,29 @@ public class ContinentView extends JPanel {
                 Country country = board.getCountry(b.getText());
                 if (country.getCurrentOwner().getplayerID() == 1) {
                     b.setForeground(Color.BLUE);
+                    b.setText(country.getCountryName()+" "+country.getNumberOfArmies());
                 }
                 else if(country.getCurrentOwner().getplayerID() == 2){
                     b.setForeground(Color.RED);
+                    b.setText(country.getCountryName()+" "+country.getNumberOfArmies());
                 }
                 else if(country.getCurrentOwner().getplayerID() == 3){
                     b.setForeground(Color.GREEN);
+                    b.setText(country.getCountryName()+" "+country.getNumberOfArmies());
+
                 } else if(country.getCurrentOwner().getplayerID() == 4){
                     b.setForeground(Color.ORANGE);
+                    b.setText(country.getCountryName()+" "+country.getNumberOfArmies());
+
 
                 }else if(country.getCurrentOwner().getplayerID() == 5){
                     b.setForeground(Color.YELLOW);
+                    b.setText(country.getCountryName()+" "+country.getNumberOfArmies());
+
                 }else
                     b.setForeground(Color.PINK);
+                    b.setText(country.getCountryName()+" "+country.getNumberOfArmies());
+
             }
     }
 

@@ -380,11 +380,6 @@ public class Game {
         }
     }
 
-    public void quit()
-    {
-        System.exit(0);
-    }
-
     /**
      * Responds to the command of the player to attack
      * @param command entered by the player to attack
@@ -439,7 +434,9 @@ public class Game {
 
     public void addRiskView(RiskViewFrame rv){
         riskViews.add(rv);
-        rv.handleNewGame(this, board);
+        for(RiskView rv2:riskViews) {
+            rv2.handleNewGame(this, board);
+        }
     }
 
     public void removeRiskView(RiskViewFrame rv){

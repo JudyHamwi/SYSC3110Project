@@ -292,6 +292,7 @@ public class Board {
     public void addNorthAmericaAdjacentCountries(Continent NorthAmerica){
         getCountry("Alaska").setAdjacentCountry(getCountry("NorthwestTerritory"));
         getCountry("Alaska").setAdjacentCountry(getCountry("Alberta"));
+        getCountry("Alaska").setAdjacentCountry(getCountry("Kamchatka"));
         getCountry("Alberta").setAdjacentCountry(getCountry("Alaska"));
         getCountry("Alberta").setAdjacentCountry(getCountry("NorthwestTerritory"));
         getCountry("Alberta").setAdjacentCountry(getCountry("Ontario"));

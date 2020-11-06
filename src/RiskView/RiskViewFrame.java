@@ -2,10 +2,12 @@ package RiskView;
 
 import RiskController.InitializationController;
 import RiskController.NewGameController;
+import RiskController.QuitGameController;
 import RiskModel.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class RiskViewFrame extends JFrame implements RiskView {
@@ -24,6 +26,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem newGame;
+    private JMenuItem quitGame;
     private Game gameModel;
     private BoardView boardView;
 
@@ -41,6 +44,8 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu=new JMenu("Start");
         newGame=new JMenuItem("New Game");
         newGame.addActionListener(new NewGameController(this, gameModel));
+        quitGame = new JMenuItem("Quit Game");
+        quitGame.addActionListener(new QuitGameController());
         numberOfPlayers=new JMenu("Players");
         twoPlayers=new JMenuItem("2 Players");
         twoPlayers.addActionListener(new InitializationController(gameModel, 2));
@@ -58,6 +63,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         numberOfPlayers.add(fivePlayers);
         numberOfPlayers.add(sixPlayers);
         menu.add(newGame);
+        menu.add(quitGame);
         menuBar.add(menu);
         this.add(menuBar, BorderLayout.NORTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -75,10 +81,16 @@ public class RiskViewFrame extends JFrame implements RiskView {
         this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);
         menuBar.add(numberOfPlayers);
+        menu.setText("Menu");
+        menu.remove(newGame);
     }
     public void handleInitialization(Game game, GameState state, Player player){
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
         boardView.InitializeBoard();
+    }
+
+    protected void addRiskActionListeners(ActionListener ev) {
+        // add buttons for number of players.
     }
 }

@@ -11,12 +11,14 @@ public class InitializationController implements ActionListener {
     private int players;
 
     public InitializationController(Game game, int players){
-        gameModel=game;
+        this.gameModel=game;
         this.players=players;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         gameModel.setNumberOfPlayers(players);
         gameModel.theInitialState();
+
+
     }
 }

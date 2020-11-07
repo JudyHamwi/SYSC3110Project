@@ -131,7 +131,7 @@ public class BoardView extends JPanel {
                 attacker=cv.getAttackerButton();
                 attacker.setForeground(getColors()[attackerCountry.getCurrentOwner().getplayerID()-1]);
                 attacker.setText(attackerCountry.getCountryName()+" "+ attackerCountry.getNumberOfArmies());
-            }else if(cv.hasCountryButton(defenderCountry)){
+            }if(cv.hasCountryButton(defenderCountry)){
                 defender=cv.defenderCountryButton(defenderCountry);
                 defender.setForeground(getColors()[defenderCountry.getCurrentOwner().getplayerID()-1]);
                 defender.setText(defenderCountry.getCountryName()+" "+ defenderCountry.getNumberOfArmies());

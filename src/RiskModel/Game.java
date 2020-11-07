@@ -222,7 +222,7 @@ public class Game {
             printBoard(command);
         }
         if(commandWord.equals("end")) {
-            endTurn(p);
+            endTurn();
         }
         if(commandWord.equals("exit")) {
             System.out.println(p + " has quit the game!");
@@ -317,10 +317,10 @@ public class Game {
 
     /**
      * ends the turn of the current player and passes the turn to the next player
-     * @param p is the current player that will end their turn
      */
-    public void endTurn(Player p) {
+    public void endTurn() {
         gameState = GameState.COMPLETED;
+        Player p=currentPlayer;
         if (players.getLast().equals(p)) {
             currentPlayer = players.getFirst();
         } else {

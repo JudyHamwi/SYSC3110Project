@@ -7,15 +7,13 @@ import RiskModel.Player;
 
 public class EndTurnController implements ActionListener {
     private Game gameModel;
-    private Player player;
 
-    public EndTurnController(Game game, Player player) {
+    public EndTurnController(Game game) {
         this.gameModel = game;
-        this.player = player;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gameModel.endTurn(player);
+        gameModel.endTurn();
     }
 }

@@ -1,5 +1,6 @@
 package RiskView;
 
+import RiskController.AttackController;
 import RiskController.EndTurnController;
 import RiskModel.*;
 
@@ -87,9 +88,8 @@ public class BoardView extends JPanel {
         inGamePanel.add(endTurnButton);
         inGamePanel.add(rollDiceButton);
 
-        attackButton.addActionListener(new EndTurnController(game, player));
-        endTurnButton.addActionListener(new EndTurnController(game, player));
-        rollDiceButton.addActionListener(new EndTurnController(game, player));
+        attackButton.addActionListener(new AttackController(game, player));
+        endTurnButton.addActionListener(new EndTurnController(game));
 
         return inGamePanel;
     }

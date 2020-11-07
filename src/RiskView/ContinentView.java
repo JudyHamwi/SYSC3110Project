@@ -21,6 +21,7 @@ public class ContinentView extends JPanel {
     private Game game;
     private RiskView rv;
     private JButton attackerButton;
+    private JButton defenderButton;
 
     public ContinentView(RiskView rv, Game game, BoardView bv, Continent continent, Color color){
         this.rv=rv;
@@ -29,6 +30,7 @@ public class ContinentView extends JPanel {
         this.game=game;
         boardView=bv;
         attackerButton=new JButton();
+        defenderButton=new JButton();
         continentLabel=new JLabel(continent.getContinentName());
         this.color=color;
         this.setLayout(new GridLayout(3,3));
@@ -80,4 +82,16 @@ public class ContinentView extends JPanel {
         attackerButton.setBorder(new JButton().getBorder());
     }
 
+    public JButton defenderCountryButton(Country country) {
+        for (JButton b : countryButtons) {
+            if (b.getName().equals(country.getCountryName())) {
+                defenderButton=b;
+                return defenderButton;
+            }
+        }
+        return null;
+    }
+    public JButton getAttackerButton(){
+        return attackerButton;
+    }
 }

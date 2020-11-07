@@ -123,5 +123,27 @@ public class BoardView extends JPanel {
         return attackButton;
     }
 
+    public void TransferOwnership(Country attackerCountry, Country defenderCountry){
+        JButton attacker=new JButton();
+        JButton defender=new JButton();
+        for (ContinentView cv:continentViews){
+            if(cv.hasCountryButton(attackerCountry)){
+                attacker=cv.getAttackerButton();
+                attacker.setForeground(getColors()[attackerCountry.getCurrentOwner().getplayerID()-1]);
+                attacker.setText(attackerCountry.getCountryName()+" "+ attackerCountry.getNumberOfArmies());
+            }else if(cv.hasCountryButton(defenderCountry)){
+                defender=cv.defenderCountryButton(defenderCountry);
+                defender.setForeground(getColors()[defenderCountry.getCurrentOwner().getplayerID()-1]);
+                defender.setText(defenderCountry.getCountryName()+" "+ defenderCountry.getNumberOfArmies());
+            }
+        }
+
+
+    }
+
+    public void updateArmy(){
+
+    }
+
 
 }

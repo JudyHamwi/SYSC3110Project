@@ -127,6 +127,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         JOptionPane.showMessageDialog(this,"Attack Phase Complete");
         boardView.getAttackButton().setEnabled(true);
         boardView.removeHighlightCountry(attackerCountry);
+        boardView.TransferOwnership(attackerCountry, defenderCountry);
 
     }
 }

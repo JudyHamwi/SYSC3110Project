@@ -102,22 +102,27 @@ public class Player {
      * @return true of the player can do the attack and false otherwise
      */
     public boolean canAttack(Country attackFrom, Country attackTo){
-        if(!(countriesOwned.contains(attackFrom))){
-            System.out.println("You do not own this country");
-            return false;
-        }
-        else if(attackFrom.getCurrentOwner().equals(attackTo.getCurrentOwner())) {
+        if(attackFrom.getCurrentOwner().equals(attackTo.getCurrentOwner())) {
             System.out.println("You can not attack your own country");
             return false;
         } else if(!attackFrom.isAdjacent(attackTo)) {
             System.out.println("The countries are not adjacent");
             return false;
         }
-        else if (attackFrom.getNumberOfArmies()==1){
+        else{
+            return true;
+        }
+    }
+
+    public boolean canAttackFrom(Country attackFrom){
+        System.out.println("3");
+        if(!(countriesOwned.contains(attackFrom))){
+            System.out.println("You do not own this country");
+            return false;
+        }else if (attackFrom.getNumberOfArmies()==1){
             System.out.println("There are not enough armies to attack");
             return false;
-        }
-        else{
+        }else {
             return true;
         }
     }

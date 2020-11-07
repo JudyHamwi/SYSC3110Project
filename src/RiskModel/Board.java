@@ -139,7 +139,6 @@ public class Board {
         // add adjacent countries in Australia
         addAustraliaAdjacentCountries(Australia);
 
-
     }
 
     public void createContinentNorthAmerica(Continent NorthAmerica){

@@ -29,6 +29,7 @@ public class Game {
     //private Parser parser;
     private Player currentPlayer;
     private ArrayList<RiskView> riskViews;
+    private Country attackCountry;
 
     /**
      * Starts a new RISKModel.Game
@@ -149,16 +150,21 @@ public class Game {
 
     /**
      * Initiates the atack phase of the game, which is entered when a player decided to attack
-     * @param player who wants to attack
-     * @param attackerCountry the country that the player wants to attack from
      * @param defenderCountry the country that will be defending from the attack
      */
-    private void attackPhase(Player player, Country attackerCountry, Country defenderCountry) {
-        if (player.canAttack(attackerCountry, defenderCountry)) {
-            AttackPhase playerAttack = new AttackPhase(player, attackerCountry, defenderCountry);
+    public void attackPhase(Country defenderCountry) {
+        if (currentPlayer.canAttack(attackCountry, defenderCountry)) {
+            AttackPhase playerAttack = new AttackPhase(currentPlayer, attackCountry, defenderCountry);
             playerAttack.attack();
             removePlayer();
             checkWinner();
+            for(RiskView rv:riskViews){
+                rv.handleAttackPhase(this, attackCountry, defenderCountry);
+            }
+        }else {
+            for (RiskView rv : riskViews) {
+                rv.handleCanNotAttackFrom(this);
+            }
         }
     }
 
@@ -428,7 +434,7 @@ public class Game {
             }
         }
 
-        attackPhase(p, attackingC, defendingC);
+        attackPhase(defendingC);
     }
 
     /**
@@ -462,4 +468,20 @@ public class Game {
 
     public void rollDice(Player player) {
     }
+
+    public void checkAttackingCountry(Country attackCountry){
+        System.out.println("2");
+        if(currentPlayer.canAttackFrom(attackCountry)){
+            this.attackCountry=attackCountry;
+            for(RiskView rv:riskViews){
+                System.out.println("4");
+                rv.handleCanAttackFrom(this, attackCountry);
+            }
+        }else {
+            for(RiskView rv:riskViews){
+                rv.handleCanNotAttackFrom(this);
+            }
+        }
+    }
+
 }

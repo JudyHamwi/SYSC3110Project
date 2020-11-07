@@ -1,6 +1,7 @@
 package RiskController;
 
 import RiskModel.Game;
+import RiskView.RiskView;
 import RiskView.RiskViewFrame;
 
 import javax.swing.*;
@@ -10,9 +11,9 @@ import java.awt.event.ActionListener;
 public class NewGameController implements ActionListener {
 
     private Game game;
-    private RiskViewFrame rv;
+    private RiskView rv;
 
-    public NewGameController(RiskViewFrame rv, Game game){
+    public NewGameController(RiskView rv, Game game){
         this.rv = rv;
         this.game=game;
     }

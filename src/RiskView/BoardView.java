@@ -5,6 +5,7 @@ import RiskController.EndTurnController;
 import RiskModel.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,9 +26,12 @@ public class BoardView extends JPanel {
     private JButton rollDiceButton;
     private JPanel inGamePanel;
     private Game game;
+    private RiskView rv;
 
-    public BoardView(Board board){
+    public BoardView(RiskView rv,Game game, Board board){
         this.board=board;
+        this.rv=rv;
+        this.game=game;
         continentViews=new ArrayList<>();
         playerColors=new JPanel();
         this.setLayout(new GridLayout(3,3,3,3));
@@ -42,7 +46,7 @@ public class BoardView extends JPanel {
 
     public void initializeContinents(){
         for(Continent c:board.getContinents()){
-            ContinentView continentview=new ContinentView(this, c, colorArray[colorCounter]);
+            ContinentView continentview=new ContinentView(rv, game,this, c, colorArray[colorCounter]);
             this.add(continentview);
             continentViews.add(continentview);
             colorCounter++;
@@ -81,6 +85,7 @@ public class BoardView extends JPanel {
         inGamePanel.setLayout(new GridLayout(3,3));
 
         attackButton = new JButton("Attack!");
+        attackButton.setName("attackButton");
         endTurnButton = new JButton("End turn");
         rollDiceButton = new JButton("Roll Dice");
 
@@ -88,14 +93,34 @@ public class BoardView extends JPanel {
         inGamePanel.add(endTurnButton);
         inGamePanel.add(rollDiceButton);
 
-        attackButton.addActionListener(new AttackController(game, player));
         endTurnButton.addActionListener(new EndTurnController(game));
+        attackButton.addActionListener(new AttackController(rv, game, null));
 
         return inGamePanel;
     }
 
     public void addInGamePanel(Game game, Player player) {
         this.add(inGamePanel(game, player));
+    }
+
+    public void highlightAttackerCountry(Country country){
+        for(ContinentView cv:continentViews){
+            if(cv.hasCountryButton(country)){
+                cv.highlightAttackerButton();
+            }
+        }
+    }
+
+    public void removeHighlightCountry(Country country){
+        for(ContinentView cv:continentViews){
+            if(cv.hasCountryButton(country)){
+                cv.removeHighlightAttackerButton();
+            }
+        }
+    }
+
+    public JButton getAttackButton(){
+        return attackButton;
     }
 
 

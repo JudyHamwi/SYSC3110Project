@@ -4,6 +4,7 @@ import RiskController.*;
 import RiskModel.*;
 
 import javax.swing.*;
+import javax.swing.text.html.Option;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleNewGame(Game game, Board board) {
-        boardView = new BoardView(board);
+        boardView = new BoardView(this,game, board);
         this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);
         menuBar.add(numberOfPlayers);
@@ -103,6 +104,29 @@ public class RiskViewFrame extends JFrame implements RiskView {
         JOptionPane.showMessageDialog(this, string);
     }
 
+    @Override
+    public void handleCanNotAttackFrom(Game game) {
+        JOptionPane.showMessageDialog(this,"Can not attack from this Country");
+    }
 
+    @Override
+    public void handleCanAttackFrom(Game game, Country country) {
+        System.out.println("5");
+        boardView.highlightAttackerCountry(country);
+    }
 
+    public void handleNewAttack(){
+        boardView.getAttackButton().setEnabled(false);
+    }
+
+    public BoardView getBoardView(){
+        return boardView;
+    }
+
+    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry){
+        JOptionPane.showMessageDialog(this,"Attack Phase Complete");
+        boardView.getAttackButton().setEnabled(true);
+        boardView.removeHighlightCountry(attackerCountry);
+
+    }
 }

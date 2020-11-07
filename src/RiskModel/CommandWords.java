@@ -1,7 +1,7 @@
-package Command;
+package RiskModel;
 
 /**
- * Command.Command Words contains a repository of valid command words to be enetered by the players to play the Model.Game.
+ * RiskModel.Command Words contains a repository of valid command words to be enetered by the players to play the Model.Game.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam

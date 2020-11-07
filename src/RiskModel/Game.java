@@ -1,13 +1,15 @@
-package Model;
+package RiskModel;
 
-import Command.Command;
-import Command.Parser;
+import RiskView.RiskView;
+import RiskView.RiskViewFrame;
 
 import java.util.Collections;
 import java.util.Random;
 import java.util.*;
+
+
 /**
- * The RISK Model.Game that initializes the game, manages the Attack Phase, and keeps track
+ * The RISK RISKModel.Game that initializes the game, manages the Attack Phase, and keeps track
  * of the turn of each player and winning player
  * @version 1.0
  * @author Sarah Jaber
@@ -24,23 +26,25 @@ public class Game {
     private static LinkedList<Player> players;
     private int playerArmy;
     private int numPlayers;
-    private Parser parser;
+    //private Parser parser;
     private Player currentPlayer;
+    private ArrayList<RiskView> riskViews;
 
     /**
-     * Starts a new Model.Game
+     * Starts a new RISKModel.Game
      */
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
-        parser = new Parser();
+        //parser = new Parser();
+        riskViews=new ArrayList<>();
     }
 
     /**
-     * Initalizes the start of the Model.Game
+     * Initalizes the start of the RISKModel.Game
      * @param numberOfPlayers that will play the game
      */
-    private void initialize(int numberOfPlayers) {
+    public void initialize(int numberOfPlayers) {
         this.gameState = GameState.INITIALIZING;
         addPlayers(numberOfPlayers);
         initialArmyForPlayer();
@@ -51,7 +55,7 @@ public class Game {
 
     /**
      * gets the current state of the game
-     * @return Model.GameState of the game
+     * @return RISKModel.GameState of the game
      */
     public GameState getState() {
         return this.gameState;
@@ -212,13 +216,13 @@ public class Game {
             printHelp();
         }
         if (commandWord.equals("attack")) {
-            attack(command, p);
+            attack(p);
         }
         if (commandWord.equals("print")) {
             printBoard(command);
         }
         if(commandWord.equals("end")) {
-            endTurn(p);
+            endTurn();
         }
         if(commandWord.equals("exit")) {
             System.out.println(p + " has quit the game!");
@@ -264,8 +268,8 @@ public class Game {
     public void initializePlayers() {
         do{
             try{
-                Command numOfPlayers =parser.getCommand();
-                this.numPlayers =processNumOfPlayers(numOfPlayers);
+                //Command numOfPlayers =parser.getCommand();
+                // this.numPlayers =processNumOfPlayers(numOfPlayers);
 
             }
             catch(Exception e){
@@ -279,11 +283,18 @@ public class Game {
      * Initialzes the state of the game at the start of the game
      */
     public void theInitialState() {
-        printWelcome();
+        //printWelcome();
         initializePlayers();
         initialize(numPlayers);
-        printInitialState();
+        //printInitialState();
         this.gameState = GameState.IN_PROGRESS;
+        for(RiskView rv:riskViews){
+            rv.handleInitialization(this, gameState,currentPlayer);
+        }
+    }
+
+    public void setNumberOfPlayers(int numberOfPlayers){
+        numPlayers=numberOfPlayers;
     }
 
     /**
@@ -294,8 +305,8 @@ public class Game {
         while (gameState == GameState.IN_PROGRESS) {
             System.out.println(currentPlayer + ", it is your turn.");
             try {
-                Command command = parser.getCommand();
-                processCommand(command, currentPlayer);
+                //  Command command = parser.getCommand();
+                //processCommand(command, currentPlayer);
             } catch (Exception e) {
                 System.out.println("Exception Occured: " + e);
                 System.out.println("Please enter command again...");
@@ -306,10 +317,10 @@ public class Game {
 
     /**
      * ends the turn of the current player and passes the turn to the next player
-     * @param p is the current player that will end their turn
      */
-    private void endTurn(Player p) {
+    public void endTurn() {
         gameState = GameState.COMPLETED;
+        Player p=currentPlayer;
         if (players.getLast().equals(p)) {
             currentPlayer = players.getFirst();
         } else {
@@ -317,6 +328,11 @@ public class Game {
             currentPlayer = players.get(i + 1);
         }
         gameState = GameState.IN_PROGRESS;
+
+        for(RiskView rv : riskViews) {
+            rv.handleEndTurn(this, currentPlayer);
+        }
+
     }
 
 
@@ -343,14 +359,18 @@ public class Game {
         return numPlayers;
     }
 
-    private void printHelp() {
-        System.out.println("Aim to conquer enemy territories!");
-        System.out.println("Your command words are: ");
-        System.out.println("help   exit   attack   end print board");
-        System.out.println("");
-        System.out.println("While attacking, your command words are: ");
-        System.out.println("attack (country) from (owned country)");
-        System.out.println("To end your turn, enter the command : end");
+    public void printHelp() {
+        String pH;
+        pH = ("Aim to conquer enemy territories!" + "\n" + "\n"+ "In game, you have choices to attack countries, end" +
+                "you turn, and roll your dice." + "\n" + "To attack, press the attack button followed by a country you " +
+                "want to attack from and then a country you want to attack." + "\n" + "Press the roll dice button to determine" +
+                "if you can successfully attack your enemy's territory." + "\n" + "Pass your turn to another player by pressing" +
+                "the end turn button" + "\n" + "\n" + "GOOD LUCK!" );
+        // lol idk change "good luck"
+
+        for (RiskView rv : riskViews) {
+            rv.handlePrintHelp(this, pH);
+        }
     }
 
     /**
@@ -369,10 +389,9 @@ public class Game {
 
     /**
      * Responds to the command of the player to attack
-     * @param command entered by the player to attack
      * @param p player that wants to attack
      */
-    private void attack(Command command, Player p) {
+    public void attack(Player p) {
 
         String attackingCountry = null;
         String defendingCountry = null;
@@ -380,17 +399,20 @@ public class Game {
         Country defendingC = null;
         this.gameState = GameState.IN_PROGRESS;
 
+        /*
         if (!command.hasSecondWord()) {
             System.out.println("What country would you like to attack?");
             return;
         }
-
         if (!command.hasThirdWord()) {
             System.out.println("What country would you like to attack from?");
         }
 
+
         attackingCountry = command.getFourthWord();
         defendingCountry = command.getSecondWord();
+
+         */
 
         for(Country c: board.getCountries()) {
             if(c.getCountryName().equals(attackingCountry)) {
@@ -408,7 +430,7 @@ public class Game {
     }
 
     /**
-     * Prints the Model.Board of the Model.Game
+     * Prints the RISKModel.Board of the RISKModel.Game
      * @param command entered by the player to print the board
      */
     public void printBoard(Command command) {
@@ -419,8 +441,23 @@ public class Game {
         System.out.println(board);
     }
 
+    public void addRiskView(RiskView rv){
+        riskViews.add(rv);
+        for(RiskView rv2:riskViews) {
+            rv2.handleNewGame(this, board);
+        }
+    }
+
+    public void removeRiskView(RiskViewFrame rv){
+        riskViews.remove(rv);
+    }
+
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
+    }
+
+
+    public void rollDice(Player player) {
     }
 }

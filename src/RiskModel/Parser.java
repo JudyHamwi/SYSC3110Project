@@ -1,6 +1,7 @@
-package Command;
+package RiskModel;
 
-import Command.Command;
+import RiskModel.Command;
+import RiskModel.CommandWords;
 
 import java.util.Scanner;
 

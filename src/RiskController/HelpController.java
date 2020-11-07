@@ -14,6 +14,6 @@ public class HelpController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        game.printHelp();
     }
 }

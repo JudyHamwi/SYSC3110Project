@@ -1,10 +1,8 @@
 package RiskModel;
 
-import RiskView.BoardView;
 import RiskView.RiskView;
 import RiskView.RiskViewFrame;
 
-import java.awt.*;
 import java.util.Collections;
 import java.util.Random;
 import java.util.*;
@@ -30,7 +28,7 @@ public class Game {
     private int numPlayers;
     //private Parser parser;
     private Player currentPlayer;
-    private ArrayList<RiskViewFrame> riskViews;
+    private ArrayList<RiskView> riskViews;
 
     /**
      * Starts a new RISKModel.Game
@@ -330,12 +328,11 @@ public class Game {
             currentPlayer = players.get(i + 1);
         }
         gameState = GameState.IN_PROGRESS;
-        /*
+
         for(RiskView rv : riskViews) {
-            rv.handlePlayersTurn(this, currentPlayer);
+            rv.handleEndTurn(this, currentPlayer);
         }
 
-         */
     }
 
 
@@ -362,14 +359,18 @@ public class Game {
         return numPlayers;
     }
 
-    private void printHelp() {
-        System.out.println("Aim to conquer enemy territories!");
-        System.out.println("Your command words are: ");
-        System.out.println("help   exit   attack   end print board");
-        System.out.println("");
-        System.out.println("While attacking, your command words are: ");
-        System.out.println("attack (country) from (owned country)");
-        System.out.println("To end your turn, enter the command : end");
+    public void printHelp() {
+        String pH;
+        pH = ("Aim to conquer enemy territories!" + "\n" + "\n"+ "In game, you have choices to attack countries, end" +
+                "you turn, and roll your dice." + "\n" + "To attack, press the attack button followed by a country you " +
+                "want to attack from and then a country you want to attack." + "\n" + "Press the roll dice button to determine" +
+                "if you can successfully attack your enemy's territory." + "\n" + "Pass your turn to another player by pressing" +
+                "the end turn button" + "\n" + "\n" + "GOOD LUCK!" );
+                // lol idk change "good luck"
+
+        for (RiskView rv : riskViews) {
+            rv.handlePrintHelp(this, pH);
+        }
     }
 
     /**
@@ -442,7 +443,7 @@ public class Game {
         System.out.println(board);
     }
 
-    public void addRiskView(RiskViewFrame rv){
+    public void addRiskView(RiskView rv){
         riskViews.add(rv);
         for(RiskView rv2:riskViews) {
             rv2.handleNewGame(this, board);

@@ -1,7 +1,7 @@
 package RiskView;
 
-import RiskModel.Board;
-import RiskModel.Continent;
+import RiskController.EndTurnController;
+import RiskModel.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +23,7 @@ public class BoardView extends JPanel {
     private JButton attackButton;
     private JButton rollDiceButton;
     private JPanel inGamePanel;
+    private Game game;
 
     public BoardView(Board board){
         this.board=board;
@@ -36,7 +37,6 @@ public class BoardView extends JPanel {
         initializeContinents();
         this.add(boardInformation);
         this.add(playerColors);
-        this.add(inGamePanel());
     }
 
     public void initializeContinents(){
@@ -73,7 +73,7 @@ public class BoardView extends JPanel {
 
     public Color[] getColors(){ return colorArray;}
 
-    public JPanel inGamePanel() {
+    public JPanel inGamePanel(Game game, Player player) {
         inGamePanel = new JPanel();
         //inGamePanel.setPreferredSize();
 
@@ -87,13 +87,16 @@ public class BoardView extends JPanel {
         inGamePanel.add(endTurnButton);
         inGamePanel.add(rollDiceButton);
 
+        attackButton.addActionListener(new EndTurnController(game, player));
+        endTurnButton.addActionListener(new EndTurnController(game, player));
+        rollDiceButton.addActionListener(new EndTurnController(game, player));
+
         return inGamePanel;
     }
 
-    public void addActionListeners(ActionListener e) {
-        attackButton.addActionListener(e);
-        endTurnButton.addActionListener(e);
-        rollDiceButton.addActionListener(e);
+    public void addInGamePanel(Game game, Player player) {
+        this.add(inGamePanel(game, player));
     }
+
 
 }

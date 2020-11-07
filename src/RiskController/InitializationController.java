@@ -2,6 +2,7 @@ package RiskController;
 
 import RiskModel.Game;
 import RiskView.RiskView;
+import RiskView.BoardView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ public class InitializationController implements ActionListener {
         this.gameModel=game;
         this.players=players;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         gameModel.setNumberOfPlayers(players);

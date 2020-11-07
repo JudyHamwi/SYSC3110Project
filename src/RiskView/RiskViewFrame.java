@@ -1,8 +1,6 @@
 package RiskView;
 
-import RiskController.InitializationController;
-import RiskController.NewGameController;
-import RiskController.QuitGameController;
+import RiskController.*;
 import RiskModel.*;
 
 import javax.swing.*;
@@ -48,7 +46,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         quitGame = new JMenuItem("Quit Game");
         quitGame.addActionListener(new QuitGameController());
         helpMenuItem = new JMenuItem("Help");
-        // helpMenuItem.addActionListener();
+        helpMenuItem.addActionListener(new HelpController(gameModel));
         numberOfPlayers=new JMenu("Players");
         twoPlayers=new JMenuItem("2 Players");
         twoPlayers.addActionListener(new InitializationController(gameModel, 2));
@@ -93,11 +91,18 @@ public class RiskViewFrame extends JFrame implements RiskView {
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
         boardView.InitializeBoard();
+        boardView.addInGamePanel(game, player);
     }
 
-    @Override
-    public void handPlayersTurn(Game game, Player player) {
+    public void handleEndTurn(Game game, Player player) {
         currentPlayer.setText(player.toString());
+        JOptionPane.showMessageDialog(this, player.toString() + ", it is your turn!");
     }
+
+    public void handlePrintHelp(Game game, String string) {
+        JOptionPane.showMessageDialog(this, string);
+    }
+
+
 
 }

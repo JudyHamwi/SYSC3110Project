@@ -158,17 +158,16 @@ public class Board {
         this.addCountry(Quebec);
         Country WesternUnitedStates=new Country("WesternUnitedStates");
         this.addCountry(WesternUnitedStates);
+
         NorthAmerica.addCountry(Alaska);
-        NorthAmerica.addCountry(Alberta);
-        NorthAmerica.addCountry(CentralAmerica);
-        NorthAmerica.addCountry(EasternUnitedStates);
-        NorthAmerica.addCountry(Greenland);
         NorthAmerica.addCountry(NorthwestTerritory);
+        NorthAmerica.addCountry(Greenland);
+        NorthAmerica.addCountry(Alberta);
         NorthAmerica.addCountry(Ontario);
         NorthAmerica.addCountry(Quebec);
         NorthAmerica.addCountry(WesternUnitedStates);
-
-
+        NorthAmerica.addCountry(EasternUnitedStates);
+        NorthAmerica.addCountry(CentralAmerica);
     }
 
     public void createContinentSouthAmerica(Continent SouthAmerica){
@@ -180,12 +179,11 @@ public class Board {
         this.addCountry(Peru);
         Country Venezuela=new Country("Venezuela");
         this.addCountry(Venezuela);
-        SouthAmerica.addCountry(Argentina);
-        SouthAmerica.addCountry(Brazil);
-        SouthAmerica.addCountry(Peru);
+
         SouthAmerica.addCountry(Venezuela);
-
-
+        SouthAmerica.addCountry(Peru);
+        SouthAmerica.addCountry(Brazil);
+        SouthAmerica.addCountry(Argentina);
     }
 
     public void createContinentEurope(Continent Europe){
@@ -203,13 +201,14 @@ public class Board {
         this.addCountry(Ukraine);
         Country WesternEurope=new Country("WesternEurope");
         this.addCountry(WesternEurope);
-        Europe.addCountry(GreatBritain);
+
         Europe.addCountry(Iceland);
-        Europe.addCountry(NorthernEurope);
         Europe.addCountry(Scandinavia);
-        Europe.addCountry(SouthernEurope);
         Europe.addCountry(Ukraine);
+        Europe.addCountry(GreatBritain);
+        Europe.addCountry(NorthernEurope);
         Europe.addCountry(WesternEurope);
+        Europe.addCountry(SouthernEurope);
 
     }
 
@@ -226,12 +225,14 @@ public class Board {
         this.addCountry(NorthAfrica);
         Country SouthAfrica=new Country("SouthAfrica");
         this.addCountry(SouthAfrica);
+
+        Africa.addCountry(NorthAfrica);
+        Africa.addCountry(Egypt);
         Africa.addCountry(Congo);
         Africa.addCountry(EastAfrica);
-        Africa.addCountry(Egypt);
-        Africa.addCountry(Madagascar);
-        Africa.addCountry(NorthAfrica);
         Africa.addCountry(SouthAfrica);
+        Africa.addCountry(SouthAfrica);
+        Africa.addCountry(Madagascar);
 
     }
 
@@ -260,19 +261,19 @@ public class Board {
         this.addCountry(Ural);
         Country Yakutsk=new Country("Yakutsk");
         this.addCountry(Yakutsk);
+
+        Asia.addCountry(Ural);
+        Asia.addCountry(Siberia);
+        Asia.addCountry(Yakutsk);
+        Asia.addCountry(Kamchatka);
+        Asia.addCountry(Irkutsk);
+        Asia.addCountry(Mongolia);
+        Asia.addCountry((Japan));
         Asia.addCountry(Afghanistan);
         Asia.addCountry(China);
-        Asia.addCountry(India);
-        Asia.addCountry(Irkutsk);
-        Asia.addCountry((Japan));
-        Asia.addCountry(Kamchatka);
         Asia.addCountry(MiddleEast);
-        Asia.addCountry(Mongolia);
+        Asia.addCountry(India);
         Asia.addCountry(Siam);
-        Asia.addCountry(Siberia);
-        Asia.addCountry(Ural);
-        Asia.addCountry(Yakutsk);
-
     }
 
     public void createContinentAustralia(Continent Australia){
@@ -284,10 +285,11 @@ public class Board {
         this.addCountry(NewGuinea);
         Country WesternAustralia=new Country("WesternAustralia");
         this.addCountry(WesternAustralia);
-        Australia.addCountry(EasternAustralia);
+
         Australia.addCountry(Indonesia);
         Australia.addCountry(NewGuinea);
         Australia.addCountry(WesternAustralia);
+        Australia.addCountry(EasternAustralia);
     }
 
     public void addNorthAmericaAdjacentCountries(Continent NorthAmerica){

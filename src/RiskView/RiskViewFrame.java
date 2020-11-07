@@ -10,17 +10,15 @@ import java.util.ArrayList;
 
 public class RiskViewFrame extends JFrame implements RiskView {
 
-    public static final int BOARD_HEIGHT=6;
-    public static final int BOARD_WIDTH=6;
+    public static final int BOARD_HEIGHT = 6;
+    public static final int BOARD_WIDTH = 6;
+    private static final int MAX_NUM_PLAYERS = 6;
+
     private JPanel gameStatusPanel;
     private JLabel gameStatus;
     private JLabel currentPlayer;
     private JMenu numberOfPlayers;
-    private JMenuItem twoPlayers;
-    private JMenuItem threePlayers;
-    private JMenuItem fourPlayers;
-    private JMenuItem fivePlayers;
-    private JMenuItem sixPlayers;
+
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem newGame;
@@ -29,51 +27,49 @@ public class RiskViewFrame extends JFrame implements RiskView {
     private Game gameModel;
     private BoardView boardView;
 
-    public RiskViewFrame(){
+    public RiskViewFrame() {
         super("RISK Game");
-        gameModel=new Game();
+        gameModel = new Game();
         this.setLayout(new BorderLayout());
-        gameStatusPanel=new JPanel();
+        gameStatusPanel = new JPanel();
         gameStatusPanel.setLayout(new BorderLayout());
-        gameStatus=new JLabel("Game Status: ");
-        currentPlayer=new JLabel("Current Player: ");
+        gameStatus = new JLabel("Game Status: ");
+        currentPlayer = new JLabel("Current Player: ");
         gameStatusPanel.add(gameStatus, BorderLayout.EAST);
-        gameStatusPanel.add(currentPlayer,BorderLayout.WEST);
-        menuBar=new JMenuBar();
-        menu=new JMenu("Start");
-        newGame=new JMenuItem("New Game");
+        gameStatusPanel.add(currentPlayer, BorderLayout.WEST);
+        menuBar = new JMenuBar();
+        menu = new JMenu("Start");
+        newGame = new JMenuItem("New Game");
         newGame.addActionListener(new NewGameController(this, gameModel));
         quitGame = new JMenuItem("Quit Game");
         quitGame.addActionListener(new QuitGameController());
         helpMenuItem = new JMenuItem("Help");
         helpMenuItem.addActionListener(new HelpController(gameModel));
-        numberOfPlayers=new JMenu("Players");
-        twoPlayers=new JMenuItem("2 Players");
-        twoPlayers.addActionListener(new InitializationController(gameModel, 2));
-        threePlayers=new JMenuItem("3 Players");
-        threePlayers.addActionListener(new InitializationController(gameModel, 3));
-        fourPlayers=new JMenuItem("4 Players");
-        fourPlayers.addActionListener(new InitializationController(gameModel, 4));
-        fivePlayers=new JMenuItem("5 Players");
-        fivePlayers.addActionListener(new InitializationController(gameModel, 4));
-        sixPlayers=new JMenuItem("6 Players");
-        sixPlayers.addActionListener(new InitializationController(gameModel, 4));
-        numberOfPlayers.add(twoPlayers);
-        numberOfPlayers.add(threePlayers);
-        numberOfPlayers.add(fourPlayers);
-        numberOfPlayers.add(fivePlayers);
-        numberOfPlayers.add(sixPlayers);
+
         menu.add(newGame);
         menu.add(quitGame);
         menuBar.add(menu);
+        setnumberOfPlayersMenu();
         this.add(menuBar, BorderLayout.NORTH);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(300,400);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(300, 400);
         this.setVisible(true);
+        this.setLocation(200,0);
+        this.setMinimumSize(new Dimension(1100,800));
+    }
+
+    public void setnumberOfPlayersMenu(){
+        this.numberOfPlayers = new JMenu("Players");
+        for(int i = 2; i <= MAX_NUM_PLAYERS; i++){
+            JMenuItem numPlayer = new JMenuItem(i + " Players");
+            numPlayer.addActionListener(new InitializationController(gameModel, i));
+            numberOfPlayers.add(numPlayer);
+        }
+        menuBar.add(numberOfPlayers);
     }
 
     public static void main(String[] args) {
-        RiskViewFrame view= new RiskViewFrame();
+        RiskViewFrame view = new RiskViewFrame();
     }
 
     @Override
@@ -87,11 +83,12 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.add(helpMenuItem);
     }
 
-    public void handleInitialization(Game game, GameState state, Player player){
+    public void handleInitialization(Game game, GameState state, Player player, int numPlayers) {
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
-        boardView.InitializeBoard();
+        boardView.InitializeBoard(numPlayers);
         boardView.addInGamePanel(game, player);
+        this.numberOfPlayers.setVisible(false);
     }
 
     public void handleEndTurn(Game game, Player player) {
@@ -102,7 +99,6 @@ public class RiskViewFrame extends JFrame implements RiskView {
     public void handlePrintHelp(Game game, String string) {
         JOptionPane.showMessageDialog(this, string);
     }
-
 
 
 }

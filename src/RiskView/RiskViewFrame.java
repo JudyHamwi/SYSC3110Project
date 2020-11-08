@@ -124,11 +124,15 @@ public class RiskViewFrame extends JFrame implements RiskView {
         return boardView;
     }
 
-    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry){
-        JOptionPane.showMessageDialog(this,"Attack Phase Complete");
+    @Override
+    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess){
+        if(attackSuccess) {
+            JOptionPane.showMessageDialog(this, "You conquered the country !");
+        }else {
+            JOptionPane.showMessageDialog(this, "You did not conquer the country !");
+        }
         boardView.getAttackButton().setEnabled(true);
         boardView.removeHighlightCountry(attackerCountry);
         boardView.TransferOwnership(attackerCountry, defenderCountry);
-
     }
 }

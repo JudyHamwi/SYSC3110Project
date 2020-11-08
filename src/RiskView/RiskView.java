@@ -13,5 +13,5 @@ public interface RiskView {
     public void handleCanNotAttackFrom(Game game);
     public void handleNewAttack();
     public BoardView getBoardView();
-    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry);
+    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess);
 }

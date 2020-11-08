@@ -120,7 +120,7 @@ public class AttackPhase {
      * Applies the attack phase of the RISKModel.Game. It implements the player attacking the defender, and
      * makes the decision of the attacker army conquering the defender armu.
      */
-    public void attack() {
+    public boolean attack() {
         attackerArmies=(attackerCountry.getNumberOfArmies())-1;
         System.out.println(player + " has attacked " + defenderCountry + " with " + attackerArmies + " armies.");
         System.out.println(defenderCountry + " is defending with " + defenderCountry.getNumberOfArmies() + " armies.");
@@ -137,9 +137,11 @@ public class AttackPhase {
             numberOfArmiesToMove();
             System.out.println(player + " has conquered " + defenderCountry + " and is occupied by " + attackerArmies
                                         + " armies.");
+            return true;
         } else {
             System.out.println(defenderCountry + " was not conquered and has " + defenderCountry.getNumberOfArmies()
                                         + " armies.");
+            return false;
         }
     }
 

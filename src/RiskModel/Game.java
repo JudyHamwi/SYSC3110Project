@@ -155,11 +155,11 @@ public class Game {
     public void attackPhase(Country defenderCountry) {
         if (currentPlayer.canAttack(attackCountry, defenderCountry)) {
             AttackPhase playerAttack = new AttackPhase(currentPlayer, attackCountry, defenderCountry);
-            playerAttack.attack();
+            Boolean attackSuccess=playerAttack.attack();
             removePlayer();
             checkWinner();
             for(RiskView rv:riskViews){
-                rv.handleAttackPhase(this, attackCountry, defenderCountry);
+                rv.handleAttackPhase(this, attackCountry, defenderCountry, attackSuccess);
             }
         }else {
             for (RiskView rv : riskViews) {

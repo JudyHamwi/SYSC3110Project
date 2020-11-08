@@ -11,14 +11,19 @@ import java.util.ArrayList;
 
 public class RiskViewFrame extends JFrame implements RiskView {
 
-    public static final int BOARD_HEIGHT = 1100;
-    public static final int BOARD_WIDTH = 800;
+    public static final int BOARD_HEIGHT=6;
+    public static final int BOARD_WIDTH=6;
     private static final int MAX_NUM_PLAYERS = 6;
 
     private JPanel gameStatusPanel;
     private JLabel gameStatus;
     private JLabel currentPlayer;
     private JMenu numberOfPlayers;
+    private JMenuItem twoPlayers;
+    private JMenuItem threePlayers;
+    private JMenuItem fourPlayers;
+    private JMenuItem fivePlayers;
+    private JMenuItem sixPlayers;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem newGame;
@@ -61,12 +66,12 @@ public class RiskViewFrame extends JFrame implements RiskView {
     }
 
     public static void main(String[] args) {
-        RiskViewFrame view = new RiskViewFrame();
+        RiskViewFrame view= new RiskViewFrame();
     }
 
-    public void setNumberOfPlayersMenu() {
+    public void setNumberOfPlayersMenu(){
         this.numberOfPlayers = new JMenu("Players");
-        for (int i = 2; i <= MAX_NUM_PLAYERS; i++) {
+        for(int i = 2; i <= MAX_NUM_PLAYERS; i++){
             JMenuItem numPlayer = new JMenuItem(i + " Players");
             numPlayer.addActionListener(new InitializationController(gameModel, i));
             numberOfPlayers.add(numPlayer);
@@ -76,7 +81,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleNewGame(Game game, Board board) {
-        boardView = new BoardView(this, game, board);
+        boardView = new BoardView(this,game, board);
         this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);
         menuBar.add(numberOfPlayers);
@@ -85,7 +90,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.add(helpMenuItem);
     }
 
-    public void handleInitialization(Game game, GameState state, Player player, int numPlayers) {
+    public void handleInitialization(Game game, GameState state, Player player, int numPlayers){
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
         boardView.InitializeBoard(numPlayers);
@@ -104,7 +109,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleCanNotAttackFrom(Game game) {
-        JOptionPane.showMessageDialog(this, "Can not attack from this Country");
+        JOptionPane.showMessageDialog(this,"Can not attack from this Country");
     }
 
     @Override
@@ -117,16 +122,23 @@ public class RiskViewFrame extends JFrame implements RiskView {
         boardView.highlightAttackerCountry(country);
     }
 
-    public void handleNewAttack() {
+    public void handleNewAttack(){
         boardView.getAttackButton().setEnabled(false);
     }
 
-    public BoardView getBoardView() {
+    public BoardView getBoardView(){
         return boardView;
     }
 
     public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry) {
         JOptionPane.showMessageDialog(this, "Attack Phase Complete");
+    @Override
+    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess){
+        if(attackSuccess) {
+            JOptionPane.showMessageDialog(this, "You conquered the country !");
+        }else {
+            JOptionPane.showMessageDialog(this, "You did not conquer the country !");
+        }
         boardView.getAttackButton().setEnabled(true);
         boardView.removeHighlightCountry(attackerCountry);
         boardView.TransferOwnership(attackerCountry, defenderCountry);

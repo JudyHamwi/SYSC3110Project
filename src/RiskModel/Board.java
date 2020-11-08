@@ -349,7 +349,7 @@ public class Board {
         getCountry("GreatBritain").setAdjacentCountry(getCountry("NorthernEurope"));
         getCountry("GreatBritain").setAdjacentCountry(getCountry("Scandinavia"));
         getCountry("GreatBritain").setAdjacentCountry(getCountry("WesternEurope"));
-        getCountry("Iceland").setAdjacentCountry(getCountry("GreenLand"));
+        getCountry("Iceland").setAdjacentCountry(getCountry("Greenland"));
         getCountry("Iceland").setAdjacentCountry(getCountry("GreatBritain"));
         getCountry("Iceland").setAdjacentCountry(getCountry("Scandinavia"));
         getCountry("NorthernEurope").setAdjacentCountry(getCountry("GreatBritain"));

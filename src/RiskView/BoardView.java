@@ -5,9 +5,7 @@ import RiskController.EndTurnController;
 import RiskModel.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -106,34 +104,53 @@ public class BoardView extends JPanel {
 
     public void highlightAttackerCountry(Country country){
         for(ContinentView cv:continentViews){
-            if(cv.hasCountryButton(country)){
-                cv.highlightAttackerButton();
+            if(cv.hasCountryButton(country) != null){
+                cv.highlightButton(cv.hasCountryButton(country));
+                highlightAdjacentCountries(country);
+            }
+        }
+    }
+
+    public void highlightAdjacentCountries(Country country) {
+        for (Country adjacentCountry : country.getAdjacentCountries()) {
+            for (ContinentView cv : continentViews) {
+                if (cv.hasCountryButton(adjacentCountry) != null){
+                    cv.highlightButton(cv.hasCountryButton(adjacentCountry));
+                }
             }
         }
     }
 
     public void removeHighlightCountry(Country country){
         for(ContinentView cv:continentViews){
-            if(cv.hasCountryButton(country)){
-                cv.removeHighlightAttackerButton();
+            if(cv.hasCountryButton(country) != null){
+                cv.removeHighlightButton(cv.hasCountryButton(country));
+                removeHighLightAdjacentCountry(country);
             }
         }
     }
 
-    public JButton getAttackButton(){
-        return attackButton;
+    public void removeHighLightAdjacentCountry(Country country){
+        for(Country adjacentCountry: country.getAdjacentCountries()){
+            for (ContinentView cv : continentViews){
+                if (cv.hasCountryButton(adjacentCountry) != null){
+                    cv.removeHighlightButton(cv.hasCountryButton(adjacentCountry));
+                }
+            }
+        }
     }
+
 
     public void TransferOwnership(Country attackerCountry, Country defenderCountry){
         JButton attacker=new JButton();
         JButton defender=new JButton();
         for (ContinentView cv:continentViews){
-            if(cv.hasCountryButton(attackerCountry)){
-                attacker=cv.getAttackerButton();
+            if(cv.hasCountryButton(attackerCountry) != null){
+                attacker=cv.hasCountryButton(attackerCountry);
                 attacker.setForeground(getColors()[attackerCountry.getCurrentOwner().getplayerID()-1]);
                 attacker.setText(attackerCountry.getCountryName()+" "+ attackerCountry.getNumberOfArmies());
-            }if(cv.hasCountryButton(defenderCountry)){
-                defender=cv.defenderCountryButton(defenderCountry);
+            }if(cv.hasCountryButton(defenderCountry) != null){
+                defender=cv.hasCountryButton(defenderCountry);
                 defender.setForeground(getColors()[defenderCountry.getCurrentOwner().getplayerID()-1]);
                 defender.setText(defenderCountry.getCountryName()+" "+ defenderCountry.getNumberOfArmies());
             }
@@ -144,6 +161,9 @@ public class BoardView extends JPanel {
 
     public void updateArmy(){
 
+    }
+    public JButton getAttackButton(){
+        return attackButton;
     }
 
 

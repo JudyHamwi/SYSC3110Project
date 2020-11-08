@@ -11,19 +11,14 @@ import java.util.ArrayList;
 
 public class RiskViewFrame extends JFrame implements RiskView {
 
-    public static final int BOARD_HEIGHT=6;
-    public static final int BOARD_WIDTH=6;
+    public static final int BOARD_HEIGHT = 1100;
+    public static final int BOARD_WIDTH = 800;
     private static final int MAX_NUM_PLAYERS = 6;
 
     private JPanel gameStatusPanel;
     private JLabel gameStatus;
     private JLabel currentPlayer;
     private JMenu numberOfPlayers;
-    private JMenuItem twoPlayers;
-    private JMenuItem threePlayers;
-    private JMenuItem fourPlayers;
-    private JMenuItem fivePlayers;
-    private JMenuItem sixPlayers;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem newGame;
@@ -31,45 +26,47 @@ public class RiskViewFrame extends JFrame implements RiskView {
     private JMenuItem helpMenuItem;
     private Game gameModel;
     private BoardView boardView;
+    private Country selectedAttackButton;
 
-    public RiskViewFrame(){
-            super("RISK Game");
-            gameModel = new Game();
-            this.setLayout(new BorderLayout());
-            gameStatusPanel = new JPanel();
-            gameStatusPanel.setLayout(new BorderLayout());
-            gameStatus = new JLabel("Game Status: ");
-            currentPlayer = new JLabel("Current Player: ");
-            gameStatusPanel.add(gameStatus, BorderLayout.EAST);
-            gameStatusPanel.add(currentPlayer, BorderLayout.WEST);
-            menuBar = new JMenuBar();
-            menu = new JMenu("Start");
-            newGame = new JMenuItem("New Game");
-            newGame.addActionListener(new NewGameController(this, gameModel));
-            quitGame = new JMenuItem("Quit Game");
-            quitGame.addActionListener(new QuitGameController());
-            helpMenuItem = new JMenuItem("Help");
-            helpMenuItem.addActionListener(new HelpController(gameModel));
+    public RiskViewFrame() {
+        super("RISK Game");
+        gameModel = new Game();
+        selectedAttackButton=null;
+        this.setLayout(new BorderLayout());
+        gameStatusPanel = new JPanel();
+        gameStatusPanel.setLayout(new BorderLayout());
+        gameStatus = new JLabel("Game Status: ");
+        currentPlayer = new JLabel("Current Player: ");
+        gameStatusPanel.add(gameStatus, BorderLayout.EAST);
+        gameStatusPanel.add(currentPlayer, BorderLayout.WEST);
+        menuBar = new JMenuBar();
+        menu = new JMenu("Start");
+        newGame = new JMenuItem("New Game");
+        newGame.addActionListener(new NewGameController(this, gameModel));
+        quitGame = new JMenuItem("Quit Game");
+        quitGame.addActionListener(new QuitGameController());
+        helpMenuItem = new JMenuItem("Help");
+        helpMenuItem.addActionListener(new HelpController(gameModel));
 
-            menu.add(newGame);
-            menu.add(quitGame);
-            menuBar.add(menu);
-            setNumberOfPlayersMenu();
-            this.add(menuBar, BorderLayout.NORTH);
-            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            this.setSize(300, 400);
-            this.setVisible(true);
-            this.setLocation(200,0);
-            this.setMinimumSize(new Dimension(1100,800));
-        }
-
-    public static void main(String[] args) {
-        RiskViewFrame view= new RiskViewFrame();
+        menu.add(newGame);
+        menu.add(quitGame);
+        menuBar.add(menu);
+        setNumberOfPlayersMenu();
+        this.add(menuBar, BorderLayout.NORTH);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(300, 400);
+        this.setVisible(true);
+        this.setLocation(200, 0);
+        this.setMinimumSize(new Dimension(BOARD_HEIGHT, BOARD_WIDTH));
     }
 
-    public void setNumberOfPlayersMenu(){
+    public static void main(String[] args) {
+        RiskViewFrame view = new RiskViewFrame();
+    }
+
+    public void setNumberOfPlayersMenu() {
         this.numberOfPlayers = new JMenu("Players");
-        for(int i = 2; i <= MAX_NUM_PLAYERS; i++){
+        for (int i = 2; i <= MAX_NUM_PLAYERS; i++) {
             JMenuItem numPlayer = new JMenuItem(i + " Players");
             numPlayer.addActionListener(new InitializationController(gameModel, i));
             numberOfPlayers.add(numPlayer);
@@ -79,7 +76,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleNewGame(Game game, Board board) {
-        boardView = new BoardView(this,game, board);
+        boardView = new BoardView(this, game, board);
         this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);
         menuBar.add(numberOfPlayers);
@@ -88,7 +85,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.add(helpMenuItem);
     }
 
-    public void handleInitialization(Game game, GameState state, Player player, int numPlayers){
+    public void handleInitialization(Game game, GameState state, Player player, int numPlayers) {
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
         boardView.InitializeBoard(numPlayers);
@@ -107,28 +104,33 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleCanNotAttackFrom(Game game) {
-        JOptionPane.showMessageDialog(this,"Can not attack from this Country");
+        JOptionPane.showMessageDialog(this, "Can not attack from this Country");
     }
 
     @Override
     public void handleCanAttackFrom(Game game, Country country) {
-        System.out.println("5");
+        if(selectedAttackButton!=null) {
+            boardView.removeHighlightCountry(selectedAttackButton);
+
+        }
+        selectedAttackButton=country;
         boardView.highlightAttackerCountry(country);
     }
 
-    public void handleNewAttack(){
+    public void handleNewAttack() {
         boardView.getAttackButton().setEnabled(false);
     }
 
-    public BoardView getBoardView(){
+    public BoardView getBoardView() {
         return boardView;
     }
 
-    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry){
-        JOptionPane.showMessageDialog(this,"Attack Phase Complete");
+    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry) {
+        JOptionPane.showMessageDialog(this, "Attack Phase Complete");
         boardView.getAttackButton().setEnabled(true);
         boardView.removeHighlightCountry(attackerCountry);
         boardView.TransferOwnership(attackerCountry, defenderCountry);
+        selectedAttackButton=null;
 
     }
 }

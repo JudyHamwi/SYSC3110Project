@@ -20,8 +20,6 @@ public class ContinentView extends JPanel {
     private BoardView boardView;
     private Game game;
     private RiskView rv;
-    private JButton attackerButton;
-    private JButton defenderButton;
 
     public ContinentView(RiskView rv, Game game, BoardView bv, Continent continent, Color color){
         this.rv=rv;
@@ -29,8 +27,6 @@ public class ContinentView extends JPanel {
         this.continent=continent;
         this.game=game;
         boardView=bv;
-        attackerButton=new JButton();
-        defenderButton=new JButton();
         continentLabel=new JLabel(continent.getContinentName());
         this.color=color;
         this.setLayout(new GridLayout(3,3));
@@ -63,35 +59,31 @@ public class ContinentView extends JPanel {
             }
     }
 
-    public void highlightAttackerButton(){
-        System.out.println("10");
-        attackerButton.setBorder(BorderFactory.createLineBorder(Color.yellow, 5));
+    public void highlightButton(JButton countryButton){
+        countryButton.setBorder(BorderFactory.createLineBorder(Color.yellow, 5));
     }
 
-    public boolean hasCountryButton(Country country){
+    public JButton hasCountryButton(Country country){
         for(JButton b:countryButtons){
             if(b.getName().equals(country.getCountryName())){
-                attackerButton=b;
-                return true;
+                return b;
             }
         }
-        return false;
+        return null;
     }
 
-    public void removeHighlightAttackerButton(){
-        attackerButton.setBorder(new JButton().getBorder());
+    public void removeHighlightButton(JButton countryButton){
+        countryButton.setBorder(new JButton().getBorder());
     }
 
     public JButton defenderCountryButton(Country country) {
         for (JButton b : countryButtons) {
             if (b.getName().equals(country.getCountryName())) {
-                defenderButton=b;
-                return defenderButton;
+                return b;
             }
         }
         return null;
     }
-    public JButton getAttackerButton(){
-        return attackerButton;
-    }
+
+
 }

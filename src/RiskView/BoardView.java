@@ -79,7 +79,6 @@ public class BoardView extends JPanel {
 
     public JPanel inGamePanel(Game game, Player player) {
         inGamePanel = new JPanel();
-        //inGamePanel.setPreferredSize();
 
         inGamePanel.setLayout(new GridLayout(3,3));
 

@@ -3,18 +3,24 @@ package RiskView;
 import RiskController.*;
 import RiskModel.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.html.Option;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class RiskViewFrame extends JFrame implements RiskView {
 
-    public static final int BOARD_HEIGHT=6;
-    public static final int BOARD_WIDTH=6;
+    public static final int BOARD_HEIGHT = 1100 ;
+    public static final int BOARD_WIDTH= 800;
     private static final int MAX_NUM_PLAYERS = 6;
+    private static final File BG_IMAGE = new File("images/background.jpg");
 
+    private JLabel background;
+    private JPanel mainMenuPanel;
     private JPanel gameStatusPanel;
     private JLabel gameStatus;
     private JLabel currentPlayer;
@@ -33,6 +39,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         gameModel = new Game();
         selectedAttackButton=null;
         this.setLayout(new BorderLayout());
+
         gameStatusPanel = new JPanel();
         gameStatusPanel.setLayout(new BorderLayout());
         gameStatus = new JLabel("Game Status: ");
@@ -52,16 +59,31 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.add(quitGame);
         menuBar.add(menu);
         setNumberOfPlayersMenu();
+        startPanel();
+        this.add(mainMenuPanel);
         this.add(menuBar, BorderLayout.NORTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(300, 400);
         this.setVisible(true);
         this.setLocation(200, 0);
         this.setMinimumSize(new Dimension(BOARD_HEIGHT, BOARD_WIDTH));
+
     }
 
     public static void main(String[] args) {
         RiskViewFrame view= new RiskViewFrame();
+    }
+
+    public JPanel startPanel(){
+        this.mainMenuPanel = new JPanel(new BorderLayout());
+        try {
+            background = new JLabel(new ImageIcon(ImageIO.read(BG_IMAGE)));
+        } catch (IOException e) {
+            throw new IllegalStateException("Error loading the background image.", e);
+        }
+        mainMenuPanel.add(background);
+        mainMenuPanel.setMinimumSize(new Dimension(BOARD_HEIGHT, BOARD_WIDTH));
+
+        return mainMenuPanel;
     }
 
     public void setNumberOfPlayersMenu(){
@@ -76,6 +98,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
 
     @Override
     public void handleNewGame(Game game, Board board) {
+        this.remove(mainMenuPanel);
         boardView = new BoardView(this,game, board);
         this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);

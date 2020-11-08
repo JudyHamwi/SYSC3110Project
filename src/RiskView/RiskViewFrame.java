@@ -17,7 +17,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
     public static final int BOARD_HEIGHT = 1100 ;
     public static final int BOARD_WIDTH= 800;
     private static final int MAX_NUM_PLAYERS = 6;
-    //private static final File BG_IMAGE = new File("images/background.jpg");
+    private static final File BG_IMAGE = new File("images/background.jpg");
 
     private JLabel background;
     private JPanel mainMenuPanel;
@@ -59,8 +59,8 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.add(quitGame);
         menuBar.add(menu);
         setNumberOfPlayersMenu();
-        //startPanel();
-        //this.add(mainMenuPanel);
+        startPanel();
+        this.add(mainMenuPanel);
         this.add(menuBar, BorderLayout.NORTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -73,7 +73,6 @@ public class RiskViewFrame extends JFrame implements RiskView {
         RiskViewFrame view= new RiskViewFrame();
     }
 
-    /*
     public JPanel startPanel(){
         this.mainMenuPanel = new JPanel(new BorderLayout());
         try {
@@ -87,7 +86,6 @@ public class RiskViewFrame extends JFrame implements RiskView {
         return mainMenuPanel;
     }
 
-     */
 
     public void setNumberOfPlayersMenu(){
         this.numberOfPlayers = new JMenu("Players");

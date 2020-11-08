@@ -86,6 +86,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         return mainMenuPanel;
     }
 
+
     public void setNumberOfPlayersMenu(){
         this.numberOfPlayers = new JMenu("Players");
         for(int i = 2; i <= MAX_NUM_PLAYERS; i++){
@@ -96,9 +97,10 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menuBar.add(numberOfPlayers);
     }
 
+
     @Override
     public void handleNewGame(Game game, Board board) {
-        this.remove(mainMenuPanel);
+        //this.remove(mainMenuPanel);
         boardView = new BoardView(this,game, board);
         this.add(boardView, BorderLayout.CENTER);
         this.add(gameStatusPanel, BorderLayout.SOUTH);

@@ -119,6 +119,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
     public void handleEndTurn(Game game, Player player) {
         currentPlayer.setText(player.toString());
         JOptionPane.showMessageDialog(this, player.toString() + ", it is your turn!");
+        boardView.removeHighlightedButtons();
     }
 
     public void handlePrintHelp(Game game, String string) {
@@ -148,17 +149,17 @@ public class RiskViewFrame extends JFrame implements RiskView {
         return boardView;
     }
 
+
     @Override
     public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess){
         if(attackSuccess) {
-            JOptionPane.showMessageDialog(this, "You conquered the country !");
+            JOptionPane.showMessageDialog(this, "You conquered the country!");
         }else {
-            JOptionPane.showMessageDialog(this, "You did not conquer the country !");
+            JOptionPane.showMessageDialog(this, "You did not conquer the country!");
         }
         boardView.getAttackButton().setEnabled(true);
         boardView.removeHighlightCountry(attackerCountry);
         boardView.TransferOwnership(attackerCountry, defenderCountry);
         selectedAttackButton=null;
-
     }
 }

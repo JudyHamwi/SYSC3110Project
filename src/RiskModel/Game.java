@@ -161,7 +161,7 @@ public class Game {
             for(RiskView rv:riskViews){
                 rv.handleAttackPhase(this, attackCountry, defenderCountry, attackSuccess);
             }
-        }else {
+        }  else {
             for (RiskView rv : riskViews) {
                 rv.handleCanNotAttackFrom(this);
             }
@@ -367,11 +367,11 @@ public class Game {
 
     public void printHelp() {
         String pH;
-        pH = ("Aim to conquer enemy territories!" + "\n" + "\n"+ "In game, you have choices to attack countries, end" +
-                "you turn, and roll your dice." + "\n" + "To attack, press the attack button followed by a country you " +
+        pH = ("Aim to conquer enemy territories!" + "\n" + "\n"+ "In game, you have choices to attack countries, end your turn, and roll your dice."
+                + "\n" + "To attack, press the attack button followed by a country you " +
                 "want to attack from and then a country you want to attack." + "\n" + "Press the roll dice button to determine" +
-                "if you can successfully attack your enemy's territory." + "\n" + "Pass your turn to another player by pressing" +
-                "the end turn button" + "\n" + "\n" + "GOOD LUCK!" );
+                " if you can successfully attack your enemy's territory." + "\n" + "Pass your turn to another player by pressing" +
+                " the end turn button." + "\n" + "\n" + "GOOD LUCK!" );
                 // lol idk change "good luck"
 
         for (RiskView rv : riskViews) {

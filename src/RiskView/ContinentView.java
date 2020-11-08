@@ -20,8 +20,10 @@ public class ContinentView extends JPanel {
     private BoardView boardView;
     private Game game;
     private RiskView rv;
+    private ArrayList<JButton> selectedButtons;
 
     public ContinentView(RiskView rv, Game game, BoardView bv, Continent continent, Color color){
+        this.selectedButtons = new ArrayList<>();
         this.rv=rv;
         countryButtons=new ArrayList<>();
         this.continent=continent;
@@ -61,6 +63,17 @@ public class ContinentView extends JPanel {
 
     public void highlightButton(JButton countryButton){
         countryButton.setBorder(BorderFactory.createLineBorder(Color.yellow, 5));
+        selectedButtons.add(countryButton);
+    }
+
+    public void removeSelectedButtons() {
+        for(JButton jb : selectedButtons) {
+            removeHighlightButton(jb);
+        }
+    }
+
+    public ArrayList<JButton> getSelectedButtons() {
+        return selectedButtons;
     }
 
     public JButton hasCountryButton(Country country){
@@ -75,6 +88,7 @@ public class ContinentView extends JPanel {
     public void removeHighlightButton(JButton countryButton){
         countryButton.setBorder(new JButton().getBorder());
     }
+
 
     public JButton defenderCountryButton(Country country) {
         for (JButton b : countryButtons) {

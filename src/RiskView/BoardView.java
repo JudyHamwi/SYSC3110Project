@@ -139,6 +139,11 @@ public class BoardView extends JPanel {
         }
     }
 
+    public void removeHighlightedButtons() {
+        for(ContinentView cv:continentViews){
+            cv.removeSelectedButtons();
+        }
+    }
 
     public void TransferOwnership(Country attackerCountry, Country defenderCountry){
         JButton attacker=new JButton();

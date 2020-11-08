@@ -66,7 +66,6 @@ public class AttackPhase {
             return 1;
         }
         return 2;
-
     }
 
     /**
@@ -144,5 +143,7 @@ public class AttackPhase {
             return false;
         }
     }
+
+
 
 }

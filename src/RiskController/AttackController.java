@@ -22,12 +22,13 @@ public class AttackController implements ActionListener {
         this.country=country;
         this.riskView=riskView;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton b=(JButton) e.getSource();
         if(b.getName().equals("attackButton")){
             riskView.handleNewAttack();
-        } else if(riskView.getBoardView().getAttackButton().isEnabled()){
+        } else if (riskView.getBoardView().getAttackButton().isEnabled()){
             gameModel.checkAttackingCountry(country);
         } else {
             gameModel.attackPhase(country);

@@ -19,11 +19,6 @@ public class RiskViewFrame extends JFrame implements RiskView {
     private JLabel gameStatus;
     private JLabel currentPlayer;
     private JMenu numberOfPlayers;
-    private JMenuItem twoPlayers;
-    private JMenuItem threePlayers;
-    private JMenuItem fourPlayers;
-    private JMenuItem fivePlayers;
-    private JMenuItem sixPlayers;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem newGame;
@@ -130,8 +125,6 @@ public class RiskViewFrame extends JFrame implements RiskView {
         return boardView;
     }
 
-    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry) {
-        JOptionPane.showMessageDialog(this, "Attack Phase Complete");
     @Override
     public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess){
         if(attackSuccess) {

@@ -20,7 +20,7 @@ public class BoardView extends JPanel {
     private JPanel boardInformation;
     private Board board;
     private ArrayList<ContinentView> continentViews;
-    private JPanel playerColors;
+    private JPanel playerColorsPanel;
     private JButton endTurnButton;
     private JButton attackButton;
     private JButton rollDiceButton;
@@ -33,7 +33,8 @@ public class BoardView extends JPanel {
         this.rv=rv;
         this.game=game;
         continentViews=new ArrayList<>();
-        playerColors=new JPanel();
+        playerColorsPanel=new JPanel();
+        playerColorsPanel.setLayout(new BoxLayout(playerColorsPanel, BoxLayout.Y_AXIS));
         this.setLayout(new GridLayout(3,3,3,3));
         colors=new HashMap<>();
         colorArray=new Color[]{Color.magenta, Color.green, Color.blue, Color.orange, Color.pink, Color.red};
@@ -41,7 +42,7 @@ public class BoardView extends JPanel {
         boardInformation=new JPanel();
         initializeContinents();
         this.add(boardInformation);
-        this.add(playerColors);
+        this.add(playerColorsPanel);
     }
 
     public void initializeContinents(){
@@ -63,16 +64,16 @@ public class BoardView extends JPanel {
         colors.put( Color.white, "White");
     }
 
-    public void InitializeBoard() {
+    public void InitializeBoard(int numPlayers) {
         for (ContinentView cv : continentViews) {
             cv.InitializePlayerCountries();
         }
-        initializePlayerInformationPanel();
+        initializePlayerInformationPanel(numPlayers);
     }
 
-    public void initializePlayerInformationPanel(){
-        for(int i=0; i<6; i++){
-            playerColors.add(new JLabel("Player"+(i+1)+" : "+ colors.get(colorArray[i])));
+    public void initializePlayerInformationPanel(int numPlayers){
+        for(int i=0; i<numPlayers; i++){
+            playerColorsPanel.add(new JLabel("Player"+(i+1)+" : "+ colors.get(colorArray[i])));
         }
     }
 

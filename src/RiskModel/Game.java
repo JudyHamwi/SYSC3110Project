@@ -295,7 +295,7 @@ public class Game {
         //printInitialState();
         this.gameState = GameState.IN_PROGRESS;
         for(RiskView rv:riskViews){
-            rv.handleInitialization(this, gameState,currentPlayer);
+            rv.handleInitialization(this, gameState,currentPlayer, numPlayers);
         }
     }
 

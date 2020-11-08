@@ -465,10 +465,6 @@ public class Game {
         game.play();
     }
 
-
-    public void rollDice(Player player) {
-    }
-
     public void checkAttackingCountry(Country attackCountry){
         System.out.println("2");
         if(currentPlayer.canAttackFrom(attackCountry)){

@@ -313,7 +313,7 @@ public class Board {
         getCountry("Greenland").setAdjacentCountry(getCountry("Iceland"));
         getCountry("NorthwestTerritory").setAdjacentCountry(getCountry("Alaska"));
         getCountry("NorthwestTerritory").setAdjacentCountry(getCountry("Alberta"));
-        getCountry("NorthwestTerritory").setAdjacentCountry(getCountry("Greenland)"));
+        getCountry("NorthwestTerritory").setAdjacentCountry(getCountry("Greenland"));
         getCountry("NorthwestTerritory").setAdjacentCountry(getCountry("Ontario"));
         getCountry("Ontario").setAdjacentCountry(getCountry("WesternUnitedStates"));
         getCountry("Ontario").setAdjacentCountry(getCountry("EasternUnitedStates"));

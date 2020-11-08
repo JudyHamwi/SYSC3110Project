@@ -21,7 +21,6 @@ public class BoardView extends JPanel {
     private JPanel playerColorsPanel;
     private JButton endTurnButton;
     private JButton attackButton;
-    private JButton rollDiceButton;
     private JPanel inGamePanel;
     private Game game;
     private RiskView rv;
@@ -85,11 +84,9 @@ public class BoardView extends JPanel {
         attackButton = new JButton("Attack!");
         attackButton.setName("attackButton");
         endTurnButton = new JButton("End turn");
-        rollDiceButton = new JButton("Roll Dice");
 
         inGamePanel.add(attackButton);
         inGamePanel.add(endTurnButton);
-        inGamePanel.add(rollDiceButton);
 
         endTurnButton.addActionListener(new EndTurnController(game));
         attackButton.addActionListener(new AttackController(rv, game, null));

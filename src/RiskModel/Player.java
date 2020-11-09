@@ -120,7 +120,6 @@ public class Player {
      * @return true of the player can use this country to attack
      */
     public boolean canAttackFrom(Country attackFrom){
-        System.out.println("3");
         if(!(countriesOwned.contains(attackFrom))){
             System.out.println("You do not own this country");
             return false;

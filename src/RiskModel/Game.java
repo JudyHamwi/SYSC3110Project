@@ -30,6 +30,7 @@ public class Game {
     private Player currentPlayer;
     private ArrayList<RiskView> riskViews;
     private Country attackCountry;
+    private Map<Integer, Integer> armiesForPlayers;
 
     /**
      * Starts a new RISKModel.Game
@@ -38,10 +39,9 @@ public class Game {
         players = new LinkedList<Player>();
         board = new Board();
         riskViews = new ArrayList<>();
-    }
-
-    public LinkedList<Player> getPlayers() {
-        return players;
+        this.gameState = GameState.INITIALIZING;
+        this.armiesForPlayers = new HashMap();
+        setArmiesForPlayers();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Game {
      * @param numberOfPlayers that will play the game
      */
     public void initialize(int numberOfPlayers) {
-        this.gameState = GameState.INITIALIZING;
+        //this.gameState = GameState.INITIALIZING;
         addPlayers(numberOfPlayers);
         initialArmyForPlayer();
         distributeCountries();
@@ -102,24 +102,21 @@ public class Game {
     }
 
     /**
+     * sets the number of initial armies according to the number of players
+     */
+    public void setArmiesForPlayers() {
+        armiesForPlayers.put(2, 50);
+        armiesForPlayers.put(3, 35);
+        armiesForPlayers.put(4, 30);
+        armiesForPlayers.put(5, 25);
+        armiesForPlayers.put(6, 20);
+    }
+
+    /**
      * Calculates the number of armies that will be assigned to every player
      */
     private void initialArmyForPlayer() {
-        if (players.size() == 2) {
-            playerArmy = 50;
-        }
-        if (players.size() == 3) {
-            playerArmy = 35;
-        }
-        if (players.size() == 4) {
-            playerArmy = 30;
-        }
-        if (players.size() == 5) {
-            playerArmy = 25;
-        }
-        if (players.size() == 6) {
-            playerArmy = 20;
-        }
+        playerArmy = armiesForPlayers.get(players.size());
         for (Player p : players) {
             p.addPlayerArmy(playerArmy);
         }
@@ -416,7 +413,7 @@ public class Game {
         }
     }
 
-    public Board getBoard(){
+    public Board getBoard() {
         return board;
     }
 }

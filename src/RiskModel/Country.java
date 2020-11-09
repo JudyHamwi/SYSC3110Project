@@ -53,7 +53,7 @@ public class Country {
 
     /**
      * getter for the adjacent countries to this country
-     * @return List<Couuntry> adjacent to this country
+     * @return List<Country> adjacent to this country
      */
     public List<Country> getAdjacentCountries() {
         return adjacentCountries;

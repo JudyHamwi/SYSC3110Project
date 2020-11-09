@@ -41,7 +41,7 @@ public class PlayerTest {
 
     @Test
     public void getplayerID() {
-        assertEquals(1, player.getplayerID());
+        assertEquals(1, player.getPlayerID());
     }
 
     @Test

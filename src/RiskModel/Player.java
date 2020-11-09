@@ -48,7 +48,7 @@ public class Player {
      * Returns the id of the player
      * @return the player's ID
      */
-    public int getplayerID(){
+    public int getPlayerID(){
         return this.PLAYER_ID;
     }
 
@@ -120,7 +120,6 @@ public class Player {
      * @return true of the player can use this country to attack
      */
     public boolean canAttackFrom(Country attackFrom){
-        System.out.println("3");
         if(!(countriesOwned.contains(attackFrom))){
             System.out.println("You do not own this country");
             return false;
@@ -137,7 +136,7 @@ public class Player {
      * @return String representation of the player
      */
     public String toString(){
-        return "Player" + getplayerID();
+        return "Player" + getPlayerID();
     }
 
     @Override

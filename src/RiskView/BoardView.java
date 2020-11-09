@@ -219,11 +219,11 @@ public class BoardView extends JPanel {
         for (ContinentView cv:continentViews){
             if(cv.hasCountryButton(attackerCountry) != null){
                 attacker=cv.hasCountryButton(attackerCountry);
-                attacker.setForeground(getColors()[attackerCountry.getCurrentOwner().getplayerID()-1]);
+                attacker.setForeground(getColors()[attackerCountry.getCurrentOwner().getPlayerID()-1]);
                 attacker.setText(attackerCountry.getCountryName()+" "+ attackerCountry.getNumberOfArmies());
             }if(cv.hasCountryButton(defenderCountry) != null){
                 defender=cv.hasCountryButton(defenderCountry);
-                defender.setForeground(getColors()[defenderCountry.getCurrentOwner().getplayerID()-1]);
+                defender.setForeground(getColors()[defenderCountry.getCurrentOwner().getPlayerID()-1]);
                 defender.setText(defenderCountry.getCountryName()+" "+ defenderCountry.getNumberOfArmies());
             }
         }

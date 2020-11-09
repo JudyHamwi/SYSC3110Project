@@ -197,19 +197,6 @@ public class Game {
     }
 
     /**
-     * prints the welcome message shown when the game starts
-     */
-    private void printWelcome() {
-        System.out.println();
-        System.out.println("Welcome to RISK!: Global Domination!");
-        System.out.println("The goal of RISK! is to conquer your enemies' territories.");
-        System.out.println();
-        System.out.println("The number of players ranges from 2-6.");
-        System.out.println("Please type in the number of players.");
-    }
-
-
-    /**
      * Intializes the number of players in the game
      */
     public void initializePlayers() {
@@ -335,24 +322,6 @@ public class Game {
         Country attackingC = null;
         Country defendingC = null;
         this.gameState = GameState.IN_PROGRESS;
-
-        /*
-        if (!command.hasSecondWord()) {
-            System.out.println("What country would you like to attack?");
-            return;
-        }
-
-        if (!command.hasThirdWord()) {
-            System.out.println("What country would you like to attack from?");
-        }
-        
-         
-
-        attackingCountry = command.getFourthWord();
-        defendingCountry = command.getSecondWord();
-        
-         */
-
         for (Country c : board.getCountries()) {
             if (c.getCountryName().equals(attackingCountry)) {
                 attackingC = c;

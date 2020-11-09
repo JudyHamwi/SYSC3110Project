@@ -2,7 +2,6 @@ package RiskModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *One of the Phases of the RISKModel.Game, the Attack Phase. This Phase is entered when a player attacks a RISKModel.Country.
@@ -25,7 +24,7 @@ public class AttackPhase {
     private int attackerArmies;
 
     /**
-     *  Constructor of Attack Phase initalizes the fields.
+     *  Constructor of Attack Phase initializes the fields.
      * @param player initiating the attack
      * @param attackerCountry contains the armies that want to attack
      * @param defenderCountry country that contains armies to defend the attack

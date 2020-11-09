@@ -4,7 +4,6 @@ import RiskController.AttackController;
 import RiskModel.Continent;
 import RiskModel.Country;
 import RiskModel.Game;
-import RiskModel.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,7 +78,7 @@ public class ContinentView extends JPanel {
     public void InitializePlayerCountries() {
             for (JButton b : countryButtons) {
                 Country country = continent.getCountryFromContinent(b.getName());
-                    b.setForeground(boardView.getColors()[country.getCurrentOwner().getplayerID() - 1]);
+                    b.setForeground(boardView.getColors()[country.getCurrentOwner().getPlayerID() - 1]);
                     b.setText(country.getCountryName() + " " + country.getNumberOfArmies());
 
             }

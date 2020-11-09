@@ -5,12 +5,9 @@ import RiskModel.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.html.Option;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Risk View Frame that is the display of the Risk Game. It contains the board of the game
@@ -70,7 +67,6 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.add(newGame);
         menu.add(quitGame);
         menuBar.add(menu);
-        setNumberOfPlayersMenu();
         startPanel();
         this.add(mainMenuPanel);
         this.add(menuBar, BorderLayout.NORTH);
@@ -123,6 +119,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
      */
     @Override
     public void handleNewGame(Game game, Board board) {
+        setNumberOfPlayersMenu();
         this.remove(mainMenuPanel);
         boardView = new BoardView(this,game, board);
         this.add(boardView, BorderLayout.CENTER);
@@ -131,6 +128,8 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.setText("Menu");
         menu.remove(newGame);
         menu.add(helpMenuItem);
+        JOptionPane.showMessageDialog(this, "WELCOME TO RISK! \nPlease select the number of players" +
+                " through the menu bar");
     }
 
     /**

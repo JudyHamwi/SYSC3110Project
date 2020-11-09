@@ -315,7 +315,7 @@ public class Board {
     }
 
     /**
-     * Initialize adjacent counntries in North America
+     * Initialize adjacent countries in North America
      *
      * @param NorthAmerica
      */

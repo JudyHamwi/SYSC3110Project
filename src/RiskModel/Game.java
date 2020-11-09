@@ -196,85 +196,7 @@ public class Game {
     }
 
     /**
-     * prints the welcome message shown when the game starts
-     */
-    private void printWelcome() {
-        System.out.println();
-        System.out.println("Welcome to RISK!: Global Domination!");
-        System.out.println("The goal of RISK! is to conquer your enemies' territories.");
-        System.out.println();
-        System.out.println("The number of players ranges from 2-6.");
-        System.out.println("Please type in the number of players.");
-    }
-
-    /**
-     * Processes the commands entered by the user to produce the required result
-     *
-     * @param command enetered by the user
-     * @param p
-     */
-    private void processCommand(Command command, Player p) {
-        boolean wantToExit = false;
-
-        if (command.isUnknown()) {
-            System.out.println("Sorry, I did not understand that.");
-        }
-
-        String commandWord = command.getCommandWord();
-
-        if (commandWord.equals("help")) {
-            printHelp();
-        }
-        if (commandWord.equals("attack")) {
-            attack(p);
-        }
-        if (commandWord.equals("print")) {
-            printBoard(command);
-        }
-        if (commandWord.equals("end")) {
-            endTurn();
-        }
-        if (commandWord.equals("exit")) {
-            System.out.println(p + " has quit the game!");
-            System.exit(0);
-        }
-    }
-
-
-    /**
-     * Processes the number of players enetered by the user
-     *
-     * @param command of number of players enetered by the user
-     * @return number of players to play the game
-     */
-    private int processNumOfPlayers(Command command) {
-
-        if (command.isUnknown()) {
-            System.out.println("Invalid number");
-        }
-
-        String numPlayers = command.getCommandWord();
-
-        if (numPlayers.equals("two") || numPlayers.equals("2")) {
-            return 2;
-        }
-        if (numPlayers.equals("three") || numPlayers.equals("3")) {
-            return 3;
-        }
-        if (numPlayers.equals("four") || numPlayers.equals("4")) {
-            return 4;
-        }
-        if (numPlayers.equals("five") || numPlayers.equals("5")) {
-            return 5;
-        }
-        if (numPlayers.equals("six") || numPlayers.equals("6")) {
-            return 6;
-        }
-        return 0;
-    }
-
-    /**
-     * Intializes the number of players in the game
+     * Initializes the number of players in the game
      */
     public void initializePlayers() {
         do {
@@ -290,7 +212,7 @@ public class Game {
     }
 
     /**
-     * Initialzes the state of the game at the start of the game
+     * Initializes the state of the game at the start of the game
      */
     public void theInitialState() {
         initialize(numPlayers);
@@ -309,16 +231,6 @@ public class Game {
      */
     public void play() {
         theInitialState();
-        while (gameState == GameState.IN_PROGRESS) {
-            System.out.println(currentPlayer + ", it is your turn.");
-            try {
-                //  Command command = parser.getCommand();
-                //processCommand(command, currentPlayer);
-            } catch (Exception e) {
-                System.out.println("Exception Occured: " + e);
-                System.out.println("Please enter command again...");
-            }
-        }
     }
 
 

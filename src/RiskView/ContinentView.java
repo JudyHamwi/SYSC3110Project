@@ -75,7 +75,7 @@ public class ContinentView extends JPanel {
      * Initializes the ownership of the countries and the number of countries in the
      * initialization phase
      */
-    public void InitializePlayerCountries() {
+    public void initializePlayerCountries() {
             for (JButton b : countryButtons) {
                 Country country = continent.getCountryFromContinent(b.getName());
                     b.setForeground(boardView.getColors()[country.getCurrentOwner().getPlayerID() - 1]);

@@ -88,7 +88,7 @@ public class BoardView extends JPanel {
      */
     public void InitializeBoard(int numPlayers) {
         for (ContinentView cv : continentViews) {
-            cv.InitializePlayerCountries();
+            cv.initializePlayerCountries();
         }
         initializePlayerInformationPanel(numPlayers);
     }

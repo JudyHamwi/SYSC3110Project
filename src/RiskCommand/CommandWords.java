@@ -1,4 +1,4 @@
-package RiskModel;
+package RiskCommand;
 
 /**
  * RISKModel.Command Words contains a repository of valid command words to be enetered by the players to play the RISKModel.Game.

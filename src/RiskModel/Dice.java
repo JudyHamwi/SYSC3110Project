@@ -53,4 +53,5 @@ public class Dice {
         return sortedList;
     }
 
+    public PriorityQueue<Integer> getValues(){ return this.values;}
 }

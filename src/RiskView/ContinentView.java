@@ -4,9 +4,9 @@ import RiskController.AttackController;
 import RiskModel.Continent;
 import RiskModel.Country;
 import RiskModel.Game;
+import RiskModel.Player;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -38,16 +38,16 @@ public class ContinentView extends JPanel {
      * @param continent created in the continent view
      * @param color of the displayed continent
      */
-    public ContinentView(RiskView rv, Game game, BoardView bv, Continent continent, Color color){
+    public ContinentView(RiskView rv, Game game, BoardView bv, Continent continent, Color color) {
         this.selectedButtons = new ArrayList<>();
-        this.rv=rv;
-        countryButtons=new ArrayList<>();
-        this.continent=continent;
-        this.game=game;
-        boardView=bv;
-        continentLabel=new JLabel(continent.getContinentName());
-        this.color=color;
-        this.setLayout(new GridLayout(3,3));
+        this.rv = rv;
+        countryButtons = new ArrayList<>();
+        this.continent = continent;
+        this.game = game;
+        boardView = bv;
+        continentLabel = new JLabel(continent.getContinentName());
+        this.color = color;
+        this.setLayout(new GridLayout(3, 3));
         this.add(continentLabel);
         createContinentView();
     }
@@ -57,7 +57,7 @@ public class ContinentView extends JPanel {
      */
     private void createContinentView() {
         this.setBackground(color);
-        this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.setLayout(new GridLayout(5, 5, 5, 5));
         LinkedList<Country> continentCountries = continent.getContinentCountries();
         for (Country c : continentCountries) {
@@ -65,10 +65,10 @@ public class ContinentView extends JPanel {
             b.setText(c.getCountryName());
             b.setName(c.getCountryName());
             b.setFont(new Font("Arial", Font.BOLD, 12));
-            b.setBounds(100,100,100,100);
+            b.setBounds(100, 100, 100, 100);
             this.add(b);
             countryButtons.add(b);
-            b.addActionListener(new AttackController(rv,game, c));
+            b.addActionListener(new AttackController(rv, game, c));
         }
     }
 
@@ -76,19 +76,21 @@ public class ContinentView extends JPanel {
      * Initializes the ownership of the countries and the number of countries in the
      * initialization phase
      */
-    public void InitializePlayerCountries(){
+    public void InitializePlayerCountries() {
             for (JButton b : countryButtons) {
-                Country country=continent.getCountryFromContinent(b.getText());
-                b.setForeground(boardView.getColors()[country.getCurrentOwner().getplayerID()-1]);
-                b.setText(country.getCountryName()+" "+ country.getNumberOfArmies());
+                Country country = continent.getCountryFromContinent(b.getName());
+                    b.setForeground(boardView.getColors()[country.getCurrentOwner().getplayerID() - 1]);
+                    b.setText(country.getCountryName() + " " + country.getNumberOfArmies());
+
             }
+
     }
 
     /**
      * highlight the selected country button
      * @param countryButton to be highlighted
      */
-    public void highlightButton(JButton countryButton){
+    public void highlightButton(JButton countryButton) {
         countryButton.setBorder(BorderFactory.createLineBorder(Color.yellow, 5));
         selectedButtons.add(countryButton);
     }
@@ -97,7 +99,7 @@ public class ContinentView extends JPanel {
      * remove the highlight from all the highlighted buttons
      */
     public void removeSelectedButtons() {
-        for(JButton jb : selectedButtons) {
+        for (JButton jb : selectedButtons) {
             removeHighlightButton(jb);
         }
     }
@@ -116,9 +118,9 @@ public class ContinentView extends JPanel {
      * @return button country if the continent has the country and
      * null otherwise
      */
-    public JButton hasCountryButton(Country country){
-        for(JButton b:countryButtons){
-            if(b.getName().equals(country.getCountryName())){
+    public JButton hasCountryButton(Country country) {
+        for (JButton b : countryButtons) {
+            if (b.getName().equals(country.getCountryName())) {
                 return b;
             }
         }
@@ -129,7 +131,7 @@ public class ContinentView extends JPanel {
      * removes the highlight from the country button
      * @param countryButton to remove the highlight from
      */
-    public void removeHighlightButton(JButton countryButton){
+    public void removeHighlightButton(JButton countryButton) {
         countryButton.setBorder(new JButton().getBorder());
     }
 
@@ -147,6 +149,5 @@ public class ContinentView extends JPanel {
         }
         return null;
     }
-
 
 }

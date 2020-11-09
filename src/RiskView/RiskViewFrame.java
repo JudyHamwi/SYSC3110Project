@@ -82,7 +82,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
     }
 
     public static void main(String[] args) {
-        RiskViewFrame view= new RiskViewFrame();
+        RiskViewFrame view = new RiskViewFrame();
     }
 
     /**
@@ -157,6 +157,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
         currentPlayer.setText(player.toString());
         JOptionPane.showMessageDialog(this, player.toString() + ", it is your turn!");
         boardView.removeHighlightedButtons();
+        boardView.getAttackButton().setEnabled(true);
     }
 
     /**

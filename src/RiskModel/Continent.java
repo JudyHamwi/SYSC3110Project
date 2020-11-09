@@ -54,7 +54,7 @@ public class Continent {
      */
     public Country getCountryFromContinent(String name){
         for (Country c:countries){
-            if(c.getCountryName()==name){
+            if(c.getCountryName().equals(name)){
                 return c;
             }
         }

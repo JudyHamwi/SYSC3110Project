@@ -11,11 +11,12 @@ import java.util.*;
 /**
  * The RISK RISKModel.Game that initializes the game, manages the Attack Phase, and keeps track
  * of the turn of each player and winning player
- * @version 2.0
+ *
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
  * @author Diana Miraflor
+ * @version 2.0
  */
 
 public class Game {
@@ -36,11 +37,16 @@ public class Game {
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
-        riskViews=new ArrayList<>();
+        riskViews = new ArrayList<>();
+    }
+
+    public LinkedList<Player> getPlayers() {
+        return players;
     }
 
     /**
      * Initalizes the start of the RISKModel.Game
+     *
      * @param numberOfPlayers that will play the game
      */
     public void initialize(int numberOfPlayers) {
@@ -54,6 +60,7 @@ public class Game {
 
     /**
      * gets the current state of the game
+     *
      * @return RISKModel.GameState of the game
      */
     public GameState getState() {
@@ -62,6 +69,7 @@ public class Game {
 
     /**
      * Adds a number of players to the game
+     *
      * @param numberOfPlayers that will play the game
      */
     private void addPlayers(int numberOfPlayers) {
@@ -118,7 +126,7 @@ public class Game {
     }
 
     /**
-     *  Distributes one army to every country owned by the players
+     * Distributes one army to every country owned by the players
      */
     private void distributeOneArmyToCountry() {
         for (Player p : players) {
@@ -148,18 +156,19 @@ public class Game {
 
     /**
      * Initiates the atack phase of the game, which is entered when a player decided to attack
+     *
      * @param defenderCountry the country that will be defending from the attack
      */
     public void attackPhase(Country defenderCountry) {
         if (currentPlayer.canAttack(attackCountry, defenderCountry)) {
             AttackPhase playerAttack = new AttackPhase(currentPlayer, attackCountry, defenderCountry);
-            Boolean attackSuccess=playerAttack.attack();
+            Boolean attackSuccess = playerAttack.attack();
             removePlayer();
             checkWinner();
-            for(RiskView rv:riskViews){
+            for (RiskView rv : riskViews) {
                 rv.handleAttackPhase(this, attackCountry, defenderCountry, attackSuccess);
             }
-        }  else {
+        } else {
             for (RiskView rv : riskViews) {
                 rv.handleCanNotAttackFrom(this);
             }
@@ -182,7 +191,7 @@ public class Game {
      * checks if a player won the game if it conquered all the countries in the board
      */
     private void checkWinner() {
-        if(players.size() == 1){
+        if (players.size() == 1) {
             System.out.println(players.get(0) + ", you have conquered all your enemies' territories!");
             System.out.println("");
             System.out.println("The game has now ended.");
@@ -204,6 +213,7 @@ public class Game {
 
     /**
      * Processes the commands entered by the user to produce the required result
+     *
      * @param command enetered by the user
      * @param p
      */
@@ -225,10 +235,10 @@ public class Game {
         if (commandWord.equals("print")) {
             printBoard(command);
         }
-        if(commandWord.equals("end")) {
+        if (commandWord.equals("end")) {
             endTurn();
         }
-        if(commandWord.equals("exit")) {
+        if (commandWord.equals("exit")) {
             System.out.println(p + " has quit the game!");
             System.exit(0);
         }
@@ -237,6 +247,7 @@ public class Game {
 
     /**
      * Processes the number of players enetered by the user
+     *
      * @param command of number of players enetered by the user
      * @return number of players to play the game
      */
@@ -270,17 +281,16 @@ public class Game {
      * Intializes the number of players in the game
      */
     public void initializePlayers() {
-        do{
-            try{
+        do {
+            try {
                 //Command numOfPlayers =parser.getCommand();
-               // this.numPlayers =processNumOfPlayers(numOfPlayers);
+                // this.numPlayers =processNumOfPlayers(numOfPlayers);
 
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Please enter a valid number between 2 and 6..");
             }
         }
-        while(this.numPlayers >6 || this.numPlayers < 2);
+        while (this.numPlayers > 6 || this.numPlayers < 2);
     }
 
     /**
@@ -288,17 +298,17 @@ public class Game {
      */
     public void theInitialState() {
         //printWelcome();
-        initializePlayers();
+        //initializePlayers();
         initialize(numPlayers);
         //printInitialState();
         this.gameState = GameState.IN_PROGRESS;
-        for(RiskView rv:riskViews){
-            rv.handleInitialization(this, gameState,currentPlayer, numPlayers);
+        for (RiskView rv : riskViews) {
+            rv.handleInitialization(this, gameState, currentPlayer, numPlayers);
         }
     }
 
-    public void setNumberOfPlayers(int numberOfPlayers){
-        numPlayers=numberOfPlayers;
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        numPlayers = numberOfPlayers;
     }
 
     /**
@@ -309,7 +319,7 @@ public class Game {
         while (gameState == GameState.IN_PROGRESS) {
             System.out.println(currentPlayer + ", it is your turn.");
             try {
-              //  Command command = parser.getCommand();
+                //  Command command = parser.getCommand();
                 //processCommand(command, currentPlayer);
             } catch (Exception e) {
                 System.out.println("Exception Occured: " + e);
@@ -324,7 +334,7 @@ public class Game {
      */
     public void endTurn() {
         gameState = GameState.COMPLETED;
-        Player p=currentPlayer;
+        Player p = currentPlayer;
         if (players.getLast().equals(p)) {
             currentPlayer = players.getFirst();
         } else {
@@ -333,7 +343,7 @@ public class Game {
         }
         gameState = GameState.IN_PROGRESS;
 
-        for(RiskView rv : riskViews) {
+        for (RiskView rv : riskViews) {
             rv.handleEndTurn(this, currentPlayer);
         }
 
@@ -357,6 +367,7 @@ public class Game {
 
     /**
      * returns the number of players in the game
+     *
      * @return number of players in the game
      */
     public int getNumPlayers() {
@@ -368,12 +379,12 @@ public class Game {
      */
     public void printHelp() {
         String pH;
-        pH = ("Aim to conquer enemy territories!" + "\n" + "\n"+ "In game, you have choices to attack countries, end your turn, and roll your dice."
+        pH = ("Aim to conquer enemy territories!" + "\n" + "\n" + "In game, you have choices to attack countries, end your turn, and roll your dice."
                 + "\n" + "To attack, press the attack button followed by a country you " +
                 "want to attack from and then a country you want to attack." + "\n" + "Press the roll dice button to determine" +
                 " if you can successfully attack your enemy's territory." + "\n" + "Pass your turn to another player by pressing" +
-                " the end turn button." + "\n" + "\n" + "GOOD LUCK!" );
-                // lol idk change "good luck"
+                " the end turn button." + "\n" + "\n" + "GOOD LUCK!");
+        // lol idk change "good luck"
 
         for (RiskView rv : riskViews) {
             rv.handlePrintHelp(this, pH);
@@ -382,6 +393,7 @@ public class Game {
 
     /**
      * Exits the game
+     *
      * @param command that exits the game
      * @return true if it is the right command to exit the game
      */
@@ -396,6 +408,7 @@ public class Game {
 
     /**
      * Responds to the command of the player to attack
+     *
      * @param p player that wants to attack
      */
     public void attack(Player p) {
@@ -423,14 +436,14 @@ public class Game {
         
          */
 
-        for(Country c: board.getCountries()) {
-            if(c.getCountryName().equals(attackingCountry)) {
+        for (Country c : board.getCountries()) {
+            if (c.getCountryName().equals(attackingCountry)) {
                 attackingC = c;
             }
         }
 
-        for(Country c : board.getCountries()) {
-            if(c.getCountryName().equals(defendingCountry)) {
+        for (Country c : board.getCountries()) {
+            if (c.getCountryName().equals(defendingCountry)) {
                 defendingC = c;
             }
         }
@@ -440,6 +453,7 @@ public class Game {
 
     /**
      * Prints the RISKModel.Board of the RISKModel.Game
+     *
      * @param command entered by the player to print the board
      */
     public void printBoard(Command command) {
@@ -452,20 +466,22 @@ public class Game {
 
     /**
      * adds the view to the list of viewers of the game model
+     *
      * @param rv view of the model
      */
-    public void addRiskView(RiskView rv){
+    public void addRiskView(RiskView rv) {
         riskViews.add(rv);
-        for(RiskView rv2:riskViews) {
+        for (RiskView rv2 : riskViews) {
             rv2.handleNewGame(this, board);
         }
     }
 
     /**
      * removes a view from the viewers of the game model
+     *
      * @param rv view to be removed from the viewers of the model
      */
-    public void removeRiskView(RiskViewFrame rv){
+    public void removeRiskView(RiskViewFrame rv) {
         riskViews.remove(rv);
     }
 
@@ -477,21 +493,19 @@ public class Game {
     /**
      * checks of the attacker country chosen by the player is a valid country
      * that the play can attack from, following the rules of the attack
+     *
      * @param attackCountry that the player wants to attack from in the attack phase
      */
-    public void checkAttackingCountry(Country attackCountry){
-        System.out.println("2");
-        if(currentPlayer.canAttackFrom(attackCountry)){
-            this.attackCountry=attackCountry;
-            for(RiskView rv:riskViews){
-                System.out.println("4");
+    public void checkAttackingCountry(Country attackCountry) {
+        if (attackCountry.getCurrentOwner().equals(currentPlayer)) {
+            this.attackCountry = attackCountry;
+            for (RiskView rv : riskViews) {
                 rv.handleCanAttackFrom(this, attackCountry);
             }
-        }else {
-            for(RiskView rv:riskViews){
+        } else {
+            for (RiskView rv : riskViews) {
                 rv.handleCanNotAttackFrom(this);
             }
         }
     }
-
 }

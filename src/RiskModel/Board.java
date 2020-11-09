@@ -1,17 +1,16 @@
 package RiskModel;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
- *The RISKModel.Board of the RISK RISKModel.Game.
- * @version 2.0
+ * The RISKModel.Board of the RISK RISKModel.Game.
+ *
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
  * @author Diana Miraflor
+ * @version 2.0
  */
 public class Board {
     private final LinkedList<Continent> continents;
@@ -20,22 +19,24 @@ public class Board {
     /**
      * Constructor of RISKModel.Board that creates a new RISKModel.Board
      */
-    public Board(){
-        continents= new LinkedList<>();
+    public Board() {
+        continents = new LinkedList<>();
         countries = new ArrayList<>();
         createBoard();
-        setTotalCountries();
     }
 
     /**
      * add a new continent to the RISKModel.Board
+     *
      * @param continent added to the board
      */
-    public void addContinent(Continent continent){
+    public void addContinent(Continent continent) {
         continents.add(continent);
     }
 
-    public void addCountry(Country country) {countries.add(country);}
+    public void addCountryToBoard(Country country) {
+        countries.add(country);
+    }
 
     public Country getCountry(String name) {
         for (Country c : countries) {
@@ -46,16 +47,16 @@ public class Board {
         return null;
     }
 
-    public Continent getContinent(String continent){
-        for (Continent c : continents){
-            if(c.getContinentName().equals(continent)){
+    public Continent getContinent(String continent) {
+        for (Continent c : continents) {
+            if (c.getContinentName().equals(continent)) {
                 return c;
             }
         }
         return null;
     }
 
-    public LinkedList<Continent> getContinents(){
+    public LinkedList<Continent> getContinents() {
         return continents;
     }
 
@@ -63,47 +64,38 @@ public class Board {
     /**
      * The textual represention of the RISKModel.Board. Contains information about every continent, country
      * and the player that owns the country
+     *
      * @return the textal representation of the board.
      */
     public String toString() {
-        String Board= "RISK BOARD: \n" + "Continents: \n";
-        for(Continent c:continents){
-            Board=Board.concat(c.toString());
+        String Board = "RISK BOARD: \n" + "Continents: \n";
+        for (Continent c : continents) {
+            Board = Board.concat(c.toString());
         }
         return Board;
     }
 
     /**
-     * Set all the countries in the RISKModel.Board
-     */
-    public void setTotalCountries(){
-        for(Continent c:continents){
-            for(Country cy:c.getContinentCountries()){
-                countries.add(cy);
-            }
-        }
-    }
-
-    /**
      * Retrieves all the countries in the RISKModel.Board
+     *
      * @return List of countries in the RISKModel.Board
      */
-    public ArrayList<Country> getCountries(){
+    public ArrayList<Country> getCountries() {
         return countries;
     }
 
     /**
      * create the RISKModel.Board for the RISK RISKModel.Game
      */
-    private void createBoard(){
+    private void createBoard() {
 
         //  create the Continents in the RISKModel.Game
-        Continent NorthAmerica=new Continent("NorthAmerica");
-        Continent SouthAmerica=new Continent("SouthAmerica");
-        Continent Europe=new Continent("Europe");
-        Continent Africa=new Continent("Africa");
-        Continent Asia=new Continent("Asia");
-        Continent Australia=new Continent("Australia");
+        Continent NorthAmerica = new Continent("NorthAmerica");
+        Continent SouthAmerica = new Continent("SouthAmerica");
+        Continent Europe = new Continent("Europe");
+        Continent Africa = new Continent("Africa");
+        Continent Asia = new Continent("Asia");
+        Continent Australia = new Continent("Australia");
 
         //add continents to board
         this.addContinent(NorthAmerica);
@@ -143,27 +135,28 @@ public class Board {
 
     /**
      * create North America
+     *
      * @param NorthAmerica continent
      */
-    public void createContinentNorthAmerica(Continent NorthAmerica){
-        Country Alaska=new Country("Alaska");
-        this.addCountry(Alaska);
-        Country Alberta=new Country("Alberta");
-        this.addCountry(Alberta);
-        Country CentralAmerica=new Country("CentralAmerica");
-        this.addCountry(CentralAmerica);
-        Country EasternUnitedStates=new Country("EasternUnitedStates");
-        this.addCountry(EasternUnitedStates);
-        Country Greenland=new Country("Greenland");
-        this.addCountry(Greenland);
-        Country NorthwestTerritory=new Country("NorthwestTerritory");
-        this.addCountry(NorthwestTerritory);
-        Country Ontario=new Country("Ontario");
-        this.addCountry(Ontario);
-        Country Quebec=new Country("Quebec");
-        this.addCountry(Quebec);
-        Country WesternUnitedStates=new Country("WesternUnitedStates");
-        this.addCountry(WesternUnitedStates);
+    public void createContinentNorthAmerica(Continent NorthAmerica) {
+        Country Alaska = new Country("Alaska");
+        this.addCountryToBoard(Alaska);
+        Country Alberta = new Country("Alberta");
+        this.addCountryToBoard(Alberta);
+        Country CentralAmerica = new Country("CentralAmerica");
+        this.addCountryToBoard(CentralAmerica);
+        Country EasternUnitedStates = new Country("EasternUnitedStates");
+        this.addCountryToBoard(EasternUnitedStates);
+        Country Greenland = new Country("Greenland");
+        this.addCountryToBoard(Greenland);
+        Country NorthwestTerritory = new Country("NorthwestTerritory");
+        this.addCountryToBoard(NorthwestTerritory);
+        Country Ontario = new Country("Ontario");
+        this.addCountryToBoard(Ontario);
+        Country Quebec = new Country("Quebec");
+        this.addCountryToBoard(Quebec);
+        Country WesternUnitedStates = new Country("WesternUnitedStates");
+        this.addCountryToBoard(WesternUnitedStates);
         NorthAmerica.addCountry(Alaska);
         NorthAmerica.addCountry(Alberta);
         NorthAmerica.addCountry(CentralAmerica);
@@ -179,17 +172,18 @@ public class Board {
 
     /**
      * create South America
+     *
      * @param SouthAmerica continent
      */
-    public void createContinentSouthAmerica(Continent SouthAmerica){
-        Country Argentina=new Country("Argentina");
-        this.addCountry(Argentina);
-        Country Brazil=new Country("Brazil");
-        this.addCountry(Brazil);
-        Country Peru=new Country("Peru");
-        this.addCountry(Peru);
-        Country Venezuela=new Country("Venezuela");
-        this.addCountry(Venezuela);
+    public void createContinentSouthAmerica(Continent SouthAmerica) {
+        Country Argentina = new Country("Argentina");
+        this.addCountryToBoard(Argentina);
+        Country Brazil = new Country("Brazil");
+        this.addCountryToBoard(Brazil);
+        Country Peru = new Country("Peru");
+        this.addCountryToBoard(Peru);
+        Country Venezuela = new Country("Venezuela");
+        this.addCountryToBoard(Venezuela);
         SouthAmerica.addCountry(Argentina);
         SouthAmerica.addCountry(Brazil);
         SouthAmerica.addCountry(Peru);
@@ -200,23 +194,24 @@ public class Board {
 
     /**
      * create Europe
+     *
      * @param Europe continent
      */
-    public void createContinentEurope(Continent Europe){
-        Country GreatBritain=new Country("GreatBritain");
-        this.addCountry(GreatBritain);
-        Country Iceland=new Country("Iceland");
-        this.addCountry(Iceland);
-        Country NorthernEurope=new Country("NorthernEurope");
-        this.addCountry(NorthernEurope);
-        Country Scandinavia=new Country("Scandinavia");
-        this.addCountry(Scandinavia);
-        Country SouthernEurope=new Country("SouthernEurope");
-        this.addCountry(SouthernEurope);
-        Country Ukraine=new Country("Ukraine");
-        this.addCountry(Ukraine);
-        Country WesternEurope=new Country("WesternEurope");
-        this.addCountry(WesternEurope);
+    public void createContinentEurope(Continent Europe) {
+        Country GreatBritain = new Country("GreatBritain");
+        this.addCountryToBoard(GreatBritain);
+        Country Iceland = new Country("Iceland");
+        this.addCountryToBoard(Iceland);
+        Country NorthernEurope = new Country("NorthernEurope");
+        this.addCountryToBoard(NorthernEurope);
+        Country Scandinavia = new Country("Scandinavia");
+        this.addCountryToBoard(Scandinavia);
+        Country SouthernEurope = new Country("SouthernEurope");
+        this.addCountryToBoard(SouthernEurope);
+        Country Ukraine = new Country("Ukraine");
+        this.addCountryToBoard(Ukraine);
+        Country WesternEurope = new Country("WesternEurope");
+        this.addCountryToBoard(WesternEurope);
         Europe.addCountry(GreatBritain);
         Europe.addCountry(Iceland);
         Europe.addCountry(NorthernEurope);
@@ -229,21 +224,22 @@ public class Board {
 
     /**
      * create Africa
+     *
      * @param Africa continent
      */
-    public void createContinentAfrica(Continent Africa){
-        Country Congo=new Country("Congo");
-        this.addCountry(Congo);
-        Country EastAfrica=new Country("EastAfrica");
-        this.addCountry(EastAfrica);
-        Country Egypt=new Country("Egypt");
-        this.addCountry(Egypt);
-        Country Madagascar=new Country("Madagascar");
-        this.addCountry(Madagascar);
-        Country NorthAfrica=new Country("NorthAfrica");
-        this.addCountry(NorthAfrica);
-        Country SouthAfrica=new Country("SouthAfrica");
-        this.addCountry(SouthAfrica);
+    public void createContinentAfrica(Continent Africa) {
+        Country Congo = new Country("Congo");
+        this.addCountryToBoard(Congo);
+        Country EastAfrica = new Country("EastAfrica");
+        this.addCountryToBoard(EastAfrica);
+        Country Egypt = new Country("Egypt");
+        this.addCountryToBoard(Egypt);
+        Country Madagascar = new Country("Madagascar");
+        this.addCountryToBoard(Madagascar);
+        Country NorthAfrica = new Country("NorthAfrica");
+        this.addCountryToBoard(NorthAfrica);
+        Country SouthAfrica = new Country("SouthAfrica");
+        this.addCountryToBoard(SouthAfrica);
         Africa.addCountry(Congo);
         Africa.addCountry(EastAfrica);
         Africa.addCountry(Egypt);
@@ -255,33 +251,34 @@ public class Board {
 
     /**
      * create Asia
+     *
      * @param Asia continent
      */
-    public void createContinentAsia(Continent Asia){
-        Country Afghanistan=new Country("Afghanistan");
-        this.addCountry(Afghanistan);
-        Country China=new Country("China");
-        this.addCountry(China);
-        Country India=new Country("India");
-        this.addCountry(India);
-        Country Irkutsk=new Country("Irkutsk");
-        this.addCountry(Irkutsk);
-        Country Japan=new Country("Japan");
-        this.addCountry(Japan);
-        Country Kamchatka=new Country("Kamchatka");
-        this.addCountry(Kamchatka);
-        Country MiddleEast=new Country("MiddleEast");
-        this.addCountry(MiddleEast);
-        Country Mongolia=new Country("Mongolia");
-        this.addCountry(Mongolia);
-        Country Siam=new Country("Siam");
-        this.addCountry(Siam);
-        Country Siberia=new Country("Siberia");
-        this.addCountry(Siberia);
-        Country Ural=new Country("Ural");
-        this.addCountry(Ural);
-        Country Yakutsk=new Country("Yakutsk");
-        this.addCountry(Yakutsk);
+    public void createContinentAsia(Continent Asia) {
+        Country Afghanistan = new Country("Afghanistan");
+        this.addCountryToBoard(Afghanistan);
+        Country China = new Country("China");
+        this.addCountryToBoard(China);
+        Country India = new Country("India");
+        this.addCountryToBoard(India);
+        Country Irkutsk = new Country("Irkutsk");
+        this.addCountryToBoard(Irkutsk);
+        Country Japan = new Country("Japan");
+        this.addCountryToBoard(Japan);
+        Country Kamchatka = new Country("Kamchatka");
+        this.addCountryToBoard(Kamchatka);
+        Country MiddleEast = new Country("MiddleEast");
+        this.addCountryToBoard(MiddleEast);
+        Country Mongolia = new Country("Mongolia");
+        this.addCountryToBoard(Mongolia);
+        Country Siam = new Country("Siam");
+        this.addCountryToBoard(Siam);
+        Country Siberia = new Country("Siberia");
+        this.addCountryToBoard(Siberia);
+        Country Ural = new Country("Ural");
+        this.addCountryToBoard(Ural);
+        Country Yakutsk = new Country("Yakutsk");
+        this.addCountryToBoard(Yakutsk);
         Asia.addCountry(Afghanistan);
         Asia.addCountry(China);
         Asia.addCountry(India);
@@ -299,17 +296,18 @@ public class Board {
 
     /**
      * create Australia
+     *
      * @param Australia continent
      */
-    public void createContinentAustralia(Continent Australia){
-        Country EasternAustralia=new Country("EasternAustralia");
-        this.addCountry(EasternAustralia);
-        Country Indonesia=new Country("Indonesia");
-        this.addCountry(Indonesia);
-        Country NewGuinea=new Country("NewGuinea");
-        this.addCountry(NewGuinea);
-        Country WesternAustralia=new Country("WesternAustralia");
-        this.addCountry(WesternAustralia);
+    public void createContinentAustralia(Continent Australia) {
+        Country EasternAustralia = new Country("EasternAustralia");
+        this.addCountryToBoard(EasternAustralia);
+        Country Indonesia = new Country("Indonesia");
+        this.addCountryToBoard(Indonesia);
+        Country NewGuinea = new Country("NewGuinea");
+        this.addCountryToBoard(NewGuinea);
+        Country WesternAustralia = new Country("WesternAustralia");
+        this.addCountryToBoard(WesternAustralia);
         Australia.addCountry(EasternAustralia);
         Australia.addCountry(Indonesia);
         Australia.addCountry(NewGuinea);
@@ -318,9 +316,10 @@ public class Board {
 
     /**
      * Initialize adjacent counntries in North America
+     *
      * @param NorthAmerica
      */
-    public void addNorthAmericaAdjacentCountries(Continent NorthAmerica){
+    public void addNorthAmericaAdjacentCountries(Continent NorthAmerica) {
         getCountry("Alaska").setAdjacentCountry(getCountry("NorthwestTerritory"));
         getCountry("Alaska").setAdjacentCountry(getCountry("Alberta"));
         getCountry("Alaska").setAdjacentCountry(getCountry("Kamchatka"));
@@ -357,11 +356,13 @@ public class Board {
         getCountry("WesternUnitedStates").setAdjacentCountry(getCountry("EasternUnitedStates"));
 
     }
+
     /**
      * Initialize adjacent counntries in South America
+     *
      * @param SouthAmerica
      */
-    public void addSouthAmericaAdjacentCountries(Continent SouthAmerica){
+    public void addSouthAmericaAdjacentCountries(Continent SouthAmerica) {
         getCountry("Argentina").setAdjacentCountry(getCountry("Peru"));
         getCountry("Argentina").setAdjacentCountry(getCountry("Brazil"));
         getCountry("Brazil").setAdjacentCountry(getCountry("Argentina"));
@@ -379,9 +380,10 @@ public class Board {
 
     /**
      * Initialize adjacent counntries in Europe
+     *
      * @param Europe
      */
-    public void addEuropeAdjacentCountries(Continent Europe){
+    public void addEuropeAdjacentCountries(Continent Europe) {
         getCountry("GreatBritain").setAdjacentCountry(getCountry("Iceland"));
         getCountry("GreatBritain").setAdjacentCountry(getCountry("NorthernEurope"));
         getCountry("GreatBritain").setAdjacentCountry(getCountry("Scandinavia"));
@@ -418,9 +420,10 @@ public class Board {
 
     /**
      * Initialize adjacent counntries in Africa
+     *
      * @param Africa
      */
-    public void addAfricaAdjacentCountries(Continent Africa){
+    public void addAfricaAdjacentCountries(Continent Africa) {
         getCountry("Congo").setAdjacentCountry(getCountry("SouthAfrica"));
         getCountry("Congo").setAdjacentCountry(getCountry("EastAfrica"));
         getCountry("Congo").setAdjacentCountry(getCountry("NorthAfrica"));
@@ -450,9 +453,10 @@ public class Board {
 
     /**
      * Initialize adjacent counntries in Asia
+     *
      * @param Asia
      */
-    public void addAsiaAdjacentCountries(Continent Asia){
+    public void addAsiaAdjacentCountries(Continent Asia) {
         getCountry("Afghanistan").setAdjacentCountry(getCountry("Ukraine"));
         getCountry("Afghanistan").setAdjacentCountry(getCountry("MiddleEast"));
         getCountry("Afghanistan").setAdjacentCountry(getCountry("Ural"));
@@ -475,7 +479,7 @@ public class Board {
         getCountry("Japan").setAdjacentCountry(getCountry("Kamchatka"));
         getCountry("Japan").setAdjacentCountry(getCountry("Mongolia"));
         getCountry("Kamchatka").setAdjacentCountry(getCountry("Yakutsk"));
-        getCountry("Kamchatka").setAdjacentCountry( getCountry("Irkutsk"));
+        getCountry("Kamchatka").setAdjacentCountry(getCountry("Irkutsk"));
         getCountry("Kamchatka").setAdjacentCountry(getCountry("Mongolia"));
         getCountry("Kamchatka").setAdjacentCountry(getCountry("Japan"));
         getCountry("MiddleEast").setAdjacentCountry(getCountry("EastAfrica"));
@@ -485,7 +489,7 @@ public class Board {
         getCountry("MiddleEast").setAdjacentCountry(getCountry("Afghanistan"));
         getCountry("MiddleEast").setAdjacentCountry(getCountry("India"));
         getCountry("Mongolia").setAdjacentCountry(getCountry("Siberia"));
-        getCountry("Mongolia").setAdjacentCountry( getCountry("Irkutsk"));
+        getCountry("Mongolia").setAdjacentCountry(getCountry("Irkutsk"));
         getCountry("Mongolia").setAdjacentCountry(getCountry("Kamchatka"));
         getCountry("Mongolia").setAdjacentCountry(getCountry("Japan"));
         getCountry("Mongolia").setAdjacentCountry(getCountry("China"));
@@ -493,7 +497,7 @@ public class Board {
         getCountry("Siam").setAdjacentCountry(getCountry("India"));
         getCountry("Siam").setAdjacentCountry(getCountry("Indonesia"));
         getCountry("Siberia").setAdjacentCountry(getCountry("Yakutsk"));
-        getCountry("Siberia").setAdjacentCountry( getCountry("Irkutsk"));
+        getCountry("Siberia").setAdjacentCountry(getCountry("Irkutsk"));
         getCountry("Siberia").setAdjacentCountry(getCountry("Mongolia"));
         getCountry("Siberia").setAdjacentCountry(getCountry("China"));
         getCountry("Siberia").setAdjacentCountry(getCountry("Ural"));
@@ -503,15 +507,16 @@ public class Board {
         getCountry("Ural").setAdjacentCountry(getCountry("Afghanistan"));
         getCountry("Yakutsk").setAdjacentCountry(getCountry("Siberia"));
         getCountry("Yakutsk").setAdjacentCountry(getCountry("Kamchatka"));
-        getCountry("Yakutsk").setAdjacentCountry( getCountry("Irkutsk"));
+        getCountry("Yakutsk").setAdjacentCountry(getCountry("Irkutsk"));
 
     }
 
     /**
      * Initialize adjacent counntries in Australia
+     *
      * @param Australia
      */
-    public void addAustraliaAdjacentCountries(Continent Australia){
+    public void addAustraliaAdjacentCountries(Continent Australia) {
         getCountry("EasternAustralia").setAdjacentCountry(getCountry("WesternAustralia"));
         getCountry("EasternAustralia").setAdjacentCountry(getCountry("NewGuinea"));
         getCountry("Indonesia").setAdjacentCountry(getCountry("Siam"));

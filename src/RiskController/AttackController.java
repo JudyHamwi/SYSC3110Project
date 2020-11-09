@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 
 import RiskModel.Country;
 import RiskModel.Game;
-import RiskModel.Player;
-import RiskView.BoardView;
 import RiskView.RiskView;
 
 import javax.swing.*;

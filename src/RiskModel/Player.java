@@ -26,7 +26,6 @@ public class Player {
         this.PLAYER_ID = this.getNextPlayerId();
         this.countriesOwned = new ArrayList<>();
         this.placeArmy=0;
-
     }
 
     /**
@@ -155,6 +154,15 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects.hash(PLAYER_ID, countriesOwned, placeArmy);
+    }
+
+    public boolean playerOwnsCountry(Country country){
+        for(Country c:countriesOwned){
+            if(c.equals(country)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

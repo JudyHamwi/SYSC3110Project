@@ -23,24 +23,24 @@ public class Game {
 
     private Board board;
     private GameState gameState;
+    private boolean finished;
     private static LinkedList<Player> players;
     private int playerArmy;
     private int numPlayers;
     private Player currentPlayer;
     private ArrayList<RiskView> riskViews;
     private Country attackCountry;
-
+    private Map<Integer,Integer> armiesForPlayers;
     /**
      * Starts a new RISKModel.Game
      */
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
-        riskViews = new ArrayList<>();
-    }
-
-    public LinkedList<Player> getPlayers() {
-        return players;
+        riskViews=new ArrayList<>();
+        this.gameState = GameState.INITIALIZING;
+        this.armiesForPlayers = new HashMap();
+        setArmiesForPlayers();
     }
 
     /**
@@ -66,6 +66,7 @@ public class Game {
         return this.gameState;
     }
 
+    public Board getBoard(){ return this.board;}
     /**
      * Adds a number of players to the game
      *
@@ -101,31 +102,27 @@ public class Game {
     }
 
     /**
+     * sets the number of initial armies according to the number of players
+     */
+    public void setArmiesForPlayers(){
+        armiesForPlayers.put(2,50);
+        armiesForPlayers.put(3,35);
+        armiesForPlayers.put(4,30);
+        armiesForPlayers.put(5,25);
+        armiesForPlayers.put(6,20);
+    }
+    /**
      * Calculates the number of armies that will be assigned to every player
      */
     private void initialArmyForPlayer() {
-        if (players.size() == 2) {
-            playerArmy = 50;
-        }
-        if (players.size() == 3) {
-            playerArmy = 35;
-        }
-        if (players.size() == 4) {
-            playerArmy = 30;
-        }
-        if (players.size() == 5) {
-            playerArmy = 25;
-        }
-        if (players.size() == 6) {
-            playerArmy = 20;
-        }
+        playerArmy = armiesForPlayers.get(players.size());
         for (Player p : players) {
             p.addPlayerArmy(playerArmy);
         }
     }
 
     /**
-     * Distributes one army to every country owned by the players
+     *  Distributes one army to every country owned by the players
      */
     private void distributeOneArmyToCountry() {
         for (Player p : players) {
@@ -199,13 +196,107 @@ public class Game {
     }
 
     /**
-     * Initializes the state of the game at the start of the game
+     * prints the welcome message shown when the game starts
+     */
+    private void printWelcome() {
+        System.out.println();
+        System.out.println("Welcome to RISK!: Global Domination!");
+        System.out.println("The goal of RISK! is to conquer your enemies' territories.");
+        System.out.println();
+        System.out.println("The number of players ranges from 2-6.");
+        System.out.println("Please type in the number of players.");
+    }
+
+    /**
+     * Processes the commands entered by the user to produce the required result
+     *
+     * @param command enetered by the user
+     * @param p
+     */
+    private void processCommand(Command command, Player p) {
+        boolean wantToExit = false;
+
+        if (command.isUnknown()) {
+            System.out.println("Sorry, I did not understand that.");
+        }
+
+        String commandWord = command.getCommandWord();
+
+        if (commandWord.equals("help")) {
+            printHelp();
+        }
+        if (commandWord.equals("attack")) {
+            attack(p);
+        }
+        if (commandWord.equals("print")) {
+            printBoard(command);
+        }
+        if (commandWord.equals("end")) {
+            endTurn();
+        }
+        if (commandWord.equals("exit")) {
+            System.out.println(p + " has quit the game!");
+            System.exit(0);
+        }
+    }
+
+
+    /**
+     * Processes the number of players enetered by the user
+     *
+     * @param command of number of players enetered by the user
+     * @return number of players to play the game
+     */
+    private int processNumOfPlayers(Command command) {
+
+        if (command.isUnknown()) {
+            System.out.println("Invalid number");
+        }
+
+        String numPlayers = command.getCommandWord();
+
+        if (numPlayers.equals("two") || numPlayers.equals("2")) {
+            return 2;
+        }
+        if (numPlayers.equals("three") || numPlayers.equals("3")) {
+            return 3;
+        }
+        if (numPlayers.equals("four") || numPlayers.equals("4")) {
+            return 4;
+        }
+        if (numPlayers.equals("five") || numPlayers.equals("5")) {
+            return 5;
+        }
+        if (numPlayers.equals("six") || numPlayers.equals("6")) {
+            return 6;
+        }
+        return 0;
+    }
+
+    /**
+     * Intializes the number of players in the game
+     */
+    public void initializePlayers() {
+        do {
+            try {
+                //Command numOfPlayers =parser.getCommand();
+                // this.numPlayers =processNumOfPlayers(numOfPlayers);
+
+            } catch (Exception e) {
+                System.out.println("Please enter a valid number between 2 and 6..");
+            }
+        }
+        while (this.numPlayers > 6 || this.numPlayers < 2);
+    }
+
+    /**
+     * Initialzes the state of the game at the start of the game
      */
     public void theInitialState() {
         initialize(numPlayers);
         this.gameState = GameState.IN_PROGRESS;
-        for (RiskView rv : riskViews) {
-            rv.handleInitialization(this, gameState, currentPlayer, numPlayers);
+        for(RiskView rv:riskViews){
+            rv.handleInitialization(this, gameState,currentPlayer, numPlayers);
         }
     }
 
@@ -218,6 +309,16 @@ public class Game {
      */
     public void play() {
         theInitialState();
+        while (gameState == GameState.IN_PROGRESS) {
+            System.out.println(currentPlayer + ", it is your turn.");
+            try {
+                //  Command command = parser.getCommand();
+                //processCommand(command, currentPlayer);
+            } catch (Exception e) {
+                System.out.println("Exception Occured: " + e);
+                System.out.println("Please enter command again...");
+            }
+        }
     }
 
 
@@ -235,7 +336,7 @@ public class Game {
         }
         gameState = GameState.IN_PROGRESS;
 
-        for (RiskView rv : riskViews) {
+        for(RiskView rv : riskViews) {
             rv.handleEndTurn(this, currentPlayer);
         }
 
@@ -273,7 +374,7 @@ public class Game {
      */
     public void addRiskView(RiskView rv) {
         riskViews.add(rv);
-        for (RiskView rv2 : riskViews) {
+        for(RiskView rv2:riskViews) {
             rv2.handleNewGame(this, board);
         }
     }

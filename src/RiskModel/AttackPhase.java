@@ -60,7 +60,7 @@ public class AttackPhase {
      * else the defender can roll two dice
      * @return number of dice rolled by the defender
      */
-    int numberOfDiceForDefender(){
+    public int numberOfDiceForDefender(){
         if(defenderCountry.getNumberOfArmies()==1) {
             return 1;
         }

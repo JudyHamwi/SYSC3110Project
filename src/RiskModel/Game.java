@@ -30,17 +30,18 @@ public class Game {
     private Player currentPlayer;
     private ArrayList<RiskView> riskViews;
     private Country attackCountry;
-    private Map<Integer,Integer> armiesForPlayers;
+
     /**
      * Starts a new RISKModel.Game
      */
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
-        riskViews=new ArrayList<>();
-        this.gameState = GameState.INITIALIZING;
-        this.armiesForPlayers = new HashMap();
-        setArmiesForPlayers();
+        riskViews = new ArrayList<>();
+    }
+
+    public LinkedList<Player> getPlayers() {
+        return players;
     }
 
     /**
@@ -66,7 +67,6 @@ public class Game {
         return this.gameState;
     }
 
-    public Board getBoard(){ return this.board;}
     /**
      * Adds a number of players to the game
      *
@@ -102,27 +102,31 @@ public class Game {
     }
 
     /**
-     * sets the number of initial armies according to the number of players
-     */
-    public void setArmiesForPlayers(){
-        armiesForPlayers.put(2,50);
-        armiesForPlayers.put(3,35);
-        armiesForPlayers.put(4,30);
-        armiesForPlayers.put(5,25);
-        armiesForPlayers.put(6,20);
-    }
-    /**
      * Calculates the number of armies that will be assigned to every player
      */
     private void initialArmyForPlayer() {
-        playerArmy = armiesForPlayers.get(players.size());
+        if (players.size() == 2) {
+            playerArmy = 50;
+        }
+        if (players.size() == 3) {
+            playerArmy = 35;
+        }
+        if (players.size() == 4) {
+            playerArmy = 30;
+        }
+        if (players.size() == 5) {
+            playerArmy = 25;
+        }
+        if (players.size() == 6) {
+            playerArmy = 20;
+        }
         for (Player p : players) {
             p.addPlayerArmy(playerArmy);
         }
     }
 
     /**
-     *  Distributes one army to every country owned by the players
+     * Distributes one army to every country owned by the players
      */
     private void distributeOneArmyToCountry() {
         for (Player p : players) {
@@ -196,7 +200,20 @@ public class Game {
     }
 
     /**
-     * Initializes the number of players in the game
+     * prints the welcome message shown when the game starts
+     */
+    private void printWelcome() {
+        System.out.println();
+        System.out.println("Welcome to RISK!: Global Domination!");
+        System.out.println("The goal of RISK! is to conquer your enemies' territories.");
+        System.out.println();
+        System.out.println("The number of players ranges from 2-6.");
+        System.out.println("Please type in the number of players.");
+    }
+
+
+    /**
+     * Intializes the number of players in the game
      */
     public void initializePlayers() {
         do {
@@ -212,13 +229,16 @@ public class Game {
     }
 
     /**
-     * Initializes the state of the game at the start of the game
+     * Initialzes the state of the game at the start of the game
      */
     public void theInitialState() {
+        //printWelcome();
+        //initializePlayers();
         initialize(numPlayers);
+        //printInitialState();
         this.gameState = GameState.IN_PROGRESS;
-        for(RiskView rv:riskViews){
-            rv.handleInitialization(this, gameState,currentPlayer, numPlayers);
+        for (RiskView rv : riskViews) {
+            rv.handleInitialization(this, gameState, currentPlayer, numPlayers);
         }
     }
 
@@ -231,6 +251,16 @@ public class Game {
      */
     public void play() {
         theInitialState();
+        while (gameState == GameState.IN_PROGRESS) {
+            System.out.println(currentPlayer + ", it is your turn.");
+            try {
+                //  Command command = parser.getCommand();
+                //processCommand(command, currentPlayer);
+            } catch (Exception e) {
+                System.out.println("Exception Occured: " + e);
+                System.out.println("Please enter command again...");
+            }
+        }
     }
 
 
@@ -248,10 +278,26 @@ public class Game {
         }
         gameState = GameState.IN_PROGRESS;
 
-        for(RiskView rv : riskViews) {
+        for (RiskView rv : riskViews) {
             rv.handleEndTurn(this, currentPlayer);
         }
 
+    }
+
+
+    /**
+     * Prints the initial state of the game after the initialization happens
+     */
+    private void printInitialState() {
+        System.out.println("HERE IS THE INITIAL STATE OF THE MAP: ");
+        for (Player p : players) {
+            System.out.println(p);
+            System.out.println("owns: " + p.getCountriesOwned());
+            for (Country c : p.getCountriesOwned()) {
+                System.out.println(" " + c + " Number of Armies: " + c.getNumberOfArmies());
+            }
+        }
+        printHelp();
     }
 
     /**
@@ -268,15 +314,61 @@ public class Game {
      */
     public void printHelp() {
         String pH;
-        pH = ("Aim to conquer enemy territories!" + "\n" + "\n" + "In game, you have choices to attack countries and end your turn."
-                + "\n" + "To attack, press the country you wish to attack from followed by the attack button, and then" +
-                " an enemy territory." + "\n" + "Pass your turn to the next player by pressing" +
-                " the end turn button." + "\n" + "\n" + "NOTE: \nIn order to attack an enemy's territory, the country you are " +
-                "attacking from must have a minimum of 2 armies." + "\n\n" + "GOOD LUCK!");
+        pH = ("Aim to conquer enemy territories!" + "\n" + "\n" + "In game, you have choices to attack countries, end your turn, and roll your dice."
+                + "\n" + "To attack, press the attack button followed by a country you " +
+                "want to attack from and then a country you want to attack." + "\n" + "Press the roll dice button to determine" +
+                " if you can successfully attack your enemy's territory." + "\n" + "Pass your turn to another player by pressing" +
+                " the end turn button." + "\n" + "\n" + "GOOD LUCK!");
+        // lol idk change "good luck"
 
         for (RiskView rv : riskViews) {
             rv.handlePrintHelp(this, pH);
         }
+    }
+
+    /**
+     * Responds to the command of the player to attack
+     *
+     * @param p player that wants to attack
+     */
+    public void attack(Player p) {
+
+        String attackingCountry = null;
+        String defendingCountry = null;
+        Country attackingC = null;
+        Country defendingC = null;
+        this.gameState = GameState.IN_PROGRESS;
+
+        /*
+        if (!command.hasSecondWord()) {
+            System.out.println("What country would you like to attack?");
+            return;
+        }
+
+        if (!command.hasThirdWord()) {
+            System.out.println("What country would you like to attack from?");
+        }
+        
+         
+
+        attackingCountry = command.getFourthWord();
+        defendingCountry = command.getSecondWord();
+        
+         */
+
+        for (Country c : board.getCountries()) {
+            if (c.getCountryName().equals(attackingCountry)) {
+                attackingC = c;
+            }
+        }
+
+        for (Country c : board.getCountries()) {
+            if (c.getCountryName().equals(defendingCountry)) {
+                defendingC = c;
+            }
+        }
+
+        attackPhase(defendingC);
     }
 
     /**
@@ -286,7 +378,7 @@ public class Game {
      */
     public void addRiskView(RiskView rv) {
         riskViews.add(rv);
-        for(RiskView rv2:riskViews) {
+        for (RiskView rv2 : riskViews) {
             rv2.handleNewGame(this, board);
         }
     }
@@ -322,5 +414,9 @@ public class Game {
                 rv.handleCanNotAttackFrom(this);
             }
         }
+    }
+
+    public Board getBoard(){
+        return board;
     }
 }

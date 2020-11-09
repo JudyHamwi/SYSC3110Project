@@ -404,7 +404,7 @@ public class Game {
      * @param attackCountry that the player wants to attack from in the attack phase
      */
     public void checkAttackingCountry(Country attackCountry) {
-        if (attackCountry.getCurrentOwner().equals(currentPlayer)) {
+        if (attackCountry.getCurrentOwner().equals(currentPlayer) && attackCountry.getNumberOfArmies()>1) {
             this.attackCountry = attackCountry;
             for (RiskView rv : riskViews) {
                 rv.handleCanAttackFrom(this, attackCountry);

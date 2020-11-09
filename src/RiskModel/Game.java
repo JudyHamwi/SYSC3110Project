@@ -36,7 +36,7 @@ public class Game {
      * Starts a new RISKModel.Game
      */
     public Game() {
-        players = new LinkedList<Player>();
+        players = new LinkedList<>();
         board = new Board();
         riskViews = new ArrayList<>();
         this.gameState = GameState.INITIALIZING;
@@ -72,12 +72,11 @@ public class Game {
      *
      * @param numberOfPlayers that will play the game
      */
-    private void addPlayers(int numberOfPlayers) {
+    public void addPlayers(int numberOfPlayers) {
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player());
         }
     }
-
 
     /**
      * Distribute equal amount of random countries to each player

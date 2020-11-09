@@ -1,10 +1,10 @@
 package RiskTestCases;
 
-import RiskModel.Board;
-import RiskModel.Game;
-import RiskModel.GameState;
+import RiskModel.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
@@ -12,11 +12,21 @@ public class GameTest {
     Game game;
     Board board;
     GameState gameState;
+    LinkedList<Player> players;
+    int numPlayers = 2;
+    Player currentPlayer;
+    Country attackingCountry;
+    Country defendingCountry;
 
     @Before
     public void setUp() throws Exception {
         game = new Game();
         board = game.getBoard();
+        players = new LinkedList<>();
+        currentPlayer = new Player();
+        game.initialize(numPlayers);
+        attackingCountry = new Country("Alaska");
+        defendingCountry = new Country("Alberta");
     }
 
     @Test
@@ -26,23 +36,27 @@ public class GameTest {
     }
 
     @Test
-    public void testGetState() {
+    public void testGetState(){
         assertEquals("Game is initializing",GameState.INITIALIZING, game.getState());
     }
 
     @Test
-    public void attackPhase() {
-
+    public void testAddPlayers(){
+        game.addPlayers(numPlayers);
+        assertEquals(players.size(), game.getNumPlayers());
     }
 
     @Test
-    public void initializePlayers() {
-        game.initializePlayers();
-
+    public void attackPhase() {
+        AttackPhase playerAttack = new AttackPhase(currentPlayer, attackingCountry,defendingCountry);
+        currentPlayer.addPlayerArmy(3);
+        players.add(currentPlayer);
+        game.attackPhase(defendingCountry);
     }
 
     @Test
     public void theInitialState() {
+
     }
 
     @Test

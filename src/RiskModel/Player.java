@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * RISKModel.Player that plays in the RISKModel.Game.
- * @version 1.0
+ * @version 2.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
@@ -114,6 +114,12 @@ public class Player {
         }
     }
 
+    /**
+     * checks if the country the player wants to attack from can be used, following the
+     * rules of the game
+     * @param attackFrom country that the player wants to attack from
+     * @return true of the player can use this country to attack
+     */
     public boolean canAttackFrom(Country attackFrom){
         System.out.println("3");
         if(!(countriesOwned.contains(attackFrom))){

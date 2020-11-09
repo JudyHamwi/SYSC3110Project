@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * RISKModel.Country in the RISKModel.Board of RISK RISKModel.Game
- * @version 1.0
+ * @version 2.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
@@ -51,6 +51,10 @@ public class Country {
         return numberOfArmies;
     }
 
+    /**
+     * getter for the adjacent countries to this country
+     * @return List<Couuntry> adjacent to this country
+     */
     public List<Country> getAdjacentCountries() {
         return adjacentCountries;
     }

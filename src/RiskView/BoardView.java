@@ -9,6 +9,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The view of the Risk Game Board. It displays and keeps track of the view of the conntinents
+ * and countries on the board.
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
+ */
 public class BoardView extends JPanel {
 
     public static final int CONTINENT_WIDTH=6;
@@ -25,6 +34,12 @@ public class BoardView extends JPanel {
     private Game game;
     private RiskView rv;
 
+    /**
+     * creates the board view of the risk game
+     * @param rv view of the main frame of the risk game
+     * @param game model used for the logic of the game
+     * @param board contains all the continents and countries of the game
+     */
     public BoardView(RiskView rv,Game game, Board board){
         this.board=board;
         this.rv=rv;
@@ -42,6 +57,9 @@ public class BoardView extends JPanel {
         this.add(playerColorsPanel);
     }
 
+    /**
+     * Initializes the continents and their countries displayed on the board
+     */
     public void initializeContinents(){
         for(Continent c:board.getContinents()){
             ContinentView continentview=new ContinentView(rv, game,this, c, colorArray[colorCounter]);
@@ -51,6 +69,9 @@ public class BoardView extends JPanel {
         }
     }
 
+    /**
+     * creates the colors used in the display of the board.
+     */
     private void createColors(){
         colors.put(Color.magenta, "Purple");
         colors.put(Color.red, "Red");
@@ -61,6 +82,10 @@ public class BoardView extends JPanel {
         colors.put( Color.white, "White");
     }
 
+    /**
+     * Initializes the view of the board in the initialization phase
+     * @param numPlayers number of players playing the game
+     */
     public void InitializeBoard(int numPlayers) {
         for (ContinentView cv : continentViews) {
             cv.InitializePlayerCountries();
@@ -68,14 +93,28 @@ public class BoardView extends JPanel {
         initializePlayerInformationPanel(numPlayers);
     }
 
+    /**
+     * displays the player information containing the color for each player
+     * @param numPlayers number of players playing the game
+     */
     public void initializePlayerInformationPanel(int numPlayers){
         for(int i=0; i<numPlayers; i++){
             playerColorsPanel.add(new JLabel("Player"+(i+1)+" : "+ colors.get(colorArray[i])));
         }
     }
 
+    /**
+     * getter for the colors used in the display of the board
+     * @return
+     */
     public Color[] getColors(){ return colorArray;}
 
+    /**
+     * creates the buttons used to play the game, including the attack button,
+     * @param game model that manipulates the logic of the fame
+     * @param player with the current turn
+     * @return panel to be displayed in the view
+     */
     public JPanel inGamePanel(Game game, Player player) {
         inGamePanel = new JPanel();
 
@@ -94,10 +133,19 @@ public class BoardView extends JPanel {
         return inGamePanel;
     }
 
+    /**
+     * adds the game panel to the view
+     * @param game model that manipulates the logic of the game
+     * @param player with the current turn
+     */
     public void addInGamePanel(Game game, Player player) {
         this.add(inGamePanel(game, player));
     }
 
+    /**
+     * highlights the country that the player chooses to attack from
+     * @param country the player wants to attack from
+     */
     public void highlightAttackerCountry(Country country){
         for(ContinentView cv:continentViews){
             if(cv.hasCountryButton(country) != null){
@@ -107,6 +155,11 @@ public class BoardView extends JPanel {
         }
     }
 
+    /**
+     * highlight the countries adjacent to the country the player wants to
+     * attack from
+     * @param country the player wants to attack from
+     */
     public void highlightAdjacentCountries(Country country) {
         for (Country adjacentCountry : country.getAdjacentCountries()) {
             for (ContinentView cv : continentViews) {
@@ -117,6 +170,11 @@ public class BoardView extends JPanel {
         }
     }
 
+    /**
+     * remove the highlight from the attacker country after the attack is complete
+     * ot when the country is no longer selected to be the attacker country
+     * @param country to remove the highlight country
+     */
     public void removeHighlightCountry(Country country){
         for(ContinentView cv:continentViews){
             if(cv.hasCountryButton(country) != null){
@@ -126,6 +184,10 @@ public class BoardView extends JPanel {
         }
     }
 
+    /**
+     * remove the highlight from the countries adjacent to the country that will not be used to attack
+     * @param country that the adjacent countries highlight will be removed
+     */
     public void removeHighLightAdjacentCountry(Country country){
         for(Country adjacentCountry: country.getAdjacentCountries()){
             for (ContinentView cv : continentViews){
@@ -136,12 +198,21 @@ public class BoardView extends JPanel {
         }
     }
 
+    /**
+     * remove the highlight from all the highlighted buttons after end turn
+     */
     public void removeHighlightedButtons() {
         for(ContinentView cv:continentViews){
             cv.removeSelectedButtons();
         }
     }
 
+    /**
+     * update the ownership of the countries and number of armies on each country after the
+     * attack is complete
+     * @param attackerCountry
+     * @param defenderCountry
+     */
     public void TransferOwnership(Country attackerCountry, Country defenderCountry){
         JButton attacker=new JButton();
         JButton defender=new JButton();
@@ -160,9 +231,10 @@ public class BoardView extends JPanel {
 
     }
 
-    public void updateArmy(){
-
-    }
+    /**
+     * get the attack button used during the attack phase
+     * @return attack button
+     */
     public JButton getAttackButton(){
         return attackButton;
     }

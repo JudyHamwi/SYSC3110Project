@@ -12,6 +12,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Risk View Frame that is the display of the Risk Game. It contains the board of the game
+ * and necessary tools for an efficient display and use of the game.
+ * @version 1.0
+ * @author Sarah Jaber
+ * @author Walid Baitul Islam
+ * @author Judy Hamwi
+ * @author Diana Miraflor
+ */
 public class RiskViewFrame extends JFrame implements RiskView {
 
     public static final int BOARD_HEIGHT = 1100 ;
@@ -34,6 +43,9 @@ public class RiskViewFrame extends JFrame implements RiskView {
     private BoardView boardView;
     private Country selectedAttackButton;
 
+    /**
+     * creates the View of the Risk Game
+     */
     public RiskViewFrame() {
         super("RISK Game");
         gameModel = new Game();
@@ -73,6 +85,10 @@ public class RiskViewFrame extends JFrame implements RiskView {
         RiskViewFrame view= new RiskViewFrame();
     }
 
+    /**
+     * Creates the Initial page of the Risk Game
+     * @return panel to be added to the main frame of the Risk Game
+     */
     public JPanel startPanel(){
         this.mainMenuPanel = new JPanel(new BorderLayout());
         try {
@@ -86,7 +102,9 @@ public class RiskViewFrame extends JFrame implements RiskView {
         return mainMenuPanel;
     }
 
-
+    /**
+     * Creates the list of number of players the users can choose from to play the game
+     */
     public void setNumberOfPlayersMenu(){
         this.numberOfPlayers = new JMenu("Players");
         for(int i = 2; i <= MAX_NUM_PLAYERS; i++){
@@ -97,7 +115,12 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menuBar.add(numberOfPlayers);
     }
 
-
+    /**
+     * Updates the view when the player wants to play a new game by displaying the board and
+     * allowing the user to choose the number of players.
+     * @param game model that deals with the logic of the game
+     * @param board that contains th continents and countries of the game
+     */
     @Override
     public void handleNewGame(Game game, Board board) {
         this.remove(mainMenuPanel);
@@ -110,6 +133,13 @@ public class RiskViewFrame extends JFrame implements RiskView {
         menu.add(helpMenuItem);
     }
 
+    /**
+     * Updates the view based on the initialization of the game
+     * @param game model that deals with the logic of the game
+     * @param state current state of the game
+     * @param player with the current turn
+     * @param numPlayers number of players playing the game
+     */
     public void handleInitialization(Game game, GameState state, Player player, int numPlayers){
         gameStatus.setText(state.toString());
         currentPlayer.setText(player.toString());
@@ -118,21 +148,40 @@ public class RiskViewFrame extends JFrame implements RiskView {
         this.numberOfPlayers.setVisible(false);
     }
 
+    /**
+     * updates the view when the player ends their turn
+     * @param game model that deals with the logic of the game
+     * @param player with the current turn
+     */
     public void handleEndTurn(Game game, Player player) {
         currentPlayer.setText(player.toString());
         JOptionPane.showMessageDialog(this, player.toString() + ", it is your turn!");
         boardView.removeHighlightedButtons();
     }
 
+    /**
+     * updats the view when the player asks for help
+     * @param game model that deals with the logic of the game
+     * @param string help information
+     */
     public void handlePrintHelp(Game game, String string) {
         JOptionPane.showMessageDialog(this, string);
     }
 
+    /**
+     * updates the view when the player chooses an invalid country to attack from
+     * @param game model that deals with the logic of the game
+     */
     @Override
     public void handleCanNotAttackFrom(Game game) {
         JOptionPane.showMessageDialog(this,"Can not attack from this Country");
     }
 
+    /**
+     * updates the view when the player chooses a valid country to attack from
+     * @param game model that deals with the logic of the game
+     * @param country that the player wants to attack from
+     */
     @Override
     public void handleCanAttackFrom(Game game, Country country) {
         if(selectedAttackButton!=null) {
@@ -143,15 +192,29 @@ public class RiskViewFrame extends JFrame implements RiskView {
         boardView.highlightAttackerCountry(country);
     }
 
+    /**
+     * updates the view when its time for the user to choose to attack a country
+     */
     public void handleNewAttack(){
         boardView.getAttackButton().setEnabled(false);
     }
 
+    /**
+     * get the board view
+     * @return
+     */
     public BoardView getBoardView(){
         return boardView;
     }
 
 
+    /**
+     * update the view when the attack phase is complete
+     * @param game model that deals with the logic of the game
+     * @param attackerCountry country that the player attacked from
+     * @param defenderCountry country that the player attacks
+     * @param attackSuccess true of the player conquered the country and false otherwise
+     */
     @Override
     public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess){
         if(attackSuccess) {

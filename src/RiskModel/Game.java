@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * The RISK RISKModel.Game that initializes the game, manages the Attack Phase, and keeps track
  * of the turn of each player and winning player
- * @version 1.0
+ * @version 2.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
@@ -26,7 +26,6 @@ public class Game {
     private static LinkedList<Player> players;
     private int playerArmy;
     private int numPlayers;
-    //private Parser parser;
     private Player currentPlayer;
     private ArrayList<RiskView> riskViews;
     private Country attackCountry;
@@ -37,7 +36,6 @@ public class Game {
     public Game() {
         players = new LinkedList<Player>();
         board = new Board();
-        //parser = new Parser();
         riskViews=new ArrayList<>();
     }
 
@@ -365,6 +363,9 @@ public class Game {
         return numPlayers;
     }
 
+    /**
+     * Prints the help information when the player requests help
+     */
     public void printHelp() {
         String pH;
         pH = ("Aim to conquer enemy territories!" + "\n" + "\n"+ "In game, you have choices to attack countries, end your turn, and roll your dice."
@@ -449,6 +450,10 @@ public class Game {
         System.out.println(board);
     }
 
+    /**
+     * adds the view to the list of viewers of the game model
+     * @param rv view of the model
+     */
     public void addRiskView(RiskView rv){
         riskViews.add(rv);
         for(RiskView rv2:riskViews) {
@@ -456,6 +461,10 @@ public class Game {
         }
     }
 
+    /**
+     * removes a view from the viewers of the game model
+     * @param rv view to be removed from the viewers of the model
+     */
     public void removeRiskView(RiskViewFrame rv){
         riskViews.remove(rv);
     }
@@ -465,6 +474,11 @@ public class Game {
         game.play();
     }
 
+    /**
+     * checks of the attacker country chosen by the player is a valid country
+     * that the play can attack from, following the rules of the attack
+     * @param attackCountry that the player wants to attack from in the attack phase
+     */
     public void checkAttackingCountry(Country attackCountry){
         System.out.println("2");
         if(currentPlayer.canAttackFrom(attackCountry)){

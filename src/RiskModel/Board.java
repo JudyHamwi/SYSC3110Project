@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *The RISKModel.Board of the RISK RISKModel.Game.
- * @version 1.0
+ * @version 2.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
@@ -141,6 +141,10 @@ public class Board {
 
     }
 
+    /**
+     * create North America
+     * @param NorthAmerica continent
+     */
     public void createContinentNorthAmerica(Continent NorthAmerica){
         Country Alaska=new Country("Alaska");
         this.addCountry(Alaska);
@@ -173,6 +177,10 @@ public class Board {
 
     }
 
+    /**
+     * create South America
+     * @param SouthAmerica continent
+     */
     public void createContinentSouthAmerica(Continent SouthAmerica){
         Country Argentina=new Country("Argentina");
         this.addCountry(Argentina);
@@ -190,6 +198,10 @@ public class Board {
 
     }
 
+    /**
+     * create Europe
+     * @param Europe continent
+     */
     public void createContinentEurope(Continent Europe){
         Country GreatBritain=new Country("GreatBritain");
         this.addCountry(GreatBritain);
@@ -215,6 +227,10 @@ public class Board {
 
     }
 
+    /**
+     * create Africa
+     * @param Africa continent
+     */
     public void createContinentAfrica(Continent Africa){
         Country Congo=new Country("Congo");
         this.addCountry(Congo);
@@ -237,6 +253,10 @@ public class Board {
 
     }
 
+    /**
+     * create Asia
+     * @param Asia continent
+     */
     public void createContinentAsia(Continent Asia){
         Country Afghanistan=new Country("Afghanistan");
         this.addCountry(Afghanistan);
@@ -277,6 +297,10 @@ public class Board {
 
     }
 
+    /**
+     * create Australia
+     * @param Australia continent
+     */
     public void createContinentAustralia(Continent Australia){
         Country EasternAustralia=new Country("EasternAustralia");
         this.addCountry(EasternAustralia);
@@ -292,6 +316,10 @@ public class Board {
         Australia.addCountry(WesternAustralia);
     }
 
+    /**
+     * Initialize adjacent counntries in North America
+     * @param NorthAmerica
+     */
     public void addNorthAmericaAdjacentCountries(Continent NorthAmerica){
         getCountry("Alaska").setAdjacentCountry(getCountry("NorthwestTerritory"));
         getCountry("Alaska").setAdjacentCountry(getCountry("Alberta"));
@@ -329,6 +357,10 @@ public class Board {
         getCountry("WesternUnitedStates").setAdjacentCountry(getCountry("EasternUnitedStates"));
 
     }
+    /**
+     * Initialize adjacent counntries in South America
+     * @param SouthAmerica
+     */
     public void addSouthAmericaAdjacentCountries(Continent SouthAmerica){
         getCountry("Argentina").setAdjacentCountry(getCountry("Peru"));
         getCountry("Argentina").setAdjacentCountry(getCountry("Brazil"));
@@ -344,6 +376,11 @@ public class Board {
         getCountry("Venezuela").setAdjacentCountry(getCountry("Brazil"));
 
     }
+
+    /**
+     * Initialize adjacent counntries in Europe
+     * @param Europe
+     */
     public void addEuropeAdjacentCountries(Continent Europe){
         getCountry("GreatBritain").setAdjacentCountry(getCountry("Iceland"));
         getCountry("GreatBritain").setAdjacentCountry(getCountry("NorthernEurope"));
@@ -379,6 +416,10 @@ public class Board {
 
     }
 
+    /**
+     * Initialize adjacent counntries in Africa
+     * @param Africa
+     */
     public void addAfricaAdjacentCountries(Continent Africa){
         getCountry("Congo").setAdjacentCountry(getCountry("SouthAfrica"));
         getCountry("Congo").setAdjacentCountry(getCountry("EastAfrica"));
@@ -407,6 +448,10 @@ public class Board {
 
     }
 
+    /**
+     * Initialize adjacent counntries in Asia
+     * @param Asia
+     */
     public void addAsiaAdjacentCountries(Continent Asia){
         getCountry("Afghanistan").setAdjacentCountry(getCountry("Ukraine"));
         getCountry("Afghanistan").setAdjacentCountry(getCountry("MiddleEast"));
@@ -462,6 +507,10 @@ public class Board {
 
     }
 
+    /**
+     * Initialize adjacent counntries in Australia
+     * @param Australia
+     */
     public void addAustraliaAdjacentCountries(Continent Australia){
         getCountry("EasternAustralia").setAdjacentCountry(getCountry("WesternAustralia"));
         getCountry("EasternAustralia").setAdjacentCountry(getCountry("NewGuinea"));

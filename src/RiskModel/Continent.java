@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * RISKModel.Continent in the RISKModel.Board of RISK RISKModel.Game.
- * @version 1.0
+ * @version 2.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
@@ -17,7 +17,6 @@ public class Continent {
 
     /**
      * Contrusctor of RISKModel.Continent that creates a new RISKModel.Continent
-     *
      * @param name of the RISKModel.Continent
      */
     public Continent(String name) {
@@ -33,6 +32,10 @@ public class Continent {
         countries.add(country);
     }
 
+    /**
+     * getter for the countries in the continent
+     * @return LikedList<Conuntry> List of countries in the continent
+     */
     public LinkedList<Country> getContinentCountries() {
         return countries;
     }

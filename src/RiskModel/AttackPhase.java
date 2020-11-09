@@ -22,7 +22,20 @@ public class AttackPhase {
     private Dice dice ;
     private List<Integer> attackerDiceValues;
     private List<Integer> defenderDiceValues;
+
+    public void setAttackerArmies(int attackerArmies) {
+        this.attackerArmies = attackerArmies;
+    }
+
     private int attackerArmies;
+
+    public void setAttackerDiceValues(List<Integer> attackerDiceValues) {
+        this.attackerDiceValues = attackerDiceValues;
+    }
+
+    public void setDefenderDiceValues(List<Integer> defenderDiceValues) {
+        this.defenderDiceValues = defenderDiceValues;
+    }
 
     /**
      *  Constructor of Attack Phase initalizes the fields.

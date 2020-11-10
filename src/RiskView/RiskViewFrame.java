@@ -23,7 +23,7 @@ public class RiskViewFrame extends JFrame implements RiskView {
     public static final int BOARD_HEIGHT = 1100 ;
     public static final int BOARD_WIDTH= 800;
     private static final int MAX_NUM_PLAYERS = 6;
-    private static final File BG_IMAGE = new File("images/background.jpg");
+    private static final File BG_IMAGE = new File("src/images/background.jpg");
 
     private JLabel background;
     private JPanel mainMenuPanel;

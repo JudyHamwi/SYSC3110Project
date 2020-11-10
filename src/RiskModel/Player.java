@@ -163,5 +163,8 @@ public class Player {
         }
         return false;
     }
+    public void setPlayerCounter(int reset){
+        playerCounter=reset;
+    }
 
 }

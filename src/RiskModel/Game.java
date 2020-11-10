@@ -41,6 +41,7 @@ public class Game {
         riskViews = new ArrayList<>();
         this.gameState = GameState.INITIALIZING;
         this.armiesForPlayers = new HashMap<>();
+        currentPlayer=new Player();
         setArmiesForPlayers();
     }
 

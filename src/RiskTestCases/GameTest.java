@@ -23,7 +23,8 @@ public class GameTest {
         game = new Game();
         attackingCountry = new Country("Alaska");
         defendingCountry = new Country("Alberta");
-        numPlayers=2;
+        numPlayers = 2;
+        game.currentPlayer.setPlayerCounter(1);
 
     }
 
@@ -63,8 +64,10 @@ public class GameTest {
         assertEquals(2,numPlayers);
         assertEquals(21, game.currentPlayer.getTotalNumberOfCountries());
         assertEquals(GameState.IN_PROGRESS, game.getState());
-        //assertEquals(1, game.currentPlayer.getPlayerID());
-        //assertEquals(50, game.currentPlayer.getPlayerArmy());
+        assertEquals(game.players.get(0), game.currentPlayer);
+        assertEquals(1, game.currentPlayer.getPlayerID());
+        game.initialArmyForPlayer();
+        assertEquals(50, game.currentPlayer.getPlayerArmy());
     }
 
     @Test
@@ -73,7 +76,7 @@ public class GameTest {
         game.addPlayers(numPlayers);
         game.players.get(0).addCountry(attackingCountry);
         game.players.get(0).addCountry(defendingCountry);
-        //assertEquals(2,game.removePlayer().getPlayerID());
+        assertEquals(2,game.removePlayer().getPlayerID());
     }
 
     @Test
@@ -81,9 +84,9 @@ public class GameTest {
         game.setNumberOfPlayers(numPlayers);
         game.theInitialState();
         game.endTurn();
-        //assertEquals(2,game.currentPlayer.getPlayerID());
+        assertEquals(2,game.currentPlayer.getPlayerID());
         game.endTurn();
-        //assertEquals(1,game.currentPlayer.getPlayerID());
+        assertEquals(1,game.currentPlayer.getPlayerID());
 
     }
 

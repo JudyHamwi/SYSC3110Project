@@ -99,10 +99,10 @@ public class Board {
 
         //add continents to board
         this.addContinent(NorthAmerica);
-        this.addContinent(SouthAmerica);
         this.addContinent(Europe);
-        this.addContinent(Africa);
         this.addContinent(Asia);
+        this.addContinent(SouthAmerica);
+        this.addContinent(Africa);
         this.addContinent(Australia);
 
         //create the countries in North America

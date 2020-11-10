@@ -275,12 +275,11 @@ public class Game {
      */
     public void printHelp() {
         String pH;
-        pH = ("Aim to conquer enemy territories!" + "\n" + "\n" + "In game, you have choices to attack countries, end your turn, and roll your dice."
-                + "\n" + "To attack, press the attack button followed by a country you " +
-                "want to attack from and then a country you want to attack." + "\n" + "Press the roll dice button to determine" +
+        pH = ("Aim to conquer enemy territories!" + "\n" + "\n" + "In game, you have choices to attack countries and end your turn."
+                + "\n" + "To attack, press the country you want to attack with, then press on the attack button followed by a country you wish to attack " +
+                 "\n" + "Press the attack button to determine" +
                 " if you can successfully attack your enemy's territory." + "\n" + "Pass your turn to another player by pressing" +
                 " the end turn button." + "\n" + "\n" + "GOOD LUCK!");
-        // lol idk change "good luck"
 
         for (RiskView rv : riskViews) {
             rv.handlePrintHelp(this, pH);

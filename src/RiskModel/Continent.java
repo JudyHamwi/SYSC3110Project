@@ -1,8 +1,10 @@
+package RiskModel;
+
 import java.util.*;
 
 /**
- * Continent in the Board of RISK Game.
- * @version 1.0
+ * RISKModel.Continent in the RISKModel.Board of RISK RISKModel.Game.
+ * @version 2.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
@@ -10,13 +12,12 @@ import java.util.*;
  */
 public class Continent {
     private String continentName;
-    private List<Country> countries;
+    private LinkedList<Country> countries;
     private Player currentOwner;
 
     /**
-     * Contrusctor of Continent that creates a new Continent
-     *
-     * @param name of the Continent
+     * Contrusctor of RISKModel.Continent that creates a new RISKModel.Continent
+     * @param name of the RISKModel.Continent
      */
     public Continent(String name) {
         continentName = name;
@@ -31,7 +32,11 @@ public class Continent {
         countries.add(country);
     }
 
-    public List<Country> getContinentCountries() {
+    /**
+     * getter for the countries in the continent
+     * @return LikedList<Conuntry> List of countries in the continent
+     */
+    public LinkedList<Country> getContinentCountries() {
         return countries;
     }
 
@@ -47,6 +52,14 @@ public class Continent {
      * Text representation of the continent.
      * @return text representation of the continent
      */
+    public Country getCountryFromContinent(String name){
+        for (Country c:countries){
+            if(c.getCountryName().equals(name)){
+                return c;
+            }
+        }
+        return null;
+    }
     public String toString() {
         String continent = continentName + ": \n";
         for (Country c : countries) {

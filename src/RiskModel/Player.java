@@ -1,10 +1,12 @@
+package RiskModel;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Player that plays in the Game.
- * @version 1.0
+ * RISKModel.Player that plays in the RISKModel.Game.
+ * @version 2.0
  * @author Sarah Jaber
  * @author Walid Baitul Islam
  * @author Judy Hamwi
@@ -18,13 +20,12 @@ public class Player {
     private int placeArmy;
 
     /**
-     * Player that plays in the Game
+     * RISKModel.Player that plays in the RISKModel.Game
      */
     public Player(){
         this.PLAYER_ID = this.getNextPlayerId();
         this.countriesOwned = new ArrayList<>();
         this.placeArmy=0;
-
     }
 
     /**
@@ -36,7 +37,7 @@ public class Player {
     }
 
     /**
-     * Instantiates the ID of the next player to be added to the Game
+     * Instantiates the ID of the next player to be added to the RISKModel.Game
      * @return ID of the next player to be added in the game
      */
     public static int getNextPlayerId() {
@@ -47,7 +48,7 @@ public class Player {
      * Returns the id of the player
      * @return the player's ID
      */
-    public int getplayerID(){
+    public int getPlayerID(){
         return this.PLAYER_ID;
     }
 
@@ -100,22 +101,32 @@ public class Player {
      * @return true of the player can do the attack and false otherwise
      */
     public boolean canAttack(Country attackFrom, Country attackTo){
-        if(!(countriesOwned.contains(attackFrom))){
-            System.out.println("You do not own this country");
-            return false;
-        }
-        else if(attackFrom.getCurrentOwner().equals(attackTo.getCurrentOwner())) {
+        if(attackFrom.getCurrentOwner().equals(attackTo.getCurrentOwner())) {
             System.out.println("You can not attack your own country");
             return false;
         } else if(!attackFrom.isAdjacent(attackTo)) {
             System.out.println("The countries are not adjacent");
             return false;
         }
-        else if (attackFrom.getNumberOfArmies()==1){
+        else{
+            return true;
+        }
+    }
+
+    /**
+     * checks if the country the player wants to attack from can be used, following the
+     * rules of the game
+     * @param attackFrom country that the player wants to attack from
+     * @return true of the player can use this country to attack
+     */
+    public boolean canAttackFrom(Country attackFrom){
+        if(!(countriesOwned.contains(attackFrom))){
+            System.out.println("You do not own this country");
+            return false;
+        }else if (attackFrom.getNumberOfArmies()==1){
             System.out.println("There are not enough armies to attack");
             return false;
-        }
-        else{
+        }else {
             return true;
         }
     }
@@ -125,7 +136,7 @@ public class Player {
      * @return String representation of the player
      */
     public String toString(){
-        return "Player" + getplayerID();
+        return "Player" + getPlayerID();
     }
 
     @Override
@@ -142,6 +153,18 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects.hash(PLAYER_ID, countriesOwned, placeArmy);
+    }
+
+    public boolean playerOwnsCountry(Country country){
+        for(Country c:countriesOwned){
+            if(c.equals(country)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void setPlayerCounter(int reset){
+        playerCounter=reset;
     }
 
 }

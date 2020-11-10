@@ -1,3 +1,5 @@
+package RiskModel;
+
 import java.util.Random;
 
 /**
@@ -15,7 +17,7 @@ public class Die {
 
 
     /**
-     * creates a new Die
+     * creates a new RISKModel.Die
      */
     public Die(){
         this.random = new Random();
@@ -24,7 +26,7 @@ public class Die {
 
     /**
      * retrieve the value of the last roll
-     * @return the current face value of the Die object
+     * @return the current face value of the RISKModel.Die object
      */
     public int getFaceValue(){
         return this.faceValue;

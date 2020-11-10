@@ -1,8 +1,10 @@
+package RiskModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *One of the Phases of the Game, the Attack Phase. This Phase is entered when a player attacks a Country.
+ *One of the Phases of the RISKModel.Game, the Attack Phase. This Phase is entered when a player attacks a RISKModel.Country.
  * @version 1.0
  * @author Sarah Jaber
  * @author Walid Baitul
@@ -13,21 +15,34 @@ import java.util.List;
 public class AttackPhase {
 
 
-    private  Player player;
-    private  Country attackerCountry;
-    private  Country defenderCountry;
+    private Player player;
+    private Country attackerCountry;
+    private Country defenderCountry;
     private Dice dice ;
     private List<Integer> attackerDiceValues;
     private List<Integer> defenderDiceValues;
+
+    public void setAttackerArmies(int attackerArmies) {
+        this.attackerArmies = attackerArmies;
+    }
+
     private int attackerArmies;
 
+    public void setAttackerDiceValues(List<Integer> attackerDiceValues) {
+        this.attackerDiceValues = attackerDiceValues;
+    }
+
+    public void setDefenderDiceValues(List<Integer> defenderDiceValues) {
+        this.defenderDiceValues = defenderDiceValues;
+    }
+
     /**
-     *  Constructor of Attack Phase initalizes the fields.
+     *  Constructor of Attack Phase initializes the fields.
      * @param player initiating the attack
      * @param attackerCountry contains the armies that want to attack
      * @param defenderCountry country that contains armies to defend the attack
      */
-    public AttackPhase(Player player,  Country attackerCountry, Country defenderCountry){
+    public AttackPhase(Player player, Country attackerCountry, Country defenderCountry){
         this.player=player;
         this.attackerDiceValues = new ArrayList<>();
         this.defenderDiceValues = new ArrayList<>();
@@ -36,7 +51,7 @@ public class AttackPhase {
     }
 
     /**
-     *  Calculate the number of Dice that need to be rolled for the Attack. The number of dice
+     *  Calculate the number of RISKModel.Dice that need to be rolled for the Attack. The number of dice
      *  used to attack is equal to the number of armies attacking. The number is calculated
      *  with the maximum number of armies atacking.
      * @return number of dice rolled for the attack
@@ -58,16 +73,15 @@ public class AttackPhase {
      * else the defender can roll two dice
      * @return number of dice rolled by the defender
      */
-    int numberOfDiceForDefender(){
+    public int numberOfDiceForDefender(){
         if(defenderCountry.getNumberOfArmies()==1) {
             return 1;
         }
         return 2;
-
     }
 
     /**
-     * Roll of Dice of th Attacker
+     * Roll of RISKModel.Dice of th Attacker
      */
     public void rollForAttacker(){
         dice=new Dice(numberOfDiceForAttacker());
@@ -76,7 +90,7 @@ public class AttackPhase {
     }
 
     /**
-     * Roll of Dice of the Defender
+     * Roll of RISKModel.Dice of the Defender
      */
     public void rollForDefender(){
         dice=new Dice(numberOfDiceForDefender());
@@ -85,7 +99,7 @@ public class AttackPhase {
     }
 
     /**
-     * Compare the Roll of Dice of the Attacker and Defender. Remove armies of the losing country.
+     * Compare the Roll of RISKModel.Dice of the Attacker and Defender. Remove armies of the losing country.
      */
     public void compareDice(){
         if (attackerDiceValues.get(0) > defenderDiceValues.get(0)){
@@ -114,10 +128,10 @@ public class AttackPhase {
     }
 
     /**
-     * Applies the attack phase of the Game. It implements the player attacking the defender, and
+     * Applies the attack phase of the RISKModel.Game. It implements the player attacking the defender, and
      * makes the decision of the attacker army conquering the defender armu.
      */
-    public void attack() {
+    public boolean attack() {
         attackerArmies=(attackerCountry.getNumberOfArmies())-1;
         System.out.println(player + " has attacked " + defenderCountry + " with " + attackerArmies + " armies.");
         System.out.println(defenderCountry + " is defending with " + defenderCountry.getNumberOfArmies() + " armies.");
@@ -134,9 +148,14 @@ public class AttackPhase {
             numberOfArmiesToMove();
             System.out.println(player + " has conquered " + defenderCountry + " and is occupied by " + attackerArmies
                                         + " armies.");
+            return true;
         } else {
             System.out.println(defenderCountry + " was not conquered and has " + defenderCountry.getNumberOfArmies()
                                         + " armies.");
+            return false;
         }
     }
+
+
+
 }

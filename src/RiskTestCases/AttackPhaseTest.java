@@ -37,21 +37,21 @@ public class AttackPhaseTest {
     }
 
     @Test
-    public void numberOfDiceForAttacker() {
+    public void testnumberOfDiceForAttacker() {
         int attackerArmies = 1;
         attackPhase.setAttackerArmies(attackerArmies);
         assertEquals(1,attackPhase.numberOfDiceForAttacker());
     }
 
     @Test
-    public void numberOfDiceForDefender() {
+    public void testnumberOfDiceForDefender() {
         int attackerArmies = 4;
         attackPhase.setAttackerArmies(attackerArmies);
         assertEquals(2,attackPhase.numberOfDiceForDefender());
     }
 
     @Test
-    public void compareDice() {
+    public void testcompareDice() {
         attackerDiceValues.add(6);
         attackerDiceValues.add(5);
         defenderDiceValues.add(4);
@@ -63,7 +63,7 @@ public class AttackPhaseTest {
     }
 
     @Test
-    public void attack() {
+    public void testattack() {
         attackerDiceValues.add(6);
         attackerDiceValues.add(5);
         defenderDiceValues.add(4);

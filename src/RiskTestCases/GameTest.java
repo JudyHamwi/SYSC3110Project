@@ -1,6 +1,7 @@
 package RiskTestCases;
 
 import RiskModel.*;
+import RiskView.RiskView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,22 +10,14 @@ import java.util.LinkedList;
 import static org.junit.Assert.*;
 
 public class GameTest {
-    Game game;
-    Board board;
-    GameState gameState;
-    LinkedList<Player> players;
-    int numPlayers = 2;
-    Player currentPlayer;
-    Country attackingCountry;
-    Country defendingCountry;
-
+    private Game game;
+    private Country attackingCountry;
+    private Country defendingCountry;
+    private int numPlayers;
     @Before
     public void setUp() throws Exception {
         game = new Game();
-        board = game.getBoard();
-        players = new LinkedList<>();
-        currentPlayer = new Player();
-        game.initialize(numPlayers);
+        numPlayers=2;
         attackingCountry = new Country("Alaska");
         defendingCountry = new Country("Alberta");
     }
@@ -42,52 +35,65 @@ public class GameTest {
 
     @Test
     public void testAddPlayers(){
+        game.setNumberOfPlayers(2);
+        game.addPlayers(2);
+        assertEquals(2, game.getNumPlayers());
+        assertEquals(2, game.players.size());
+    }
+
+    @Test
+    public void testcheckWinner(){
+        game.setNumberOfPlayers(numPlayers);
         game.addPlayers(numPlayers);
-        assertEquals(players.size(), game.getNumPlayers());
+        game.players.get(0).addCountry(attackingCountry);
+        game.players.get(0).addCountry(defendingCountry);
+        Player p= game.removePlayer();
+        assertTrue(game.checkWinner());
     }
 
     @Test
-    public void attackPhase() {
-        AttackPhase playerAttack = new AttackPhase(currentPlayer, attackingCountry,defendingCountry);
-        currentPlayer.addPlayerArmy(3);
-        players.add(currentPlayer);
-        game.attackPhase(defendingCountry);
+    public void testtheInitialState() {
+        game.setNumberOfPlayers(numPlayers);
+        game.theInitialState();
+        assertEquals(2,numPlayers);
+        assertEquals(21, game.currentPlayer.getTotalNumberOfCountries());
+        assertEquals(GameState.IN_PROGRESS, game.getState());
+        assertEquals(1, game.currentPlayer.getPlayerID());
+        assertEquals(50, game.currentPlayer.getPlayerArmy());
     }
 
     @Test
-    public void theInitialState() {
+    public void testremovePlayer(){
+        game.setNumberOfPlayers(numPlayers);
+        game.addPlayers(numPlayers);
+        game.players.get(0).addCountry(attackingCountry);
+        game.players.get(0).addCountry(defendingCountry);
+        assertEquals(2,game.removePlayer().getPlayerID());
+    }
+
+    @Test
+    public void testendTurn() {
+        game.setNumberOfPlayers(numPlayers);
+        game.theInitialState();
+        game.endTurn();
+        assertEquals(2,game.currentPlayer.getPlayerID());
+        game.endTurn();
+        assertEquals(1,game.currentPlayer.getPlayerID());
 
     }
 
     @Test
-    public void setNumberOfPlayers() {
-    }
-
-    @Test
-    public void play() {
-    }
-
-    @Test
-    public void endTurn() {
-    }
-
-    @Test
-    public void getNumPlayers() {
+    public void testgetNumPlayers() {
+        game.setNumberOfPlayers(numPlayers);
+        assertEquals(2,game.getNumPlayers());
     }
 
     @org.junit.Test
-    public void attack() {
-    }
-
-    @org.junit.Test
-    public void addRiskView() {
-    }
-
-    @org.junit.Test
-    public void removeRiskView() {
-    }
-
-    @org.junit.Test
-    public void checkAttackingCountry() {
+    public void testcheckAttackingCountry() {
+        game.setNumberOfPlayers(numPlayers);
+        game.theInitialState();
+        game.currentPlayer.addCountry(attackingCountry);
+        game.checkAttackingCountry(attackingCountry);
+        assertEquals("Alaska", game.getAttackingCountry().getCountryName());
     }
 }

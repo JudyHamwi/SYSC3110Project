@@ -34,18 +34,18 @@ public class PlayerTest {
     }
 
     @Test
-    public void getNextPlayerId() {
+    public void testgetNextPlayerId() {
         int playerID = 1;
         assertEquals(2,player.getNextPlayerId());
     }
 
     @Test
-    public void getplayerID() {
+    public void testgetplayerID() {
         assertEquals(1, player.getPlayerID());
     }
 
     @Test
-    public void addPlayerArmy() {
+    public void testaddPlayerArmy() {
         int army = 4;
         player.addPlayerArmy(army);
         assertEquals(4,player.getPlayerArmy());
@@ -59,13 +59,13 @@ public class PlayerTest {
     }
 
     @Test
-    public void addCountry() {
+    public void testaddCountry() {
         player.addCountry(new Country("Alaska"));
         assertEquals(1,player.getTotalNumberOfCountries());
     }
 
     @Test
-    public void removeCountry() {
+    public void testremoveCountry() {
         Country madagascar = new Country("Madagascar");
         player.addCountry(madagascar);
         player.addCountry(new Country("SouthAfrica"));
@@ -75,7 +75,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void canAttack() {
+    public void testcanAttack() {
         Player player2 = new Player();
         Country attackFrom = new Country("Alaska");
         Country attackTo = new Country("India");
@@ -85,7 +85,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void canAttackFrom() {
+    public void testcanAttackFrom() {
         Country china = new Country("China");
         player.addCountry(china);
         player.addPlayerArmy(4);

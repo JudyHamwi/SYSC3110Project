@@ -24,13 +24,13 @@ public class Game {
     private Board board;
     private GameState gameState;
     private boolean finished;
-    private static LinkedList<Player> players;
     private int playerArmy;
+    public  LinkedList<Player> players;
     private int numPlayers;
-    private Player currentPlayer;
+    public Player currentPlayer;
     private ArrayList<RiskView> riskViews;
     private Country attackCountry;
-    private Map<Integer, Integer> armiesForPlayers;
+    private HashMap<Integer, Integer> armiesForPlayers;
 
     /**
      * Starts a new RISKModel.Game
@@ -40,7 +40,7 @@ public class Game {
         board = new Board();
         riskViews = new ArrayList<>();
         this.gameState = GameState.INITIALIZING;
-        this.armiesForPlayers = new HashMap();
+        this.armiesForPlayers = new HashMap<>();
         setArmiesForPlayers();
     }
 
@@ -50,12 +50,11 @@ public class Game {
      * @param numberOfPlayers that will play the game
      */
     public void initialize(int numberOfPlayers) {
-        //this.gameState = GameState.INITIALIZING;
         addPlayers(numberOfPlayers);
+        currentPlayer = players.getFirst();
         initialArmyForPlayer();
         distributeCountries();
         distributeRandomArmyToCountry();
-        currentPlayer = players.getFirst();
     }
 
     /**
@@ -100,6 +99,9 @@ public class Game {
         }
     }
 
+    public void setNumberOfPlayers(int numberOfPlayers){
+        numPlayers=numberOfPlayers;
+    }
     /**
      * sets the number of initial armies according to the number of players
      */
@@ -114,7 +116,7 @@ public class Game {
     /**
      * Calculates the number of armies that will be assigned to every player
      */
-    private void initialArmyForPlayer() {
+    public void initialArmyForPlayer() {
         playerArmy = armiesForPlayers.get(players.size());
         for (Player p : players) {
             p.addPlayerArmy(playerArmy);
@@ -159,10 +161,10 @@ public class Game {
         if (currentPlayer.canAttack(attackCountry, defenderCountry)) {
             AttackPhase playerAttack = new AttackPhase(currentPlayer, attackCountry, defenderCountry);
             Boolean attackSuccess = playerAttack.attack();
-            removePlayer();
-            checkWinner();
+            Player playerRemoved=removePlayer();
+            boolean winner = checkWinner();
             for (RiskView rv : riskViews) {
-                rv.handleAttackPhase(this, attackCountry, defenderCountry, attackSuccess);
+                rv.handleAttackPhase(this, attackCountry, defenderCountry, attackSuccess, winner, playerRemoved);
             }
         } else {
             for (RiskView rv : riskViews) {
@@ -174,59 +176,37 @@ public class Game {
     /**
      * Removes a player from the game if lost all their armies
      */
-    private void removePlayer() {
+    public Player removePlayer() {
         for (Player p : players) {
             if (p.getCountriesOwned().size() == 0) {
                 players.remove(p);
                 System.out.println(p + " has lost.");
+                return p;
             }
         }
+        return null;
     }
 
     /**
      * checks if a player won the game if it conquered all the countries in the board
      */
-    private void checkWinner() {
+    public boolean checkWinner() {
         if (players.size() == 1) {
-            System.out.println(players.get(0) + ", you have conquered all your enemies' territories!");
-            System.out.println("");
-            System.out.println("The game has now ended.");
-            System.exit(0);
+            return true;
+        } else {
+            return false;
         }
-    }
-
-    /**
-     * Intializes the number of players in the game
-     */
-    public void initializePlayers() {
-        do {
-            try {
-                //Command numOfPlayers =parser.getCommand();
-                // this.numPlayers =processNumOfPlayers(numOfPlayers);
-
-            } catch (Exception e) {
-                System.out.println("Please enter a valid number between 2 and 6..");
-            }
-        }
-        while (this.numPlayers > 6 || this.numPlayers < 2);
     }
 
     /**
      * Initialzes the state of the game at the start of the game
      */
     public void theInitialState() {
-        //printWelcome();
-        //initializePlayers();
         initialize(numPlayers);
-        //printInitialState();
         this.gameState = GameState.IN_PROGRESS;
         for (RiskView rv : riskViews) {
             rv.handleInitialization(this, gameState, currentPlayer, numPlayers);
         }
-    }
-
-    public void setNumberOfPlayers(int numberOfPlayers) {
-        numPlayers = numberOfPlayers;
     }
 
     /**
@@ -237,8 +217,6 @@ public class Game {
         while (gameState == GameState.IN_PROGRESS) {
             System.out.println(currentPlayer + ", it is your turn.");
             try {
-                //  Command command = parser.getCommand();
-                //processCommand(command, currentPlayer);
             } catch (Exception e) {
                 System.out.println("Exception Occured: " + e);
                 System.out.println("Please enter command again...");
@@ -381,7 +359,18 @@ public class Game {
         }
     }
 
+    /**
+     * getter for the board
+     * @return the board of the game
+     */
     public Board getBoard() {
         return board;
+    }
+
+    /**
+     * getter for the attacker country
+     */
+    public Country getAttackingCountry(){
+        return attackCountry;
     }
 }

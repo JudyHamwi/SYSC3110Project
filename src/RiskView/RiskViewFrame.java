@@ -216,9 +216,15 @@ public class RiskViewFrame extends JFrame implements RiskView {
      * @param attackSuccess true of the player conquered the country and false otherwise
      */
     @Override
-    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess){
+    public void handleAttackPhase(Game game, Country attackerCountry, Country defenderCountry, boolean attackSuccess, boolean winner, Player playerRemoved){
         if(attackSuccess) {
             JOptionPane.showMessageDialog(this, "You conquered the country!");
+            if(playerRemoved!=null){
+                JOptionPane.showMessageDialog(this, playerRemoved + "Lost !");
+            }
+            if(winner){
+                JOptionPane.showMessageDialog(this, "You Conquered the World !");
+            }
         }else {
             JOptionPane.showMessageDialog(this, "You did not conquer the country!");
         }

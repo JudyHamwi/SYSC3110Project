@@ -19,12 +19,12 @@ public class DieTest {
     }
 
     @Test
-    public void getFaceValue() {
+    public void testgetFaceValue() {
         assertEquals(die.getFaceValue(),1 );
     }
 
     @Test
-    public void rollDie() {
+    public void testrollDie() {
         assertEquals(die.rollDie(), die.getFaceValue());
     }
 }

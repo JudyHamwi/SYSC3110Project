@@ -17,7 +17,7 @@ public class DiceTest {
     }
 
     @Test
-    public void roll() {
+    public void testroll() {
         assertEquals(dice.roll(), dice.getValues());
     }
 

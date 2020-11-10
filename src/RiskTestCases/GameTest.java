@@ -16,15 +16,17 @@ public class GameTest {
      private Country attackingCountry;
      private Country defendingCountry;
      private int numPlayers;
+     private Player currentPlayer;
 
 
     @Before
     public void setUp() throws Exception {
         game = new Game();
+        currentPlayer = new Player();
         attackingCountry = new Country("Alaska");
         defendingCountry = new Country("Alberta");
         numPlayers = 2;
-        game.currentPlayer.setPlayerCounter(1);
+        currentPlayer.setPlayerCounter(1);
 
     }
 

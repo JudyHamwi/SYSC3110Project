@@ -18,6 +18,7 @@ public class PlayerTest {
     public void setUp() throws Exception {
        player = new Player();
        countriesOwned = new ArrayList<>();
+       player.setPlayerCounter(1);
     }
 
     @Test
@@ -34,13 +35,14 @@ public class PlayerTest {
     }
 
     @Test
-    public void testgetNextPlayerId() {
+    public void testGetNextPlayerId() {
         int playerID = 1;
+        assertEquals(1,player.getNextPlayerId());
         assertEquals(2,player.getNextPlayerId());
     }
 
     @Test
-    public void testgetplayerID() {
+    public void testGetPlayerID() {
         assertEquals(1, player.getPlayerID());
     }
 
